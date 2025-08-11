@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Ambassade (en travaux) - Mes Voyages</title>
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    <div class="place-content">
+    <a href="/" class="back-link">← Retour à la carte</a>
+    
+    <div class="place-header">
+        <h1 class="place-title">L'Ambassade (en travaux)</h1>
+        
+        
+        
+        
+        <div class="place-tags tags">
+            
+            <span class="tag">Bar,Terrasse,Restaurant,Bière</span>
+            
+        </div>
+        
+    </div>
+    
+    <div class="place-body">
+        
+
+    </div>
+    
+    
+    <div style="margin-top: 40px;">
+        <h2 style="margin-bottom: 20px; color: #333;">Localisation</h2>
+        <div id="placeMap" style="height: 300px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);"></div>
+    </div>
+    
+    <script>
+        // Créer une carte pour ce lieu spécifique
+        const placeMap = L.map('placeMap').setView([48.1092611, -1.6808988], 13);
+        
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(placeMap);
+        
+        L.marker([48.1092611, -1.6808988])
+            .addTo(placeMap)
+            .bindPopup('L&#39;Ambassade (en travaux)')
+            .openPopup();
+    </script>
+    
+</div>
+
+</body>
+</html>

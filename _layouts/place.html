@@ -1,0 +1,48 @@
+---
+layout: default
+---
+
+<div class="place-content">
+    <a href="{{ '/' | relative_url }}" class="back-link">← Retour à la carte</a>
+    
+    <div class="place-header">
+        <h1 class="place-title">{{ page.title }}</h1>
+        
+        {% if page.image %}
+        <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="place-image">
+        {% endif %}
+        
+        {% if page.tags %}
+        <div class="place-tags tags">
+            {% for tag in page.tags %}
+            <span class="tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="place-body">
+        {{ content }}
+    </div>
+    
+    {% if page.lat and page.lon %}
+    <div style="margin-top: 40px;">
+        <h2 style="margin-bottom: 20px; color: #333;">Localisation</h2>
+        <div id="placeMap" style="height: 300px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);"></div>
+    </div>
+    
+    <script>
+        // Créer une carte pour ce lieu spécifique
+        const placeMap = L.map('placeMap').setView([{{ page.lat }}, {{ page.lon }}], 13);
+        
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(placeMap);
+        
+        L.marker([{{ page.lat }}, {{ page.lon }}])
+            .addTo(placeMap)
+            .bindPopup('{{ page.title | escape }}')
+            .openPopup();
+    </script>
+    {% endif %}
+</div>

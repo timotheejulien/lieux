@@ -1,0 +1,315 @@
+:root {
+   /* COLOR TOKEN */
+   --color-background: #FBFBFB;
+   --color-background-elevated: #EDEDED;
+   --color-button-background-primary: #202020;
+   --color-button-background-primary-hover: #545454;
+   --color-button-text-primary: #FBFBFB;
+   --color-button-background-secondary: #DEDEDE;
+   --color-button-text-secondary: #202020;
+   --color-divider: #DEDEDE;
+   --color-text-primary: #202020;
+   --color-text-secondary: #707070;
+   --color-text-third: #BABABA;
+   --color-focus: #202020;
+   --color-primary: #019074;
+
+   /* SPACE TOKEN */
+   --space-none: 0;
+   --space-xx-small: 2px;
+   --space-x-small: 4px;
+   --space-small: 8px;
+   --space-regular: 16px;
+   --space-medium: 24px;
+   --space-large: 32px;
+   --space-x-large: 48px;
+   --space-xx-large: 64px;
+   --space-xxx-large: 96px;
+}
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+body {
+   font-family: UncutSans-Variable, sans-serif;
+   height: 100vh;
+   /* overflow: hidden; */
+   font-feature-settings: 'dlig' on, 'salt' on, 'rvrn' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss06' on, 'ss07' on, 'ss08' on;
+}
+
+/* TYPOGRAPHY */
+@font-face {
+   font-family: UncutSans-Variable;
+   src: url(../assets/fonts/UncutSans-Variable.woff2) format("woff2");
+   font-style: normal;
+   font-feature-settings: 'dlig' on, 'salt' on, 'rvrn' on, 'ss01' on, 'ss02' on, 'ss03' on, 'ss06' on, 'ss07' on, 'ss08' on;
+   font-display: fallback;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+   font-family: UncutSans-Variable, sans-serif;
+}
+
+h1, .h1 { 
+   margin: 0;
+   font-size: 44px;
+   font-style: normal;
+   font-weight: 400;
+   line-height: normal;
+}
+
+#page-categories-title {
+   margin-bottom: var(--space-regular);
+}
+
+h2, .h2 {
+   margin: 0;
+   font-size: 36px;
+   font-style: normal;
+   font-weight: 400;
+   line-height: 44px;
+}
+
+h3, .h3 {
+   margin: var(--space-medium) 0 var(--space-regular) 0;
+   font-size: 28px;
+   font-style: normal;
+   font-weight: 400;
+   line-height: 120%;
+}
+
+h4, .h4 {
+   font-size: 18px;
+   font-weight: 500;
+   margin: 0;
+   margin-bottom: 0px;
+   line-height: 26px;
+   
+}
+
+p {
+   line-height: 1.5;
+   letter-spacing: 0px;
+}
+
+p strong, strong {
+   font-family: UncutSans-Variable, sans-serif;
+   font-weight: 600;
+}
+
+a {
+   line-height: 1.4;
+   letter-spacing: 0;
+   text-decoration: underline;
+   color: var(--color-text-primary);
+}
+
+a:hover {
+   text-decoration: none;
+}
+
+/* BUTTON */
+.btn {
+   transition: all .1s ease-in-out;
+   display: inline-block;
+   vertical-align: middle;
+   text-decoration: none;
+   font-family: UncutSans-Variable, sans-serif;
+   font-weight: 500;
+   font-size: 18px;
+   border-radius: 8px;
+   padding: 12px 24px;
+   border: none;
+   cursor: pointer;
+}
+
+.btn-primary {
+   background: var(--color-button-background-primary);
+   color: var(--color-button-text-primary);
+}
+
+.btn-primary:hover {
+   border-radius: 0px;
+}
+
+/* GENERIC */
+.controls {
+   width: calc(100% - 128px);
+   position: fixed;
+   top: 10px;
+   left: var(--space-xx-large);
+   right: var(--space-xx-large);
+   z-index: 1000;
+   display: flex;
+   flex-direction: row;
+   flex-wrap: nowrap;
+   justify-content: center;
+   align-items: flex-start;
+   align-content: normal;
+   gap: 16px;
+}
+
+#searchInput,
+#tagFilter {
+   width: 100%;
+   min-width: 250px;
+   height: 45px;
+   padding: var(--space-small) var(--space-regular) var(--space-small) var(--space-regular);
+   border: none;
+   border-radius: 8px;
+   font-family: UncutSans-Variable, sans-serif;
+   font-size: 18px;
+   font-weight: 400;
+   line-height: 1.4;
+   letter-spacing: 0px;
+   color: var(--color-text-primary);
+   background: rgba(251, 251, 251, 0.85);
+   backdrop-filter: blur(10px) saturate(120%);
+   -webkit-backdrop-filter: blur(10px) saturate(120%);
+   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+#searchInput::placeholder {
+   font-size: 18px;
+   font-weight: 400;
+   line-height: 1.4;
+   letter-spacing: 0px;
+   color: var(--color-text-secondary);
+}
+
+#searchInput:focus {
+   outline: 2px solid var(--color-primary);
+}
+
+#map {
+   height: 100vh;
+   width: 100%;
+}
+
+/* Styles pour les popups */
+.popup-content {
+   max-width: 250px;
+}
+
+.popup-content h3 {
+   margin-bottom: 10px;
+   color: #333;
+}
+
+.popup-content h3 a {
+   color: #4CAF50;
+   text-decoration: none;
+}
+
+.popup-content h3 a:hover {
+   text-decoration: underline;
+}
+
+.popup-content img {
+   border-radius: 6px;
+   margin-bottom: 10px;
+}
+
+.popup-content p {
+   color: #666;
+   font-size: 14px;
+   line-height: 1.4;
+   margin-bottom: 10px;
+}
+
+.tags {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 4px;
+}
+
+.tag {
+   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+   color: white;
+   padding: 3px 8px;
+   border-radius: 4px;
+   font-size: 12px;
+   font-weight: 500;
+}
+
+/* Layout pour les pages de lieux */
+.place-content {
+   max-width: 800px;
+   margin: 0 auto;
+   padding: 40px 20px;
+   background: white;
+   min-height: 100vh;
+}
+
+.place-header {
+   text-align: center;
+   margin-bottom: 40px;
+}
+
+.place-title {
+   font-size: 2.5em;
+   color: #333;
+   margin-bottom: 20px;
+   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   background-clip: text;
+}
+
+.place-image {
+   width: 100%;
+   max-width: 600px;
+   height: 400px;
+   object-fit: cover;
+   border-radius: 12px;
+   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+   margin-bottom: 30px;
+}
+
+.place-tags {
+   margin: 20px 0;
+   text-align: center;
+}
+
+.back-link {
+   display: inline-block;
+   margin-bottom: 30px;
+   color: #4CAF50;
+   text-decoration: none;
+   font-weight: 500;
+   padding: 10px 20px;
+   border: 2px solid #4CAF50;
+   border-radius: 8px;
+   transition: all 0.3s ease;
+}
+
+.back-link:hover {
+   background: #4CAF50;
+   color: white;
+   transform: translateY(-2px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+   .controls {
+         flex-direction: column;
+         align-items: stretch;
+   }
+
+   #searchInput,
+   #tagFilter {
+         min-width: auto;
+         width: 100%;
+   }
+
+   .place-title {
+         font-size: 2em;
+   }
+
+   .place-image {
+         height: 250px;
+   }
+}

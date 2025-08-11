@@ -1,0 +1,3494 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Voyages</title>
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    <div id="controls" class="controls">
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Rechercher un lieu...">
+  </div>
+  
+  <div class="filter-container">
+    <select id="tagFilter">
+      <option value="">Tous les tags</option>
+    </select>
+  </div>
+  
+  <div class="reset-container">
+    <button id="resetFilters" class="btn btn-primary">Réinitialiser</button>
+  </div>
+</div>
+
+<div id="map"></div>
+
+<script>
+// Données des lieux depuis Jekyll
+const places = [
+  
+  {
+    title: "A L&#39;Ouest",
+    lat: 46.2281769,
+    lon: -1.5429466,
+    tags: ["Bar","Restaurant","Brasserie"],
+    url: "/places/a-l-ouest/",
+    description: "Positionné sur une petite place avec ses tonneaux, lieu très sympa et bouffe très bonne. Le service manque un peu de chaleur mais reste agréable. Je recommande !!",
+    image: ""
+  },
+  
+  {
+    title: "Acqua e Farina",
+    lat: 48.853105,
+    lon: 2.3830354,
+    tags: ["Restaurant","Pizzeria"],
+    url: "/places/acqua-e-farina/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Ademi Monsigny",
+    lat: 48.869546,
+    lon: 2.3357216,
+    tags: ["Pizzeria","Restaurant"],
+    url: "/places/ademi-monsigny/",
+    description: "Pas mauvais mais on peut trouver mieux. La salle est petite et ce n’est pas très lumineux comme endroit. ",
+    image: ""
+  },
+  
+  {
+    title: "Ama",
+    lat: 48.86965,
+    lon: 2.36932,
+    tags: ["Restaurant","Tapas","Décoration"],
+    url: "/places/ama/",
+    description: "Le cadre est super cool ainsi que les serveurs. La bouffe est très bonne, faudrait pas plus cher mais très bonne adresse ! Le vin est un poil cher",
+    image: ""
+  },
+  
+  {
+    title: "Amagat",
+    lat: 48.85804539999999,
+    lon: 2.396694799999999,
+    tags: ["Bar,Restaurant,Tapas"],
+    url: "/places/amagat/",
+    description: "Adresse atypique et tapas sympa ! ",
+    image: ""
+  },
+  
+  {
+    title: "Anneaux de Buren",
+    lat: 47.215513,
+    lon: -1.5456169,
+    tags: ["Bar,Galeried’art"],
+    url: "/places/anneaux-de-buren/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Apertivus",
+    lat: 48.8343046,
+    lon: 2.3288174,
+    tags: ["Commerce,Épicerie,Décoration,Restaurant,Surlepouce"],
+    url: "/places/apertivus/",
+    description: "Excellente épicerie pour préparer un bon apéro ! La saucisse sèche et leurs tapenades sont bonnes. Leur sandwich sont qualis 👌🏻",
+    image: ""
+  },
+  
+  {
+    title: "Arbela 92",
+    lat: 48.845245361328125,
+    lon: 2.236274003982544,
+    tags: ["Restaurant,Tapas,Vin"],
+    url: "/places/arbela-92/",
+    description: "Service super sympa ! La bouffe est bonne mais un poil cher à mon sens. Apres c’est souvent le cas des tapas à partager… Déco standard.  Bonne découverte pour des vins ! ",
+    image: ""
+  },
+  
+  {
+    title: "Arinella and Algaio Beach",
+    lat: 42.5766228,
+    lon: 8.8050941,
+    tags: ["Plage"],
+    url: "/places/arinella-and-algaio-beach/",
+    description: "Petite plage intimiste avec une vue incroyable. Baignade avec les poissons qui te mangent les pieds ! 🙈👌🏻",
+    image: ""
+  },
+  
+  {
+    title: "Asian wok",
+    lat: 48.86472181951019,
+    lon: 2.3729843193519473,
+    tags: ["Àessayer,Restaurant,Thaï"],
+    url: "/places/asian-wok/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Au Coeur du Marché",
+    lat: 48.8497361,
+    lon: 2.378855,
+    tags: ["Commerce,Traiteur,Charcuterie,Fromage"],
+    url: "/places/au-coeur-du-marche/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "au-delà du cuir",
+    lat: 48.8620665,
+    lon: 2.3511458,
+    tags: ["Shopping,Chaussure"],
+    url: "/places/au-dela-du-cuir/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Au Moka",
+    lat: 48.84979879999999,
+    lon: 2.2948228,
+    tags: ["Bar,Terrasse"],
+    url: "/places/au-moka/",
+    description: "Petit bistro qui paye pas de mine. Serveur sympa",
+    image: ""
+  },
+  
+  {
+    title: "Au QG de la mer",
+    lat: 46.20326,
+    lon: -1.393853,
+    tags: ["Bar,Huitre,Vuemer"],
+    url: "/places/au-qg-de-la-mer/",
+    description: "Vue exceptionnelle ! Il faut prendre le vin Ré os très 👌🏻",
+    image: ""
+  },
+  
+  {
+    title: "Au Vieux Paris D’Arcole",
+    lat: 48.854064713694214,
+    lon: 2.3502826596691992,
+    tags: ["Restaurant"],
+    url: "/places/au-vieux-paris-darcole/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Au Vieux Paris E’Arcole",
+    lat: 48.854064713694214,
+    lon: 2.3502826596691992,
+    tags: ["Restaurant"],
+    url: "/places/au-vieux-paris-earcole/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Autour Du Saumon",
+    lat: 48.84067950699908,
+    lon: 2.288976381737816,
+    tags: ["Restaurant"],
+    url: "/places/autour-du-saumon/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "B.O.U.L.O.M",
+    lat: 48.89358759999999,
+    lon: 2.3356451,
+    tags: ["Restaurant,Buffetàvolonté"],
+    url: "/places/b-o-u-l-o-m/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "B2",
+    lat: 43.48060989379883,
+    lon: -1.562222957611084,
+    tags: ["Restaurant"],
+    url: "/places/b2/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Baaria",
+    lat: 51.5133,
+    lon: -0.12914,
+    tags: ["Brunch,Restaurant"],
+    url: "/places/baaria/",
+    description: "Croissant au Nutella bon et très gourmand ",
+    image: ""
+  },
+  
+  {
+    title: "Bali Bowls",
+    lat: 43.481872,
+    lon: -1.5596543,
+    tags: ["Restaurant,Surlepouce"],
+    url: "/places/bali-bowls/",
+    description: "Tres sympa et rafraîchissant",
+    image: ""
+  },
+  
+  {
+    title: "Bambou",
+    lat: 48.86935,
+    lon: 2.34503,
+    tags: ["Asiatique,Décoration,Restaurant,Patio,Terrasse"],
+    url: "/places/bambou/",
+    description: "Le cadre est vraiment sympa avec une terrasse en patio. Par trop cher pour ce que c’est… ",
+    image: ""
+  },
+  
+  {
+    title: "Bar à Bulles",
+    lat: 48.88447459999999,
+    lon: 2.3322397,
+    tags: ["Bar,Terrasse"],
+    url: "/places/bar-a-bulles/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Bar &amp; Beer Picpus",
+    lat: 48.8406,
+    lon: 2.40033,
+    tags: ["Bar,Bière,Terrasse,HappyHour"],
+    url: "/places/bar-beer-picpus/",
+    description: "Bar à bières qui tournent toutes les semaines. Petite terrasse extérieure et prix vraiment corrects !",
+    image: ""
+  },
+  
+  {
+    title: "Barbica",
+    lat: 38.7090213,
+    lon: -9.146759099999999,
+    tags: ["Brasserie,Restaurant,Terrasse"],
+    url: "/places/barbica/",
+    description: "Superbe terrasse au calme. La bouffe est bonne ! Petit moment posé 👌🏻",
+    image: ""
+  },
+  
+  {
+    title: "Batz",
+    lat: 38.710866,
+    lon: -9.149505,
+    tags: ["Brunch,Restaurant,Terrasse"],
+    url: "/places/batz/",
+    description: "Menu express à 6,50€ pour un petit déjeuner. Fait maison, c’est très sympa ! ",
+    image: ""
+  },
+  
+  {
+    title: "Beau Passage",
+    lat: 48.85433011767516,
+    lon: 2.3248510017444555,
+    tags: ["Bar,CoffeeShop,Épicerie,Terrasse,Passage"],
+    url: "/places/beau-passage/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Bercy Beaucoup",
+    lat: 48.8391439,
+    lon: 2.3827415,
+    tags: ["Bar,Guinguette,Terrasse"],
+    url: "/places/bercy-beaucoup/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Bien Élevé",
+    lat: 48.8739843,
+    lon: 2.343312899999999,
+    tags: ["Viande,Restaurant"],
+    url: "/places/bien-eleve/",
+    description: "Rapport qualité/prix pour le 🍔 est honnête. La viande est excellente et les frites aussi, cuites dans la graisses de bœuf! Viandes à tester",
+    image: ""
+  },
+  
+  {
+    title: "Bistropolitain",
+    lat: 48.8674581,
+    lon: 2.3351639,
+    tags: ["Brasserie,Àemporter,Restaurant"],
+    url: "/places/bistropolitain/",
+    description: "Brasserie à emporter qui propose deux plat du jour avec garniture au choix. Bon rapport qualité prix quantité. ",
+    image: ""
+  },
+  
+  {
+    title: "BISTROT MEE",
+    lat: 48.8644675,
+    lon: 2.3339743,
+    tags: ["Asiatique,Restaurant,Coréen"],
+    url: "/places/bistrot-mee/",
+    description: "Décoration surprenante sympa, petite terrasse extérieure. Les plats sont bons ! Bonne découverte ",
+    image: ""
+  },
+  
+  {
+    title: "Blitz",
+    lat: 48.86107332296931,
+    lon: 2.3786859916021186,
+    tags: ["Àessayer,Restaurant"],
+    url: "/places/blitz/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Bopain boulangerie",
+    lat: 48.84036636352539,
+    lon: 2.3952605724334717,
+    tags: ["Commerce,Boulangerie,Pâtisserie"],
+    url: "/places/bopain-boulangerie/",
+    description: "Le marbré est à se taper le cul par terre  !",
+    image: ""
+  },
+  
+  {
+    title: "Bopain",
+    lat: 48.8522588,
+    lon: 2.3741985,
+    tags: ["Commerce,Boulangerie,Pâtisserie"],
+    url: "/places/bopain/",
+    description: "Pâtisseries exceptionnelles ! Le salon de thé manque de décoration mais c’est en cours. ",
+    image: ""
+  },
+  
+  {
+    title: "Bouche Paris",
+    lat: 48.8681640625,
+    lon: 2.378389835357666,
+    tags: ["Àessayer,Bistronomie,Restaurant,Vin,Tapas"],
+    url: "/places/bouche-paris/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Boucherie Polmard",
+    lat: 48.85402870000001,
+    lon: 2.3359365,
+    tags: ["Shopping,Boucherie"],
+    url: "/places/boucherie-polmard/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Bouillon République",
+    lat: 48.86602783203125,
+    lon: 2.364701986312866,
+    tags: ["Brasserie,Restaurant"],
+    url: "/places/bouillon-republique/",
+    description: "Rapport qualité/prix imbattable ! Bruyant mais c’est l’esprit bouillon.  À refaire ! ",
+    image: ""
+  },
+  
+  {
+    title: "BRASSERIE ALESTI",
+    lat: 48.87239456176758,
+    lon: 2.343062162399292,
+    tags: ["Restaurant"],
+    url: "/places/brasserie-alesti/",
+    description: "Bonne adresse ! La décoration est sympa, cuisine avec un bon rapport qualité/prix. Bon bistro moderne ! ",
+    image: ""
+  },
+  
+  {
+    title: "Brasserie Oskare",
+    lat: 48.85107,
+    lon: 2.40249,
+    tags: ["Caveàbière,Commerce"],
+    url: "/places/brasserie-oskare/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "BRAVO, la fabrique de pâtes",
+    lat: 48.8697909,
+    lon: 2.3431617,
+    tags: ["Surlepouce,Restaurant"],
+    url: "/places/bravo-la-fabrique-de-pates/",
+    description: "8€ le plat de pâtes. Bon rapport qualité/prix",
+    image: ""
+  },
+  
+  {
+    title: "BRUMES – Specialty coffee shop",
+    lat: 45.89944930000001,
+    lon: 6.123419699999999,
+    tags: ["CoffeeShop"],
+    url: "/places/brumes-specialty-coffee-shop/",
+    description: "Dans un petit passage, ce coffee shop offre une petite terrasse et de bons petits café en tout genre ",
+    image: ""
+  },
+  
+  {
+    title: "Brussels Beer Project",
+    lat: 48.88356018066406,
+    lon: 2.3319742679595947,
+    tags: ["Bar,Bière"],
+    url: "/places/brussels-beer-project/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "BRUTUS - Gaité",
+    lat: 48.8392049,
+    lon: 2.3229858,
+    tags: ["Restaurant,Crêperie"],
+    url: "/places/brutus-gaite/",
+    description: "Superbe crêperie, ingrédients de bonne qualité, bon accueil ! A refaire !! Une galette du moment est changée tous les mois environ ",
+    image: ""
+  },
+  
+  {
+    title: "By Sainbioz",
+    lat: 47.21957,
+    lon: -1.55899,
+    tags: ["Restaurant,Burger,Décoration"],
+    url: "/places/by-sainbioz/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Café Bletterie | La Rochelle",
+    lat: 46.15958,
+    lon: -1.15062,
+    tags: ["Brunch,Restaurant"],
+    url: "/places/cafe-bletterie-la-rochelle/",
+    description: "Super service ! Le brunch est tres bon et bien copieux, belle découverte ! ",
+    image: ""
+  },
+  
+  {
+    title: "Café Central",
+    lat: 48.8564762,
+    lon: 2.3064154,
+    tags: ["Bar"],
+    url: "/places/cafe-central/",
+    description: "Quartier sympa ! À revenir ",
+    image: ""
+  },
+  
+  {
+    title: "Café du Soleil",
+    lat: 46.2232563,
+    lon: 6.127647599999999,
+    tags: ["Restaurant,Fromage"],
+    url: "/places/cafe-du-soleil/",
+    description: "Fondue suisse excellente ! Cadre très sympa mais rustique :)",
+    image: ""
+  },
+  
+  {
+    title: "Café Leonard",
+    lat: 48.86568292388842,
+    lon: 2.356876482525736,
+    tags: ["Bar"],
+    url: "/places/cafe-leonard/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Café Moco",
+    lat: 48.854237,
+    lon: 2.386467,
+    tags: ["Brunch,Restaurant"],
+    url: "/places/cafe-moco/",
+    description: "Fuir !",
+    image: ""
+  },
+  
+  {
+    title: "Cali Sisters",
+    lat: 48.8683099,
+    lon: 2.341750499999999,
+    tags: ["Restaurant,Cocktails,Brasserie,Burger,Décoration"],
+    url: "/places/cali-sisters/",
+    description: "Le burger est pas mal mais les prix sont trop chers. Beaucoup d’attente également. Le cadre est très sympa par contre ! ",
+    image: ""
+  },
+  
+  {
+    title: "Caminito",
+    lat: 48.868407,
+    lon: 2.347725,
+    tags: ["Restaurant,Tapas"],
+    url: "/places/caminito/",
+    description: "Restaurant argentin qui propose des tapas et quelques plats. La bouffe est bonne, le bun est costaud mais bon ! Le service est cool",
+    image: ""
+  },
+  
+  {
+    title: "Caprice",
+    lat: 48.8753118,
+    lon: 2.3452432,
+    tags: ["Àessayer,Bar,Brasserie,Restaurant,Vin,Tapas"],
+    url: "/places/caprice/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Captain Pub",
+    lat: 45.8984964,
+    lon: 6.1257796,
+    tags: ["Bar,Pub"],
+    url: "/places/captain-pub/",
+    description: "Situé sur un petit pont, la terrasse offre une vue sur un canal ",
+    image: ""
+  },
+  
+  {
+    title: "Carøe",
+    lat: 43.47914189999999,
+    lon: -1.5642333,
+    tags: ["Bar,Poisson,Restaurant"],
+    url: "/places/care/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Chai Nous Comme Chai Vous",
+    lat: 46.18688789999999,
+    lon: -1.3240171,
+    tags: ["Restaurant,Gastronomie"],
+    url: "/places/chai-nous-comme-chai-vous/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Chez Addy &amp; Ida",
+    lat: 48.846489,
+    lon: 2.39463,
+    tags: ["Bar,Terrasse,Restaurant,HappyHour"],
+    url: "/places/chez-addy-ida/",
+    description: "Brasserie qui offre une terrasse en dehors du bruit de Nation. Service super sympa et la bouffe est vraiment bonne ! Super QG 🤘🏻",
+    image: ""
+  },
+  
+  {
+    title: "Chez Bouboule",
+    lat: 48.881905,
+    lon: 2.346706999999999,
+    tags: ["Bar,Pétanque"],
+    url: "/places/chez-bouboule/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Chez Cece",
+    lat: 43.6084791,
+    lon: 3.877087,
+    tags: ["Restaurant"],
+    url: "/places/chez-cece/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Chez Fanch",
+    lat: 48.11246906488076,
+    lon: -1.681511686841527,
+    tags: ["Fromage,Bar,Restaurant,Vin"],
+    url: "/places/chez-fanch/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Chez Joy",
+    lat: 48.83579,
+    lon: 2.32482,
+    tags: ["Asiatique,Restaurant,Surlepouce"],
+    url: "/places/chez-joy/",
+    description: "Le bobun est top ! Les nems sont délicieux. Plus qu’à tester leur nouilles sautées la prochaine fois ;) ",
+    image: ""
+  },
+  
+  {
+    title: "Chez Justine",
+    lat: 48.8656838,
+    lon: 2.377854999999999,
+    tags: ["Àessayer,Restaurant,Barbecue"],
+    url: "/places/chez-justine/",
+    description: "Cuisine au feu de bois ",
+    image: ""
+  },
+  
+  {
+    title: "Chez Nounoute",
+    lat: 49.76039429999999,
+    lon: 0.3674185999999999,
+    tags: ["Huitre,Poisson,Restaurant"],
+    url: "/places/chez-nounoute/",
+    description: "Les moules frites sont top ! Le service n’est pas aimable ni accueillant... ça gâche le plat",
+    image: ""
+  },
+  
+  {
+    title: "Chez Poupette",
+    lat: 48.8846581,
+    lon: 2.3259104,
+    tags: ["Restaurant,Bistronomie"],
+    url: "/places/chez-poupette/",
+    description: "Très bonne adresse. La tarte au citron revisitée est dingue ! ",
+    image: ""
+  },
+  
+  {
+    title: "Chez Vous",
+    lat: 48.87766200000001,
+    lon: 2.3397935,
+    tags: ["Restaurant,Tapas,Vin"],
+    url: "/places/chez-vous/",
+    description: "Le burger était bon ! Simple mais très efficaces sur la qualité des produits. ",
+    image: ""
+  },
+  
+  {
+    title: "Choron",
+    lat: 48.87736959999999,
+    lon: 2.342443,
+    tags: ["Bar,HappyHour,Terrasse"],
+    url: "/places/choron/",
+    description: "La terrasse donne sur une place en mode guinguette ! De plus, ils servent de la Gallia IPA 🍺 ",
+    image: ""
+  },
+  
+  {
+    title: "Coup D’oeil",
+    lat: 48.8585930053824,
+    lon: 2.3781371413955985,
+    tags: ["Àessayer,Vin,Tapas"],
+    url: "/places/coup-doeil/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Cul De Cochon",
+    lat: 48.85351609952409,
+    lon: 2.336469357403721,
+    tags: ["Fromage,Shopping"],
+    url: "/places/cul-de-cochon/",
+    description: "Charcuterie &amp; fromagerie",
+    image: ""
+  },
+  
+  {
+    title: "Dalea",
+    lat: 48.8411242,
+    lon: 2.324251499999999,
+    tags: ["Restaurant,Terrasse,Bar"],
+    url: "/places/dalea/",
+    description: "Terrasse chouette avec parasols des en paille. Planches diverses mais qualité pas ouf. ",
+    image: ""
+  },
+  
+  {
+    title: "Daroco Bourse",
+    lat: 48.8671391,
+    lon: 2.3392712,
+    tags: ["Décoration,Pizzeria,Restaurant"],
+    url: "/places/daroco-bourse/",
+    description: "Très bonne pizza avec pâte épaisse ! La décoration est top ! Device agréable 👌🏻",
+    image: ""
+  },
+  
+  {
+    title: "De Seze Blanche",
+    lat: 48.85588455200195,
+    lon: 2.3712821006774902,
+    tags: ["Àessayer,Bar,Bière,Restaurant,Vin,Tapas"],
+    url: "/places/de-seze-blanche/",
+    description: "Bières artisanales à essayer !!!",
+    image: ""
+  },
+  
+  {
+    title: "District",
+    lat: 48.866575061632844,
+    lon: 2.344182898640412,
+    tags: ["Bar"],
+    url: "/places/district/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Domaine du Vallon des Glauges",
+    lat: 43.7047607,
+    lon: 5.003934,
+    tags: ["Bar,Vin,Tapas,Terrasse,Fromage,Vuedeouf"],
+    url: "/places/domaine-du-vallon-des-glauges/",
+    description: "Vue incroyable sur les vignes et la montagne !! 🤩 ! Le vin et la planche sont très bien ! ",
+    image: ""
+  },
+  
+  {
+    title: "Doppio - Paris 18",
+    lat: 48.8942639,
+    lon: 2.345876699999999,
+    tags: ["Italien,Restaurant,Décoration"],
+    url: "/places/doppio-paris-18/",
+    description: "Les carbo sont top !",
+    image: ""
+  },
+  
+  {
+    title: "Douze",
+    lat: 48.8483477,
+    lon: 2.3858711,
+    tags: ["Boucherie,Commerce,Charcuterie,Épicerie,Marché,Viande,Poisson"],
+    url: "/places/douze/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Dubrown",
+    lat: 47.21704039999999,
+    lon: -1.555417,
+    tags: ["Restaurant"],
+    url: "/places/dubrown/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "ÉCLIPSE",
+    lat: 48.8905263,
+    lon: 2.2434088,
+    tags: ["Bistronomie,Restaurant,Àessayer"],
+    url: "/places/eclipse/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Eden Rock Café",
+    lat: 43.4823775,
+    lon: -1.5686604,
+    tags: ["Bar,Vuemer"],
+    url: "/places/eden-rock-cafe/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Eden",
+    lat: 48.862782,
+    lon: 2.36297,
+    tags: ["Bar,Bière"],
+    url: "/places/eden/",
+    description: "Bière normande artisanale, le barman est super sympa ! On peut commander les pizzas d’en face (Iovine’s) tout en restant au bar 👌🏻",
+    image: ""
+  },
+  
+  {
+    title: "ENZO Aux Bonnes Gourmandises Italiennes",
+    lat: 48.835454,
+    lon: 2.325926,
+    tags: ["Restaurant,Pizzeria"],
+    url: "/places/enzo-aux-bonnes-gourmandises-italiennes/",
+    description: "Pâte fine, un peu déçu mais personnel gentil ",
+    image: ""
+  },
+  
+  {
+    title: "Faaron Steakhouse",
+    lat: 37.016299,
+    lon: -7.934237,
+    tags: ["Bar,Viande,Restaurant,Terrasse"],
+    url: "/places/faaron-steakhouse/",
+    description: "Terrasse bien symp pour prendre un verre ! Les plats ont l’air sympa. Super service ! ",
+    image: ""
+  },
+  
+  {
+    title: "Fellows",
+    lat: 48.873898,
+    lon: 2.355216,
+    tags: ["Àessayer,Restaurant,Pâte"],
+    url: "/places/fellows/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Ferme Fortia",
+    lat: 44.403661,
+    lon: 5.310215,
+    tags: ["Vacances,Hôtel,Piscine"],
+    url: "/places/ferme-fortia/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "FORMATICUS",
+    lat: 48.8887242,
+    lon: 2.3180758,
+    tags: ["Fromage,Àessayer"],
+    url: "/places/formaticus/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Frangins",
+    lat: 48.8682653,
+    lon: 2.3710943,
+    tags: ["Àessayer,Brasserie,Bistronomie,Restaurant"],
+    url: "/places/frangins/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Frenchie",
+    lat: 48.86773,
+    lon: 2.34792,
+    tags: ["Bar,Restaurant,Vin"],
+    url: "/places/frenchie/",
+    description: "Super sympa ! Très bonne qualité de nourriture. Vin un peu cher mais qualité respectée ! A refaire ! ",
+    image: ""
+  },
+  
+  {
+    title: "Fromagerie Eric Lefebvre MOF",
+    lat: 48.8379239,
+    lon: 2.3906242,
+    tags: ["Commerce,Fromagerie"],
+    url: "/places/fromagerie-eric-lefebvre-mof/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Fromagerie Gaidon",
+    lat: 46.1858918,
+    lon: -1.3923989,
+    tags: ["Bar,Fromage,Fromagerie"],
+    url: "/places/fromagerie-gaidon/",
+    description: "La planche « Au dessus du sommet » est top ! Rapport quantité/qualité/prix est parfaite !!  Depuis 3 générations ils sont fromagers. Belle histoire, bons produits : tout ce qu’on aime ! ",
+    image: ""
+  },
+  
+  {
+    title: "Fromagerie Hardouin",
+    lat: 48.84902779999999,
+    lon: 2.377952,
+    tags: ["Fromage,Commerce,Àessayer"],
+    url: "/places/fromagerie-hardouin/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Fromagerie Quatrehomme",
+    lat: 48.8450447,
+    lon: 2.405126,
+    tags: ["Charcuterie,Commerce,Fromage,Épicerie,Légumes"],
+    url: "/places/fromagerie-quatrehomme/",
+    description: "L’accueil est un peu froid mais les fromages sont excellents. Gruyère suisse et le petit fiancé des Pyrénées sont à se taper le cul par terre ! 😜",
+    image: ""
+  },
+  
+  {
+    title: "Fromagerie Vacroux",
+    lat: 48.8333996,
+    lon: 2.3307949,
+    tags: ["Fromage,Shopping"],
+    url: "/places/fromagerie-vacroux/",
+    description: "La tome de Jura est à se taper le cul par terre ! ",
+    image: ""
+  },
+  
+  {
+    title: "Fulgurances",
+    lat: 48.852931,
+    lon: 2.389863999999999,
+    tags: ["Restaurant"],
+    url: "/places/fulgurances/",
+    description: "Très bien 😊 ",
+    image: ""
+  },
+  
+  {
+    title: "Fuxia",
+    lat: 48.8675472,
+    lon: 2.3323177,
+    tags: ["Restaurant,Italien"],
+    url: "/places/fuxia/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "G. IV",
+    lat: 48.86874962914634,
+    lon: 2.3478599167236576,
+    tags: ["Tapas,Bar"],
+    url: "/places/g-iv/",
+    description: "Pas donné, mais concept sympa. On part du vin pour aller vers la bouffe ",
+    image: ""
+  },
+  
+  {
+    title: "Gallika Choiseul - Restaurant Grec",
+    lat: 48.8686812,
+    lon: 2.3357642,
+    tags: ["Restaurant,Grec"],
+    url: "/places/gallika-choiseul-restaurant-grec/",
+    description: "Les pitas sont top ! On choisit ses propres ingrédients ! Conseil : bol base pâte plus porc confit 👌🏻",
+    image: ""
+  },
+  
+  {
+    title: "GEMÜSE - Berliner Kebap",
+    lat: 48.89064510000001,
+    lon: 2.3452711,
+    tags: ["Restaurant,Surlepouce,Kebab,Légumes"],
+    url: "/places/gemuse-berliner-kebap/",
+    description: "Super kebab travaillé avec du poulet mariné ! 7€ le kebab et 10€ avec frites. ",
+    image: ""
+  },
+  
+  {
+    title: "Gigg’S Irish Pub",
+    lat: 47.2180242,
+    lon: -1.5517137,
+    tags: ["Bar,Bière,Pub"],
+    url: "/places/giggs-irish-pub/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Gillardeau - la cabanajam",
+    lat: 46.2040827,
+    lon: -1.3863493,
+    tags: ["Bar,Vuemer,Huitre"],
+    url: "/places/gillardeau-la-cabanajam/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Goguette",
+    lat: 48.86303739999999,
+    lon: 2.3672992,
+    tags: ["Restaurant,Bistronomie"],
+    url: "/places/goguette-1/",
+    description: "Très bonne cuisson et qualité des produits 👌🏻Le rapport qualité prix de est top ! Le vin est nul et Gianmarco se prend pas pour de la merde ! ",
+    image: ""
+  },
+  
+  {
+    title: "Goguette",
+    lat: 47.21703338623047,
+    lon: -1.5648103952407837,
+    tags: ["Restaurant,Terrasse,Fruitsdemer"],
+    url: "/places/goguette/",
+    description: "Super terrasse ! La bouffe est bonne également, bonne soirée ! ",
+    image: ""
+  },
+  
+  {
+    title: "Granite",
+    lat: 48.8610438,
+    lon: 2.3419215,
+    tags: ["Bistronomie,Restaurant,⭐️"],
+    url: "/places/granite/",
+    description: "Excellent resto, cadre au top et accord mets et vin très qualitatif ! Ca sent l’étoile prochainement ! A refaire ! ",
+    image: ""
+  },
+  
+  {
+    title: "Greengourmet",
+    lat: 48.84510803222656,
+    lon: 2.2363154888153076,
+    tags: ["Restaurant,Vegan,Terrasse,Décoration"],
+    url: "/places/greengourmet/",
+    description: "Plats végétariens plutôt bons et les portions sont bien servies. C’est sympa ☺️",
+    image: ""
+  },
+  
+  {
+    title: "Griffon",
+    lat: 48.859498,
+    lon: 2.357477,
+    tags: ["Àessayer,Restaurant,Bar,Terrasse,Décoration"],
+    url: "/places/griffon/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Ground Control",
+    lat: 48.8439199,
+    lon: 2.381509599999999,
+    tags: ["Bar,Restaurant,Terrasse,Foodhall"],
+    url: "/places/ground-control/",
+    description: "Lieu très cool avec une énorme terrasse en plein air. Différents bars et restaurants. Il n’y a plus qu’à faire son choix ;)",
+    image: ""
+  },
+  
+  {
+    title: "Guillaume Grasso",
+    lat: 48.83358,
+    lon: 2.3044599,
+    tags: ["Àessayer,Restaurant,Pizzeria"],
+    url: "/places/guillaume-grasso/",
+    description: "Apparemment c’est top 🤷🏻‍♂️",
+    image: ""
+  },
+  
+  {
+    title: "Guo Xin, Restaurant raviolis",
+    lat: 48.8731135,
+    lon: 2.3807876,
+    tags: ["Thaï,Restaurant"],
+    url: "/places/guo-xin-restaurant-raviolis/",
+    description: "Très bon mais très copieux ! 1 assiettes représentés au moins 12 gyozas. Les porcs ciboulette sont top ! ",
+    image: ""
+  },
+  
+  {
+    title: "Harper’s",
+    lat: 48.8447583878311,
+    lon: 2.321083403865439,
+    tags: ["Àessayer,Bar"],
+    url: "/places/harpers/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Hémisphère Homme",
+    lat: 43.6091465,
+    lon: 3.8785095,
+    tags: ["Shopping"],
+    url: "/places/hemisphere-homme/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Hoppy Corner",
+    lat: 48.8677486,
+    lon: 2.3474974,
+    tags: ["Bière"],
+    url: "/places/hoppy-corner/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "HuThoPi",
+    lat: 48.85087203979492,
+    lon: 2.3729517459869385,
+    tags: ["Àessayer,Bistronomie,Restaurant"],
+    url: "/places/huthopi/",
+    description: "https://www.instagram.com/reel/C5DghR3LwSF/?igsh=bG1rMmNjeWJycnNk",
+    image: ""
+  },
+  
+  {
+    title: "inaro maubeuge",
+    lat: 48.8766427,
+    lon: 2.3417704,
+    tags: ["Bar,Brunch,Restaurant,Tapas,Vin"],
+    url: "/places/inaro-maubeuge/",
+    description: "Décoration sympa, service très agréable. Rapport qualité/prix 👌🏻",
+    image: ""
+  },
+  
+  {
+    title: "Iodé Bistrot Marin",
+    lat: 48.8417301,
+    lon: 2.2401624,
+    tags: ["Àessayer,Fruitsdemer,Poisson,Terrasse,Restaurant"],
+    url: "/places/iode-bistrot-marin/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Iodé",
+    lat: 48.8865893,
+    lon: 2.3174922,
+    tags: ["Shopping,Bijoux"],
+    url: "/places/iode/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Iovine’S Marais",
+    lat: 48.8627844,
+    lon: 2.3629692,
+    tags: ["Restaurant,Pizzeria"],
+    url: "/places/iovines-marais/",
+    description: "Les pizza sont bonnes, la pâte est un peu épaisse comme j’aime ! Mais elles sont chères. Bar au top en face où l’on peut commander les pizzas",
+    image: ""
+  },
+  
+  {
+    title: "Italian Kitchen",
+    lat: 48.8322,
+    lon: 2.25301,
+    tags: ["Restaurant,Pizzeria"],
+    url: "/places/italian-kitchen/",
+    description: "15 € la pizza 4 fromages avec pate épaisse, c’est honnête ! ",
+    image: ""
+  },
+  
+  {
+    title: "Jòia Bun",
+    lat: 48.8702392578125,
+    lon: 2.3349015712738037,
+    tags: ["Burger,Restaurant"],
+    url: "/places/joia-bun/",
+    description: "Un peu cher mais tres bon ! ",
+    image: ""
+  },
+  
+  {
+    title: "Jun",
+    lat: 48.85159230000001,
+    lon: 2.3385005,
+    tags: ["Bar,Japonais"],
+    url: "/places/jun/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "JUSTE Restaurant de fruits de mer (Paris)",
+    lat: 48.8749662,
+    lon: 2.3385081,
+    tags: ["Restaurant,Poisson"],
+    url: "/places/juste-restaurant-de-fruits-de-mer-paris/",
+    description: "Excellent rapport qualité/prix ! Personnel sympathique :)  La bonne adresse pour aller manger des fruits de mer à Paname !",
+    image: ""
+  },
+  
+  {
+    title: "Kamouraska",
+    lat: 45.89941,
+    lon: 6.125706999999999,
+    tags: ["Bistronomie,Restaurant,Vin,Bio"],
+    url: "/places/kamouraska/",
+    description: "Super table ! La recommandation mets/vin est top ! Service ultra sympathique :) ",
+    image: ""
+  },
+  
+  {
+    title: "Kodawari Ramen",
+    lat: 48.86437,
+    lon: 2.33626,
+    tags: ["Asiatique,Restaurant"],
+    url: "/places/kodawari-ramen/",
+    description: "Ramen excellent ! Le bouillon fait à base de poisson est top ! ",
+    image: ""
+  },
+  
+  {
+    title: "Kokotte",
+    lat: 48.86392584875072,
+    lon: 2.3720262895843676,
+    tags: ["Àessayer,Brunch,Tartine,Tapas,Restaurant"],
+    url: "/places/kokotte/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Komos Beach",
+    lat: 35.017649,
+    lon: 24.7601141,
+    tags: ["Plage,Vuemer"],
+    url: "/places/komos-beach/",
+    description: "Une eau transparente comme une piscine ! Très belle plage ",
+    image: ""
+  },
+  
+  {
+    title: "Krügen",
+    lat: 48.8506944037742,
+    lon: 2.3767865000000072,
+    tags: ["Crêperie,Restaurant"],
+    url: "/places/krugen/",
+    description: "Très bonnes galettes et crêpes. Un lichette de beurre en plus aurait été souhaitable. Elles sont généreuse et bon cidre à la pression ! À refaire ",
+    image: ""
+  },
+  
+  {
+    title: "Kura",
+    lat: 48.85746,
+    lon: 2.2749,
+    tags: ["Asiatique,Restaurant,Àessayer"],
+    url: "/places/kura/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Kwon",
+    lat: 48.83247300000001,
+    lon: 2.3296211,
+    tags: ["Asiatique,Restaurant,Terrasse"],
+    url: "/places/kwon/",
+    description: "Ce coréen est top, leurs gyozas sont excellents ! Jolie découverte de leur bibimbap. Petite terrasse au calme dans Paris 👌🏻",
+    image: ""
+  },
+  
+  {
+    title: "L&#39;Ambassade (en travaux)",
+    lat: 48.1092611,
+    lon: -1.6808988,
+    tags: ["Bar,Terrasse,Restaurant,Bière"],
+    url: "/places/l-ambassade-en-travaux/",
+    description: "La Skumenn y est servie ! Terrasse super sympa, pas de voiture !",
+    image: ""
+  },
+  
+  {
+    title: "L&#39;Artiste",
+    lat: 48.8595512,
+    lon: 2.3865155,
+    tags: ["Àessayer,Brunch,Restaurant"],
+    url: "/places/l-artiste/",
+    description: "Brunch à 25€ recommandé par la frangine ",
+    image: ""
+  },
+  
+  {
+    title: "L&#39;Atelier",
+    lat: 46.1873488,
+    lon: -1.3245013,
+    tags: ["Glacier"],
+    url: "/places/l-atelier/",
+    description: "Une tuerie ! Prendre cacahuète ;)",
+    image: ""
+  },
+  
+  {
+    title: "L&#39;Écrin",
+    lat: 48.8652431,
+    lon: 2.3363918,
+    tags: ["Brasserie,Restaurant"],
+    url: "/places/l-ecrin/",
+    description: "Petite brasserie qui paye pas de mine. Présentation des plats sommaire, je n’y retournerai. ",
+    image: ""
+  },
+  
+  {
+    title: "L&#39;épicerie Saint-Sabin",
+    lat: 48.85533419999999,
+    lon: 2.3718069,
+    tags: ["Fromage,Vin"],
+    url: "/places/l-epicerie-saint-sabin/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "L&#39;épuisette",
+    lat: 48.8813344,
+    lon: 2.3464109,
+    tags: ["Àessayer,Poisson,Restaurant"],
+    url: "/places/l-epuisette/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "L&#39;Ivress Sentier",
+    lat: 48.86870339999999,
+    lon: 2.347624799999999,
+    tags: ["Bar,Tapas"],
+    url: "/places/l-ivress-sentier/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "La Balle au Bond",
+    lat: 48.85812490000001,
+    lon: 2.335672,
+    tags: ["Bar,Vuemer,Terrasse"],
+    url: "/places/la-balle-au-bond/",
+    description: "Péniche sur les quais de Seine 🤘🏻",
+    image: ""
+  },
+  
+  {
+    title: "La Belle Ronde",
+    lat: 48.8338373,
+    lon: 2.329772799999999,
+    tags: ["Restaurant,Crêperie,Terrasse,Patio"],
+    url: "/places/la-belle-ronde/",
+    description: "Qualité pas folle… les serveurs étaient pressés. C’est dommage parce que superbes terrasse/patio. ",
+    image: ""
+  },
+  
+  {
+    title: "La Boite a Sardines",
+    lat: 47.8611056,
+    lon: -3.9865581,
+    tags: ["Restaurant"],
+    url: "/places/la-boite-a-sardines/",
+    description: "Les plats sont bons mais un peu cher pour la quantité dans l’assiette. Beaucoup d’attente…",
+    image: ""
+  },
+  
+  {
+    title: "La Buvette",
+    lat: 48.8629024,
+    lon: 2.3792241,
+    tags: ["Àessayer,Vin"],
+    url: "/places/la-buvette/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "La Cabane Du Bout",
+    lat: 44.765296359958924,
+    lon: -1.1362754692009076,
+    tags: ["Bar,Huitre,Vuemer,Restaurant,Tapas,Terrasse"],
+    url: "/places/la-cabane-du-bout/",
+    description: "Penser à la marée, bien mieux quand elle est haute ! ",
+    image: ""
+  },
+  
+  {
+    title: "La Cabane",
+    lat: 47.2155512,
+    lon: -1.5524013,
+    tags: ["Restaurant,Bistronomie"],
+    url: "/places/la-cabane/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "La Cantine Diderot",
+    lat: 48.8466672,
+    lon: 2.3822285,
+    tags: ["Àessayer,Restaurant,Brasserie"],
+    url: "/places/la-cantine-diderot/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "La Cantine du Voyage",
+    lat: 47.2018004,
+    lon: -1.5727683,
+    tags: ["Bar,Vuemer,Pétanque"],
+    url: "/places/la-cantine-du-voyage/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "La Capanna",
+    lat: 48.83464509999999,
+    lon: 2.327519699999999,
+    tags: ["Restaurant,Italien"],
+    url: "/places/la-capanna/",
+    description: "Restaurant pas si italien que ça, pâtes carbo à la crème et le tiramisu est pas terrible. Décevant  ",
+    image: ""
+  },
+  
+  {
+    title: "La Caravane",
+    lat: 48.86832769999999,
+    lon: 2.3715018,
+    tags: ["Bar,Terrasse,Décoration"],
+    url: "/places/la-caravane/",
+    description: "Petite terrasse dans la rue (rue sans voiture), esprit un peu roots 👌🏻",
+    image: ""
+  },
+  
+  {
+    title: "La Chope Daguerre",
+    lat: 48.83376459999999,
+    lon: 2.3300031,
+    tags: ["Bar,Bière,Terrasse"],
+    url: "/places/la-chope-daguerre/",
+    description: "Terrasse super sympa qui donne sur les passants de la rue Daguerre. Ils font de la Brooklyn mais c’est pas donné ! 😬",
+    image: ""
+  },
+  
+  {
+    title: "La Cible",
+    lat: 46.2042508,
+    lon: -1.3543452,
+    tags: ["Bar,Restaurant,Terrasse,Vuemer"],
+    url: "/places/la-cible/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "La Cigogne",
+    lat: 48.87692699999999,
+    lon: 2.33849,
+    tags: ["Épicerie,Bière,Fromage,Vin"],
+    url: "/places/la-cigogne/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "La Crique",
+    lat: 43.4793552,
+    lon: -1.5640608,
+    tags: ["Restaurant,Poisson"],
+    url: "/places/la-crique/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "La Cuisine du Marche",
+    lat: 44.36043167114258,
+    lon: 5.14349365234375,
+    tags: ["Bistronomie,Restaurant,Vin"],
+    url: "/places/la-cuisine-du-marche/",
+    description: "Cuisine simple mais très bien réalisée. Grande carte des vins et accueil très chaleureux ! A refaire ! ",
+    image: ""
+  },
+  
+  {
+    title: "La Felicità",
+    lat: 48.8321419,
+    lon: 2.3730124,
+    tags: ["Bar,Restaurant"],
+    url: "/places/la-felicita/",
+    description: "Esprit guinguette dans la Station F ! Très jolie lieux où l&#39;on peut manger un peu de tout !",
+    image: ""
+  },
+  
+  {
+    title: "La Fine Mousse Restaurant",
+    lat: 48.8647375,
+    lon: 2.3818415,
+    tags: ["Àessayer,Bière"],
+    url: "/places/la-fine-mousse-restaurant/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "La Garçonnière",
+    lat: 48.86809681274442,
+    lon: 2.3477743928011705,
+    tags: ["Shopping"],
+    url: "/places/la-garconniere/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "La Maison du Whisky",
+    lat: 48.8707862,
+    lon: 2.3215497,
+    tags: ["Commerce"],
+    url: "/places/la-maison-du-whisky/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "La Maison Plisson",
+    lat: 48.8675817,
+    lon: 2.3319711,
+    tags: ["Boucherie,Commerce,Fromage,Vin,Épicerie,Restaurant"],
+    url: "/places/la-maison-plisson/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "La Martinière",
+    lat: 46.2045881,
+    lon: -1.3682314,
+    tags: ["Glacier"],
+    url: "/places/la-martiniere-1/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "La Martiniere",
+    lat: 46.243189,
+    lon: -1.55935,
+    tags: ["Glacier"],
+    url: "/places/la-martiniere/",
+    description: "Une tuerie ! Prendre cacahuète ;)",
+    image: ""
+  },
+  
+  {
+    title: "La Part des Anges",
+    lat: 46.194199,
+    lon: -1.4253584,
+    tags: ["Àessayer,Bar,Vin"],
+    url: "/places/la-part-des-anges/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "La Petite Fabrique",
+    lat: 48.85361940000001,
+    lon: 2.3988498,
+    tags: ["Restaurant,Bio"],
+    url: "/places/la-petite-fabrique/",
+    description: "Prenez un parquet de bois clair, des tables et chaises coordonnées, des murs blancs ou couverts de briques brutes : vous voici dans ce restaurant bio où l&#39;on confectionne, depuis la cuisine ouverte sur la salle, de belles assiettes avec des produits issus de l&#39;agriculture biologique. Sympathiques et appétissantes, elles mettent tout en oeuvre pour satisfaire chaque palais, dont celui des enfants. Cake aux légumes, tarte au pesto et à la mozzarella, risotto aux courgettes : les propositions végétariennes sont abondantes et riches en ingrédients de saison. Vous êtes plutôt amateur de viande grillée ? Il y a des plats à votre intention, comme le tournedos de boeuf. Et le poisson ? Il se révèle haut en saveur dans le pavé de saumon, ou dans l&#39;assiette du pêcheur. Vous en reprendrez volontiers.",
+    image: ""
+  },
+  
+  {
+    title: "La Petite",
+    lat: 48.8442594,
+    lon: 2.349707399999999,
+    tags: ["Bar,Terrasse"],
+    url: "/places/la-petite/",
+    description: "Donne sur la place de de la Contrescarpe",
+    image: ""
+  },
+  
+  {
+    title: "La REcyclerie",
+    lat: 48.89762,
+    lon: 2.34404,
+    tags: ["Brunch,Restaurant,Terrasse"],
+    url: "/places/la-recyclerie/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "La Ribouldingue",
+    lat: 47.2166467,
+    lon: -1.5525417,
+    tags: ["Bar"],
+    url: "/places/la-ribouldingue/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "La Sassa",
+    lat: 42.784927483982784,
+    lon: 9.343044049702288,
+    tags: ["Bar,Vuemer,Terrasse,Patio"],
+    url: "/places/la-sassa/",
+    description: "Lieu avec une vue incroyable ! Ambiance lounge comme on aime 😜",
+    image: ""
+  },
+  
+  {
+    title: "La Soffitta Renovatio",
+    lat: 41.9058979,
+    lon: 12.4590022,
+    tags: ["Restaurant,Pizzeria"],
+    url: "/places/la-soffitta-renovatio/",
+    description: "Bon Rapport qualité prix. Service agréable ",
+    image: ""
+  },
+  
+  {
+    title: "La Station",
+    lat: 47.2133577,
+    lon: -1.5613967,
+    tags: ["Shopping"],
+    url: "/places/la-station/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "La Table De Julie",
+    lat: 48.442674,
+    lon: 1.4896574,
+    tags: ["Restaurant,Néobistrot,Vin"],
+    url: "/places/la-table-de-julie/",
+    description: "Service très sympa. La cuisine est très bonne, bonne qualité de produit ! La déco est moderne, un resto que je recommande vu le rapport qualité/prix ! ",
+    image: ""
+  },
+  
+  {
+    title: "La Terrazza de L&#39;orangerie",
+    lat: 46.2059852,
+    lon: 6.167260499999998,
+    tags: ["Restaurant,Terrasse,Brunch"],
+    url: "/places/la-terrazza-de-l-orangerie/",
+    description: "Super lieu dans un parc, toile de tente. On adore !",
+    image: ""
+  },
+  
+  {
+    title: "La Tribu",
+    lat: 46.1868791,
+    lon: -1.32478,
+    tags: ["Bar,Restaurant,Tapas,Décoration,Patio"],
+    url: "/places/la-tribu/",
+    description: "Le cadre est top, bonne planche de fromage ! ",
+    image: ""
+  },
+  
+  {
+    title: "La Vache et le Cuisinier",
+    lat: 48.8846214,
+    lon: 2.3412645,
+    tags: ["Àessayer,Restaurant,Viande"],
+    url: "/places/la-vache-et-le-cuisinier/",
+    description: "Recommandé par Jo",
+    image: ""
+  },
+  
+  {
+    title: "La villa des poetes",
+    lat: 44.34734152286068,
+    lon: 5.105420416589373,
+    tags: ["Hôtel,Vacances,Piscine"],
+    url: "/places/la-villa-des-poetes/",
+    description: "Chambre d’hôte avec un accueil très chaleureux, perdu au milieu des oliviers avec une vue incroyable depuis la piscine 👌🏻",
+    image: ""
+  },
+  
+  {
+    title: "La Zinguerie",
+    lat: 48.86102168503112,
+    lon: 2.380521208922759,
+    tags: ["Vin,Brunch,Tapas,Bar,Bière,Brasserie"],
+    url: "/places/la-zinguerie/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Label Ferme",
+    lat: 48.86929319999999,
+    lon: 2.3432221,
+    tags: ["Restaurant,Surlepouce,Salade"],
+    url: "/places/label-ferme/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Lac Daumesnil",
+    lat: 48.8321918,
+    lon: 2.4143318,
+    tags: ["Parc"],
+    url: "/places/lac-daumesnil/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "LALÀ - La Lasagneria",
+    lat: 48.88108159999999,
+    lon: 2.334690499999999,
+    tags: ["Italien,Restaurant"],
+    url: "/places/lala-la-lasagneria/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le 12ème Cru",
+    lat: 48.8469144,
+    lon: 2.3967214,
+    tags: ["Brasserie,Restaurant"],
+    url: "/places/le-12eme-cru/",
+    description: "Basique mais bien préparé. Rapport qualité prix correct. ",
+    image: ""
+  },
+  
+  {
+    title: "Le 138",
+    lat: 48.850449,
+    lon: 2.37944,
+    tags: ["Bar,HappyHour,Terrasse,Décoration"],
+    url: "/places/le-138/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Bambou",
+    lat: 48.86931610107422,
+    lon: 2.3449692726135254,
+    tags: ["Restaurant,Àessayer,Thaï"],
+    url: "/places/le-bambou/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le BAP",
+    lat: 48.8658368,
+    lon: 2.3770144,
+    tags: ["Bar,Bière,Jeux"],
+    url: "/places/le-bap/",
+    description: "Bar avec un bon choix de bière, avec babyfoots et billards ! Cool pour voir un match sur grand écran",
+    image: ""
+  },
+  
+  {
+    title: "Le Bar Fleuri",
+    lat: 48.87785619999999,
+    lon: 2.3854427,
+    tags: ["Àessayer,Bar,Brasserie,Restaurant"],
+    url: "/places/le-bar-fleuri/",
+    description: "Vu sur Instagram, le poulet frite est à 6,86€. Bar de quartier (plus de 20 ans)",
+    image: ""
+  },
+  
+  {
+    title: "Le Barbiche - Le Cerf Volant",
+    lat: 48.8772429,
+    lon: 2.3420562,
+    tags: ["Bar"],
+    url: "/places/le-barbiche-le-cerf-volant/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Barbu",
+    lat: 43.484961279982855,
+    lon: -1.562350589449524,
+    tags: ["Bar,Restaurant"],
+    url: "/places/le-barbu/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Bistrot de Maëlle et Augustin",
+    lat: 48.8514347,
+    lon: 2.3109525,
+    tags: ["Restaurant"],
+    url: "/places/le-bistrot-de-maelle-et-augustin/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Bistrot des Colonnes",
+    lat: 48.86919779999999,
+    lon: 2.3393295,
+    tags: ["Bar,Bière"],
+    url: "/places/le-bistrot-des-colonnes/",
+    description: "Ils font de la Gallia ! Un peu bruyant côté Rue mais dans la terrasse perpendiculaire c&#39;est mieux.",
+    image: ""
+  },
+  
+  {
+    title: "Le Bistrot Flottais",
+    lat: 46.18744,
+    lon: -1.32353,
+    tags: ["Bar,Terrasse,Vuemer"],
+    url: "/places/le-bistrot-flottais/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Bistrot",
+    lat: 41.8600423,
+    lon: 12.4938104,
+    tags: ["Restaurant,Pizzeria,Italien,Pâte"],
+    url: "/places/le-bistrot/",
+    description: "Rapport qualité prix honnête. Placé dans une petite rue au calme, moment agréable ! ",
+    image: ""
+  },
+  
+  {
+    title: "Le Bon Marché Rive Gauche",
+    lat: 48.8511354,
+    lon: 2.3243648,
+    tags: ["Boucherie,Caveàvin,Fromage,Marché,Shopping,Épicerie"],
+    url: "/places/le-bon-marche-rive-gauche/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Central Bar",
+    lat: 48.8581211,
+    lon: 2.3567532,
+    tags: ["Bar"],
+    url: "/places/le-central-bar/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Chat et la Souris",
+    lat: 48.8805619,
+    lon: 2.337462299999999,
+    tags: ["Vinyle,Shopping,Décoration"],
+    url: "/places/le-chat-et-la-souris/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Dénicheur",
+    lat: 48.8644306,
+    lon: 2.3497596,
+    tags: ["Àessayer,Bar,Vin"],
+    url: "/places/le-denicheur/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Dépanneur Terrasse",
+    lat: 48.8822531,
+    lon: 2.3332483,
+    tags: ["Bar,Terrasse"],
+    url: "/places/le-depanneur-terrasse/",
+    description: "Jolie petite place, terrasse en mode guinguette. Très sympa :) ",
+    image: ""
+  },
+  
+  {
+    title: "Le Duguesclin",
+    lat: 48.1117121,
+    lon: -1.6805773,
+    tags: ["Vin,Tartine,Bar"],
+    url: "/places/le-duguesclin/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Guy XVI",
+    lat: 48.1237295,
+    lon: -1.2143561,
+    tags: ["Bar"],
+    url: "/places/le-guy-xvi/",
+    description: "Atmosphère agréable dans le petit salon",
+    image: ""
+  },
+  
+  {
+    title: "Le Marégraphe",
+    lat: 48.63607,
+    lon: -2.067917,
+    tags: ["Crêperie,Restaurant,Terrasse"],
+    url: "/places/le-maregraphe/",
+    description: "Très bonne crêperie avec une terrasse au soleil 👌🏻",
+    image: ""
+  },
+  
+  {
+    title: "Le Montesquieu",
+    lat: 47.213028,
+    lon: -1.5658207,
+    tags: ["Àessayer,Restaurant,Bistronomie"],
+    url: "/places/le-montesquieu/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Naguere",
+    lat: 48.8352656,
+    lon: 2.3263567,
+    tags: ["Bar,Terrasse"],
+    url: "/places/le-naguere/",
+    description: "Bar de quartier. Serveurs sympas et terrasse super agréable ",
+    image: ""
+  },
+  
+  {
+    title: "Le Nid du Merle",
+    lat: 45.8992097,
+    lon: 6.121802700000001,
+    tags: ["Bar,Vin"],
+    url: "/places/le-nid-du-merle/",
+    description: "Une excellente bière, de supers vins et un conseil au top ! ",
+    image: ""
+  },
+  
+  {
+    title: "Le Nid",
+    lat: 47.21771460000001,
+    lon: -1.5582339,
+    tags: ["Bar,Rooftop"],
+    url: "/places/le-nid/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Pas Sage.",
+    lat: 48.8646686,
+    lon: 2.3500914,
+    tags: ["Àessayer,Vin"],
+    url: "/places/le-pas-sage/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le passage à niveaux",
+    lat: 48.8873654,
+    lon: 2.3847386,
+    tags: ["Bar,Bière,Vin,Restaurant,Terrasse"],
+    url: "/places/le-passage-a-niveaux/",
+    description: "La bouffe est pas très chère mais c’est pas mal ! Ils se rattrapent sur les digestifs ! Belle terrasse en mode guinguette !!! ",
+    image: ""
+  },
+  
+  {
+    title: "Le Patron Prêt à Porter Homme",
+    lat: 48.11321359999999,
+    lon: -1.6774186,
+    tags: ["Shopping"],
+    url: "/places/le-patron-pret-a-porter-homme/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Perchoir Ménilmontant",
+    lat: 48.865417,
+    lon: 2.382118,
+    tags: ["Bar,Rooftop"],
+    url: "/places/le-perchoir-menilmontant/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Petit Flore",
+    lat: 47.21454029999999,
+    lon: -1.5591249,
+    tags: ["Restaurant"],
+    url: "/places/le-petit-flore/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Petit Varenne",
+    lat: 48.85507579999999,
+    lon: 2.3201269,
+    tags: ["Brasserie,Restaurant,Terrasse"],
+    url: "/places/le-petit-varenne/",
+    description: "Petite brasserie sympathique. La bouffe est très bonne et service très cool, suite à un retard desserts offerts 👌🏻",
+    image: ""
+  },
+  
+  {
+    title: "Le Potager de Charlotte",
+    lat: 48.8790049,
+    lon: 2.3446852,
+    tags: ["Vegan,Restaurant,Àessayer"],
+    url: "/places/le-potager-de-charlotte/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Preaumur",
+    lat: 48.8687207327667,
+    lon: 2.3417991006224255,
+    tags: ["Pizzeria,Restaurant"],
+    url: "/places/le-preaumur/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Rhinoceros",
+    lat: 48.8636396,
+    lon: 2.349255400000001,
+    tags: ["Bar,HappyHour,Terrasse"],
+    url: "/places/le-rhinoceros/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Rive Gauche",
+    lat: 43.1824489,
+    lon: 3.0065249,
+    tags: ["Bar"],
+    url: "/places/le-rive-gauche/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Rocketship",
+    lat: 48.8799413,
+    lon: 2.3372066,
+    tags: ["Décoration,Shopping"],
+    url: "/places/le-rocketship/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Rouge à Lèvres",
+    lat: 48.8716375,
+    lon: 2.3461153,
+    tags: ["Bar,Tapas,Terrasse"],
+    url: "/places/le-rouge-a-levres/",
+    description: "Terrasse dans une rue très peu passante. Prix un peu cher mais à faire ",
+    image: ""
+  },
+  
+  {
+    title: "Le Royal Cafe",
+    lat: 47.2149566,
+    lon: -1.5584585,
+    tags: ["Bar"],
+    url: "/places/le-royal-cafe/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Ruisseau Burguer Joint",
+    lat: 48.8609932,
+    lon: 2.3544339,
+    tags: ["Restaurant,Àessayer,Burger"],
+    url: "/places/le-ruisseau-burguer-joint/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Sentier des Ocres",
+    lat: 43.90112570000001,
+    lon: 5.2956504,
+    tags: ["Vuedeouf,Parc"],
+    url: "/places/le-sentier-des-ocres/",
+    description: "Réserve des anciennes carrières. Couleurs magnifiques !! ",
+    image: ""
+  },
+  
+  {
+    title: "Le Servan",
+    lat: 48.86101559999999,
+    lon: 2.3814506,
+    tags: ["Restaurant,Àessayer,Bistronomie"],
+    url: "/places/le-servan/",
+    description: "https://lefooding.com/fr/restaurants/restaurant-le-servan-paris",
+    image: ""
+  },
+  
+  {
+    title: "Le Sevigne",
+    lat: 48.858691,
+    lon: 2.362643,
+    tags: ["Bar"],
+    url: "/places/le-sevigne/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Sur Mesure",
+    lat: 47.21252059384336,
+    lon: -1.560236028253575,
+    tags: ["Bar,Bière"],
+    url: "/places/le-sur-mesure/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Surfing",
+    lat: 43.4783905,
+    lon: -1.5664019,
+    tags: ["Restaurant"],
+    url: "/places/le-surfing/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le Transition",
+    lat: 47.2184422,
+    lon: -1.5656418,
+    tags: ["Restaurant"],
+    url: "/places/le-transition/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le TUB",
+    lat: 48.8664399,
+    lon: 2.3376451,
+    tags: ["Terrasse,Restaurant,Bar,Brasserie"],
+    url: "/places/le-tub/",
+    description: "La terrasse est petite mais super cool ! Isolé des voitures. Les flammekueches sont bonnes",
+    image: ""
+  },
+  
+  {
+    title: "Le Voltigeur",
+    lat: 48.85817126980759,
+    lon: 2.3591778220323936,
+    tags: ["Bar,Restaurant"],
+    url: "/places/le-voltigeur/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Léandrés, happy food &amp; coffee",
+    lat: 48.87915599999999,
+    lon: 2.348059,
+    tags: ["Àessayer,Bar,Restaurant"],
+    url: "/places/leandres-happy-food-coffee/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "L’équilibriste",
+    lat: 49.3603752,
+    lon: 0.0789403,
+    tags: ["Bar,Restaurant,Tapas"],
+    url: "/places/lequilibriste/",
+    description: "Ambiance très sympa et le serveur au top ! Bière IPA très bonne ",
+    image: ""
+  },
+  
+  {
+    title: "Les Affiches",
+    lat: 49.3677868,
+    lon: 0.0789043,
+    tags: ["Restaurant"],
+    url: "/places/les-affiches/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Les Blouses Blanches",
+    lat: 48.850093,
+    lon: 2.3831168,
+    tags: ["Bar,Terrasse"],
+    url: "/places/les-blouses-blanches/",
+    description: "Terrasse sympa et bien vivante ! ",
+    image: ""
+  },
+  
+  {
+    title: "Les Bols de Jean - Choiseul",
+    lat: 48.8689438,
+    lon: 2.336031,
+    tags: ["Restaurant,Surlepouce"],
+    url: "/places/les-bols-de-jean-choiseul/",
+    description: "Les fameux sandwich bols de Jean Imbert",
+    image: ""
+  },
+  
+  {
+    title: "Les Bols de Jean - Poissonnière",
+    lat: 48.8746209,
+    lon: 2.3477626,
+    tags: ["Bistronomie,Restaurant"],
+    url: "/places/les-bols-de-jean-poissonniere/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Les Caves de Prague",
+    lat: 48.84992299999999,
+    lon: 2.3759858,
+    tags: ["Commerce,Caveàbière,Bar,Bière,Vin,Terrasse"],
+    url: "/places/les-caves-de-prague/",
+    description: "Terrasse sur très calme. Le service est top, pas de carte on dit ce qu’on aime et on goûte !   Il vend la bière Maddam (http://www.maddam-chablis.com/). À vérifier ! ",
+    image: ""
+  },
+  
+  {
+    title: "Les Domaines Qui Montent Voltaire",
+    lat: 48.8568315,
+    lon: 2.381209300000001,
+    tags: ["Commerce,Caveàvin"],
+    url: "/places/les-domaines-qui-montent-voltaire/",
+    description: "Ils vendent la bouteille “Le planteur” 👌🏻",
+    image: ""
+  },
+  
+  {
+    title: "Les Fauves Restaurant",
+    lat: 48.8416987,
+    lon: 2.3226703,
+    tags: ["Àessayer,Restaurant"],
+    url: "/places/les-fauves-restaurant/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Les Flibustiers",
+    lat: 48.648028,
+    lon: -2.0271332,
+    tags: ["Restaurant,Terrasse"],
+    url: "/places/les-flibustiers/",
+    description: "Petite terrasse au calme, super produit locaux et bon service ! Tout ce qu’on aime !",
+    image: ""
+  },
+  
+  {
+    title: "Les Houblonneurs",
+    lat: 48.8867406,
+    lon: 2.3234566,
+    tags: ["Commerce,Brasserie,Àessayer"],
+    url: "/places/les-houblonneurs/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Les Petis Culs",
+    lat: 48.8495517,
+    lon: 2.3775672,
+    tags: ["Àessayer,Bistronomie,Bar,Restaurant,Terrasse"],
+    url: "/places/les-petis-culs/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Les Petites Sorcières",
+    lat: 48.83386609999999,
+    lon: 2.3279254,
+    tags: ["Bistronomie,Restaurant"],
+    url: "/places/les-petites-sorcieres/",
+    description: "Bon rapport qualité prix, mais décevant de ne pas avoir des produits de saison.",
+    image: ""
+  },
+  
+  {
+    title: "Les Piaules - Nation",
+    lat: 48.8475227355957,
+    lon: 2.3970658779144287,
+    tags: ["Bar,Vuedeouf,Rooftop,Terrasse,Hôtel"],
+    url: "/places/les-piaules-nation/",
+    description: "Une sacrée vue sur la place Nation ",
+    image: ""
+  },
+  
+  {
+    title: "Les Raffineurs",
+    lat: 48.8505,
+    lon: 2.33032,
+    tags: ["Shopping"],
+    url: "/places/les-raffineurs/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Les Rupins",
+    lat: 48.87186699999999,
+    lon: 2.3597021,
+    tags: ["Àessayer,Brasserie,Bistronomie,Restaurant"],
+    url: "/places/les-rupins/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Levain",
+    lat: 48.8453498,
+    lon: 2.2362814,
+    tags: ["Burger,Restaurant"],
+    url: "/places/levain/",
+    description: "Burger excellent. Très bien servi et très bon accueil ! 👌🏻",
+    image: ""
+  },
+  
+  {
+    title: "Libertino",
+    lat: 48.8755484,
+    lon: 2.3502117,
+    tags: ["Bar,Décoration,Italien,Restaurant"],
+    url: "/places/libertino/",
+    description: "La bouffe est bonne et cadre vraiment sympa et original ! Il y a au sous sol un bar rond qui tourne avec table ou on peut se poser 👌🏻",
+    image: ""
+  },
+  
+  {
+    title: "L’intrepide ",
+    lat: 48.88438267737241,
+    lon: 2.3346957111931586,
+    tags: ["Àessayer,Bière"],
+    url: "/places/lintrepide/",
+    description: "Craft beer ",
+    image: ""
+  },
+  
+  {
+    title: "Liquiderie Bar",
+    lat: 48.87098150000001,
+    lon: 2.3768053,
+    tags: ["Bar,Bière,Vin,Tapas"],
+    url: "/places/liquiderie-bar/",
+    description: "Bonne adresse, large choix de bière en pression. Bonne ambiance ",
+    image: ""
+  },
+  
+  {
+    title: "LIZARD LOUNGE",
+    lat: 48.8573805,
+    lon: 2.3563453,
+    tags: ["Bar,Restaurant,Pub,Bière"],
+    url: "/places/lizard-lounge/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Lulurouget",
+    lat: 47.20490329999999,
+    lon: -1.5619755,
+    tags: ["Gastronomie,Restaurant,⭐️"],
+    url: "/places/lulurouget/",
+    description: "Premier étoilé ! Équilibre des saveurs incroyables, cadre chic mais décontracté. Très belle découverte !  ",
+    image: ""
+  },
+  
+  {
+    title: "Lux",
+    lat: 48.86847052969721,
+    lon: 2.3471525918279883,
+    tags: ["Bar,Vin,Fromage"],
+    url: "/places/lux/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Mabillon",
+    lat: 48.8530297,
+    lon: 2.3357003,
+    tags: ["Bar"],
+    url: "/places/mabillon/",
+    description: "Brooklyn Lager",
+    image: ""
+  },
+  
+  {
+    title: "Maison Bouakache",
+    lat: 48.856449127197266,
+    lon: 2.3596930503845215,
+    tags: ["Àessayer,Boulangerie"],
+    url: "/places/maison-bouakache/",
+    description: "Cheesecake à tester ",
+    image: ""
+  },
+  
+  {
+    title: "Maison Dandoy",
+    lat: 50.8461197,
+    lon: 4.3520321,
+    tags: ["Restaurant,Gaufre,Pâtisserie"],
+    url: "/places/maison-dandoy/",
+    description: "Attente un peu longue mais les gaufres sont bonnes. Le chocolat est un peu trop liquide sur la gaufre. ",
+    image: ""
+  },
+  
+  {
+    title: "Mamie Cherie",
+    lat: 48.8512267,
+    lon: 2.380262,
+    tags: ["Brasserie,Décoration,Restaurant"],
+    url: "/places/mamie-cherie/",
+    description: "Super décoration, le resto porte bien son nom. Cuisine traditionnelle, super bon ! ",
+    image: ""
+  },
+  
+  {
+    title: "MAMMA MIA",
+    lat: 48.86620069999999,
+    lon: 2.3511001,
+    tags: ["Pizzeria,Restaurant"],
+    url: "/places/mamma-mia/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Mamma Roma Oberkampf",
+    lat: 48.8655021,
+    lon: 2.377027699999999,
+    tags: ["Pizzeria,Restaurant,Surlepouce"],
+    url: "/places/mamma-roma-oberkampf/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Marché Aligre/Beauvau",
+    lat: 48.848712,
+    lon: 2.378116,
+    tags: ["Marché"],
+    url: "/places/marche-aligre-beauvau/",
+    description: "Il y a aussi des halles, le marché est top !",
+    image: ""
+  },
+  
+  {
+    title: "Marché couvert des Enfants Rouges",
+    lat: 48.8629706,
+    lon: 2.3621515,
+    tags: ["Marché"],
+    url: "/places/marche-couvert-des-enfants-rouges/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Marlowe",
+    lat: 47.21744155883789,
+    lon: -1.553290843963623,
+    tags: ["Bar,Club"],
+    url: "/places/marlowe/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Mazali Restaurant",
+    lat: 48.8453879,
+    lon: 2.3830605,
+    tags: ["Àessayer,Bistronomie,Restaurant"],
+    url: "/places/mazali-restaurant/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "MELT",
+    lat: 48.8656108,
+    lon: 2.3708026,
+    tags: ["Àessayer,Restaurant,Viande"],
+    url: "/places/melt/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "MONBLEU Le Comptoir",
+    lat: 48.86541,
+    lon: 2.36194,
+    tags: ["Restaurant,Fromage"],
+    url: "/places/monbleu-le-comptoir/",
+    description: "Lieu très cool mais pas une bonne idée pour les raclettes. On mange sur des poufs…",
+    image: ""
+  },
+  
+  {
+    title: "Monbleu",
+    lat: 48.8741,
+    lon: 2.342127000000001,
+    tags: ["Fromage,Restaurant,Shopping"],
+    url: "/places/monbleu/",
+    description: "La bouffe est un peu décevante quoique l’es gougères étaient pas mal ! Vaut mieux prendre les planches à mon avis ",
+    image: ""
+  },
+  
+  {
+    title: "Monsieur Matthieu",
+    lat: 48.86114457210821,
+    lon: 2.3811438585079627,
+    tags: ["Vin,Àessayer"],
+    url: "/places/monsieur-matthieu/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Montezuma",
+    lat: 48.8682309,
+    lon: 2.3416915,
+    tags: ["Restaurant,CoffeeShop,Néobistrot"],
+    url: "/places/montezuma/",
+    description: "Hyper sympa : musique, bouffe, vin. Aucune idée de comment classifier le truc mais vins natures, une formule bun, vege, classique le midi avec des produits frais. Bref ambiance top, c’est délicieux, le service est cool. Adresse très sympa dans le quartier ",
+    image: ""
+  },
+  
+  {
+    title: "Moxy Brussels City Center",
+    lat: 50.83464,
+    lon: 4.36351,
+    tags: ["Hôtel"],
+    url: "/places/moxy-brussels-city-center/",
+    description: "Cocktails de bienvenu, propre et proche du centre. Très bon choix pour visiter Bruxelles !",
+    image: ""
+  },
+  
+  {
+    title: "Myomeu",
+    lat: 37.0157733,
+    lon: -7.933498,
+    tags: ["Restaurant,Terrasse,Décoration"],
+    url: "/places/myomeu/",
+    description: "À défaut d’avoir pu manger portugais ce soir là, ce restaurant polonais est très bon ! ",
+    image: ""
+  },
+  
+  {
+    title: "Nam Nam",
+    lat: 48.8686685,
+    lon: 2.3367073,
+    tags: ["Asiatique,Restaurant"],
+    url: "/places/nam-nam/",
+    description: "Tres bon ! Vermicelle plus poulet saté 👌🏻",
+    image: ""
+  },
+  
+  {
+    title: "Naumachia Ristorante",
+    lat: 41.8891108,
+    lon: 12.49658,
+    tags: ["Restaurant,Pizzeria,Pâte,Italien"],
+    url: "/places/naumachia-ristorante/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "O&#39;Connell&#39;s Irish Pub",
+    lat: 48.112087,
+    lon: -1.677209,
+    tags: ["Bar"],
+    url: "/places/o-connell-s-irish-pub/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Obao",
+    lat: 48.86078244071053,
+    lon: 2.3545880984033793,
+    tags: ["Àessayer,Restaurant,Asiatique"],
+    url: "/places/obao/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Ober Mamma",
+    lat: 48.8644444,
+    lon: 2.3701153,
+    tags: ["Tapas,Restaurant,Bar"],
+    url: "/places/ober-mamma/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Obicà - Parlamento",
+    lat: 41.9022671,
+    lon: 12.4760622,
+    tags: ["Restaurant,Pâte"],
+    url: "/places/obica-parlamento/",
+    description: "Les carbonaras sont bonnes ! 👌🏻",
+    image: ""
+  },
+  
+  {
+    title: "Olatua Biarritz",
+    lat: 43.483689,
+    lon: -1.567488,
+    tags: ["Bar,Vuemer"],
+    url: "/places/olatua-biarritz/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Olive &amp; Thym",
+    lat: 48.86166146687243,
+    lon: 2.350850743552741,
+    tags: ["Restaurant"],
+    url: "/places/olive-thym/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "On Partage",
+    lat: 48.85521697998047,
+    lon: 2.387363910675049,
+    tags: ["Àessayer,CoffeeShop,Restaurant,Vegan"],
+    url: "/places/on-partage/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Otonali",
+    lat: 48.6522847,
+    lon: -2.0117065,
+    tags: ["Bistronomie,Restaurant,Asiatique,Japonais"],
+    url: "/places/otonali/",
+    description: "Très belle découverte. Le cadre est très sympa, la nourriture est délicieuse ! Belle présentation également ",
+    image: ""
+  },
+  
+  {
+    title: "P&#39;tit Nice (Le Petit Nice)",
+    lat: 47.1147423,
+    lon: -2.1035935,
+    tags: ["Crêperie,Restaurant"],
+    url: "/places/p-tit-nice-le-petit-nice/",
+    description: "Ça faisait longtemps que je n’avais pas mangé des galettes et crêpes aussi bonnes !  Service super sympa et cadre cool ! U0001F44DU0001F3FB ",
+    image: ""
+  },
+  
+  {
+    title: "Païpaï",
+    lat: 48.855768195559456,
+    lon: 2.371443130476601,
+    tags: ["Àessayer,Bière,Vin"],
+    url: "/places/paipai/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Palacito",
+    lat: 43.48229651670517,
+    lon: -1.561893050447179,
+    tags: ["Bar"],
+    url: "/places/palacito/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Paname Brewing Company",
+    lat: 48.88786710000001,
+    lon: 2.378988000000001,
+    tags: ["Bière,Bar,Vuemer,Terrasse"],
+    url: "/places/paname-brewing-company/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Paprika",
+    lat: 48.864327330033746,
+    lon: 2.360152858604935,
+    tags: ["Brunch,Restaurant"],
+    url: "/places/paprika/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Paris Saint Bière",
+    lat: 48.8545171,
+    lon: 2.3841378,
+    tags: ["Commerce,Caveàbière"],
+    url: "/places/paris-saint-biere/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Paroles de Fromagers",
+    lat: 48.8693613,
+    lon: 2.3687224,
+    tags: ["Commerce,Fromage"],
+    url: "/places/paroles-de-fromagers/",
+    description: "Propose également des cours de caséologie et fait des raclettes ! ",
+    image: ""
+  },
+  
+  {
+    title: "Patatak",
+    lat: 50.84820556640625,
+    lon: 4.351023197174072,
+    tags: ["Restaurant,Surlepouce,Friterie"],
+    url: "/places/patatak/",
+    description: "Les frites sont incroyables accompagnées de très bonnes sauces. Ça tient au corps par contre 😅",
+    image: ""
+  },
+  
+  {
+    title: "Paul Smith",
+    lat: 48.85376910000001,
+    lon: 2.3259689,
+    tags: ["Shopping"],
+    url: "/places/paul-smith/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Penny lane",
+    lat: 48.11108701917267,
+    lon: -1.678818084720343,
+    tags: ["Bar"],
+    url: "/places/penny-lane/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "PERLOUSE",
+    lat: 48.88316039999999,
+    lon: 2.3307178,
+    tags: ["Àessayer,Bar,Huitre"],
+    url: "/places/perlouse/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Peter Mc Cool",
+    lat: 47.2140053,
+    lon: -1.5624338,
+    tags: ["Bar,Bière,Pub"],
+    url: "/places/peter-mc-cool/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Petit Plisson",
+    lat: 48.86689,
+    lon: 2.34735,
+    tags: ["Épicerie"],
+    url: "/places/petit-plisson/",
+    description: "Très bons produits, bien présentés. C’est dans le même esprit que Le Bon Marché",
+    image: ""
+  },
+  
+  {
+    title: "Pigalle Fromage Club",
+    lat: 48.8797856,
+    lon: 2.3340303,
+    tags: ["Àessayer,Bar,Fromage"],
+    url: "/places/pigalle-fromage-club/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Plan B",
+    lat: 48.84896469116211,
+    lon: 2.2906301021575928,
+    tags: ["Bière,Bar"],
+    url: "/places/plan-b/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Planto",
+    lat: 38.70878,
+    lon: -9.14896,
+    tags: ["Restaurant,Terrasse,Décoration"],
+    url: "/places/planto/",
+    description: "Très belle décoration et les plats sont bons. Très belle présentation des plats :) ",
+    image: ""
+  },
+  
+  {
+    title: "Poechenellekelder",
+    lat: 50.8447359,
+    lon: 4.3500102,
+    tags: ["Bar,Bière,Brasserie,Restaurant"],
+    url: "/places/poechenellekelder/",
+    description: "Très sympa, typique pour des bières belges authentiques. Petit concept de beer tasting : 3 galopins pour le prix d’une pinte 👌🏻. Service et musiques top !",
+    image: ""
+  },
+  
+  {
+    title: "Poupée",
+    lat: 48.86134,
+    lon: 2.35382,
+    tags: ["Fromage,Vin"],
+    url: "/places/poupee/",
+    description: "Le lieu est très sympa dans une impasse mais beaucoup trop cher... ",
+    image: ""
+  },
+  
+  {
+    title: "Puces",
+    lat: 48.88146943358418,
+    lon: 2.3356203778594713,
+    tags: ["Restaurant,Bistronomie"],
+    url: "/places/puces/",
+    description: "Top ! Meilleurs mousse au chocolat et guacamole, ever ! Petit plat à partager de bonne qualité 😋",
+    image: ""
+  },
+  
+  {
+    title: "Pupetta",
+    lat: 48.8647783,
+    lon: 2.3504143,
+    tags: ["Restaurant,Italien"],
+    url: "/places/pupetta/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "R. 25 de Abril 78",
+    lat: 37.10079574584961,
+    lon: -8.671623229980469,
+    tags: ["Restaurant,Terrasse"],
+    url: "/places/r-25-de-abril-78/",
+    description: "Les poulets sont bons. Petite terrasse dans une rue animée, fort sympa ! ",
+    image: ""
+  },
+  
+  {
+    title: "Rains",
+    lat: 48.861595153808594,
+    lon: 2.3570687770843506,
+    tags: ["Shopping"],
+    url: "/places/rains/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Razowski&#39;s",
+    lat: 48.8672694,
+    lon: 2.3325566,
+    tags: ["Bar,Brunch"],
+    url: "/places/razowski-s/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Ré Ostréa",
+    lat: 46.20459899999999,
+    lon: -1.381819,
+    tags: ["Bar,Huitre,Tapas"],
+    url: "/places/re-ostrea/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "READi Design Lab",
+    lat: 47.2042095,
+    lon: -1.5664796,
+    tags: ["École"],
+    url: "/places/readi-design-lab/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Reforme",
+    lat: 48.1120147,
+    lon: -1.678388,
+    tags: ["Shopping"],
+    url: "/places/reforme/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Restaurant du Palais Royal",
+    lat: 48.865657,
+    lon: 2.338916,
+    tags: ["⭐️⭐️,Restaurant,Gastronomie"],
+    url: "/places/restaurant-du-palais-royal/",
+    description: "Cadre (dans le jardin) et repas (menu du midi) excellents ! La différence avec un ⭐️ doit se faire le soir. Service au top, très sympa et pas guindé ! ",
+    image: ""
+  },
+  
+  {
+    title: "Restaurante A Tasca",
+    lat: 37.010427,
+    lon: -8.931091,
+    tags: ["Poisson,Restaurant,Terrasse,Vuemer,Vuedeouf"],
+    url: "/places/restaurante-a-tasca/",
+    description: "Restaurant à la cuisine portugaise traditionnelle, c’était excellent ! Service au top et une vue mer à couper le souffle ! ",
+    image: ""
+  },
+  
+  {
+    title: "Roberta",
+    lat: 48.8846968,
+    lon: 2.339037,
+    tags: ["Àessayer,Shopping,Épicerie"],
+    url: "/places/roberta/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "roche coffee shop",
+    lat: 48.8806912,
+    lon: 2.346612899999999,
+    tags: ["Àessayer,CoffeeShop"],
+    url: "/places/roche-coffee-shop/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Rosie Lou",
+    lat: 48.8702844,
+    lon: 2.348848,
+    tags: ["Brasserie,Restaurant,Décoration"],
+    url: "/places/rosie-lou/",
+    description: "Le cadre est super sympa, assez bruyant cela dit.  Mauvaise cuisson de la viande mais ils nous ont gait geste de compensation. La bouffe est plutôt bonne ! ",
+    image: ""
+  },
+  
+  {
+    title: "Sadara",
+    lat: 46.1986,
+    lon: 6.12563,
+    tags: ["Bar,Restaurant,Tapas,Hotdog,Terrasse,Vuedeouf"],
+    url: "/places/sadara/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Saline Ceviche Bar - Restaurant Biarritz",
+    lat: 43.47948,
+    lon: -1.564284,
+    tags: ["Restaurant"],
+    url: "/places/saline-ceviche-bar-restaurant-biarritz/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Santovino",
+    lat: 41.90319609999999,
+    lon: 12.4772945,
+    tags: ["Restaurant,Pâte,Terrasse"],
+    url: "/places/santovino/",
+    description: "Un poil cher mais pas mal du tout. Les polpettes au gorgonzola sont bonnes ! Le Tiramisu également ",
+    image: ""
+  },
+  
+  {
+    title: "Sauver Le Monde Des Hommes",
+    lat: 48.88345482892111,
+    lon: 2.34170786831803,
+    tags: ["Shopping"],
+    url: "/places/sauver-le-monde-des-hommes/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Scala",
+    lat: 34.9931353,
+    lon: 24.747259,
+    tags: ["Restaurant,Vuemer,Vuedeouf,Huitre,Poisson"],
+    url: "/places/scala/",
+    description: "Le ceviche de bar est top ! La vue est exceptionnelle, bon choix contenu des restaurants très touristiques des environs",
+    image: ""
+  },
+  
+  {
+    title: "Schmoove",
+    lat: 48.86014075545636,
+    lon: 2.3546263859661662,
+    tags: ["Shopping"],
+    url: "/places/schmoove/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Scotch &amp; Soda",
+    lat: 48.8578909,
+    lon: 2.3580086,
+    tags: ["Shopping"],
+    url: "/places/scotch-soda/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Sette",
+    lat: 48.85648684419265,
+    lon: 2.373997454373452,
+    tags: ["Pizzeria,Restaurant"],
+    url: "/places/sette/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Shinjuku Pigalle",
+    lat: 48.88030209999999,
+    lon: 2.3431856,
+    tags: ["Asiatique,Restaurant"],
+    url: "/places/shinjuku-pigalle/",
+    description: "Simple mais bons produits ",
+    image: ""
+  },
+  
+  {
+    title: "Shiso Burger Paris - Saint Michel",
+    lat: 48.85338050000001,
+    lon: 2.3453281,
+    tags: ["Restaurant"],
+    url: "/places/shiso-burger-paris-saint-michel/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Sloopy Jo",
+    lat: 48.871097564697266,
+    lon: 2.335775136947632,
+    tags: ["Restaurant,Burger"],
+    url: "/places/sloopy-jo/",
+    description: "Decoration atypique mais frite surgelées. Trop cher pour ce que c’est… ",
+    image: ""
+  },
+  
+  {
+    title: "Slow Gallery",
+    lat: 48.86487208820451,
+    lon: 2.3667859480936135,
+    tags: ["Galeried’art"],
+    url: "/places/slow-gallery/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Smiley",
+    lat: 48.87927,
+    lon: 2.33985,
+    tags: ["Bar,HappyHour,Terrasse"],
+    url: "/places/smiley/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Sogno Di Pasta",
+    lat: 48.8785293,
+    lon: 2.3399108,
+    tags: ["Italien,Restaurant"],
+    url: "/places/sogno-di-pasta/",
+    description: "Les pâtes, raviolis et autres sont top ! ",
+    image: ""
+  },
+  
+  {
+    title: "Sorry Angel",
+    lat: 48.85330641873916,
+    lon: 2.37558827838399,
+    tags: ["Bar,Restaurant"],
+    url: "/places/sorry-angel/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Taberna da mó",
+    lat: 37.10042,
+    lon: -8.67152,
+    tags: ["Tapas,Restaurant,Surlepouce,Terrasse"],
+    url: "/places/taberna-da-mo/",
+    description: "Les tapas sont délicieux ! Le thon est dingue ! Très bonne adresse ",
+    image: ""
+  },
+  
+  {
+    title: "Tamara Bar",
+    lat: 46.2030831,
+    lon: 6.1350811,
+    tags: ["Bar,Bière,Burger,Restaurant"],
+    url: "/places/tamara-bar/",
+    description: "Très belle sélections de bière à la pression et bon burger !",
+    image: ""
+  },
+  
+  {
+    title: "Tante Jeanne",
+    lat: 43.65924529999999,
+    lon: -1.4287851,
+    tags: ["Glacier"],
+    url: "/places/tante-jeanne/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "That&#39;s Toast",
+    lat: 51.20653679999999,
+    lon: 3.2193294,
+    tags: ["Restaurant,Tartine"],
+    url: "/places/that-s-toast/",
+    description: "Les tartines sont tops ! Petit patio extérieur possible ",
+    image: ""
+  },
+  
+  {
+    title: "The French Guinguette",
+    lat: 48.86169599836042,
+    lon: 2.351445529893015,
+    tags: ["Bar"],
+    url: "/places/the-french-guinguette/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "The Ganton Arms",
+    lat: 51.51297,
+    lon: -0.13933,
+    tags: ["Bar,Pub,Terrasse"],
+    url: "/places/the-ganton-arms/",
+    description: "Très joli pub, on adore et prix corrects ! ",
+    image: ""
+  },
+  
+  {
+    title: "the mill",
+    lat: 38.7107833,
+    lon: -9.1498186,
+    tags: ["Brunch,Restaurant"],
+    url: "/places/the-mill/",
+    description: "Simple mais efficace. Le bagel breakfast est franchement bon ! A refaire ",
+    image: ""
+  },
+  
+  {
+    title: "Tigermilk South-Pigalle",
+    lat: 48.8765729,
+    lon: 2.3397434,
+    tags: ["Restaurant,Tapas,Décoration"],
+    url: "/places/tigermilk-south-pigalle/",
+    description: "Décoration et service sympa. Je m’attendais à mieux sur la Quesadilla",
+    image: ""
+  },
+  
+  {
+    title: "Tripletta Gaité",
+    lat: 48.8405655,
+    lon: 2.324732599999999,
+    tags: ["Restaurant,Pizzeria"],
+    url: "/places/tripletta-gaite/",
+    description: "Les pizzas sont bonnes ! ",
+    image: ""
+  },
+  
+  {
+    title: "Uma",
+    lat: 48.8651625,
+    lon: 2.3304951,
+    tags: ["Bar,Restaurant"],
+    url: "/places/uma/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Une Glace A Paris",
+    lat: 48.8583190957689,
+    lon: 2.356285896776008,
+    tags: ["Glacier"],
+    url: "/places/une-glace-a-paris/",
+    description: "Meilleur ouvrier glacier de France ",
+    image: ""
+  },
+  
+  {
+    title: "Vermillon",
+    lat: 48.8820765,
+    lon: 2.3316336,
+    tags: ["Àessayer,Restaurant"],
+    url: "/places/vermillon/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Vila Adentro",
+    lat: 37.0129872,
+    lon: -7.9343757,
+    tags: ["Décoration,Restaurant,Terrasse,Àessayer"],
+    url: "/places/vila-adentro/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Villa Gypsy",
+    lat: 49.3664413,
+    lon: 0.0820105,
+    tags: ["Tartine,CoffeeShop,Restaurant"],
+    url: "/places/villa-gypsy/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Will&#39;s Deli",
+    lat: 48.86976139999999,
+    lon: 2.347982999999999,
+    tags: ["Àessayer,Restaurant"],
+    url: "/places/will-s-deli/",
+    description: "Pastrami excellent apparemment ",
+    image: ""
+  },
+  
+  {
+    title: "With Marlow",
+    lat: 48.85915669999999,
+    lon: 2.3536269,
+    tags: ["Opticien,Cheap,Shopping"],
+    url: "/places/with-marlow/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Wolf",
+    lat: 50.8499341,
+    lon: 4.356280599999999,
+    tags: ["Restaurant,Foodhall"],
+    url: "/places/wolf/",
+    description: "Cuisine du monde, assez bruyant forcément mais le stand de pâte est top ! Bon rapport qualité prix 👌🏻",
+    image: ""
+  },
+  
+  {
+    title: "Workshop",
+    lat: 48.86250778095261,
+    lon: 2.352163822219099,
+    tags: ["Bar"],
+    url: "/places/workshop/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Yaai Thaï Daguerre",
+    lat: 48.83410560000001,
+    lon: 2.3294163,
+    tags: ["Asiatique,Restaurant,Àemporter,Terrasse"],
+    url: "/places/yaai-thai-daguerre/",
+    description: "Rapport qualité prix excellent. Service super cool. Il faut prendre leur pad thaï. Par contre les tables de la terrasses sont supers collée, ça manque d’intimité… ",
+    image: ""
+  },
+  
+  {
+    title: "Yatai Rāmen",
+    lat: 48.8673210144043,
+    lon: 2.3351056575775146,
+    tags: ["Restaurant,Thaï"],
+    url: "/places/yatai-ramen/",
+    description: "On se rapproche de Kodawari, très bon ramen !",
+    image: ""
+  },
+  
+  {
+    title: "Yaya Secrétan",
+    lat: 48.8811718,
+    lon: 2.3738043,
+    tags: ["Àessayer,Restaurant,Grec"],
+    url: "/places/yaya-secretan/",
+    description: "",
+    image: ""
+  },
+  
+  {
+    title: "Yoda",
+    lat: 48.8499134,
+    lon: 2.3781466,
+    tags: ["Restaurant,Tartine,Terrasse,Bar,Décoration"],
+    url: "/places/yoda/",
+    description: "Petite terrasse charmante au calme. Le matcha est nul mais déco et service sympa ! ",
+    image: ""
+  },
+  
+  {
+    title: "Yumchaa Camden Lock",
+    lat: 51.5413,
+    lon: -0.1466855,
+    tags: ["Marché"],
+    url: "/places/yumchaa-camden-lock/",
+    description: "",
+    image: ""
+  }
+  
+];
+
+// Variables globales
+let map;
+let markers = [];
+let originalData = [...places];
+
+// Initialisation de la carte
+function initMap() {
+  // Créer la carte centrée sur la France
+  map = L.map('map').setView([46.603354, 1.888334], 6);
+  
+  // Ajouter les tuiles OpenStreetMap
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors',
+    maxZoom: 18
+  }).addTo(map);
+  
+  // Ajouter les marqueurs
+  addMarkersToMap(places);
+  
+  // Ajuster la vue pour montrer tous les marqueurs
+  if (places.length > 0) {
+    const group = new L.featureGroup(markers);
+    map.fitBounds(group.getBounds().pad(0.1));
+  }
+}
+
+// Ajouter les marqueurs sur la carte
+function addMarkersToMap(placesToShow) {
+  // Supprimer les marqueurs existants
+  markers.forEach(marker => map.removeLayer(marker));
+  markers = [];
+  
+  placesToShow.forEach(place => {
+    const popupContent = `
+      <div class="popup-content">
+        <h3><a href="${place.url}">${place.title}</a></h3>
+        ${place.image ? `<img src="${place.image}" alt="${place.title}" style="width: 200px; height: 150px; object-fit: cover;">` : ''}
+        ${place.description ? `<p>${place.description}</p>` : ''}
+        ${place.tags.length > 0 ? `<div class="tags">${place.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</div>` : ''}
+      </div>
+    `;
+    
+    const marker = L.marker([place.lat, place.lon])
+      .addTo(map)
+      .bindPopup(popupContent);
+    
+    markers.push(marker);
+  });
+}
+
+// Initialiser les filtres
+function initFilters() {
+  const tagFilter = document.getElementById('tagFilter');
+  const searchInput = document.getElementById('searchInput');
+  const resetButton = document.getElementById('resetFilters');
+  
+  // Récupérer tous les tags uniques
+  const allTags = [...new Set(places.flatMap(place => place.tags))].sort();
+  
+  // Ajouter les options de tags
+  allTags.forEach(tag => {
+    const option = document.createElement('option');
+    option.value = tag;
+    option.textContent = tag;
+    tagFilter.appendChild(option);
+  });
+  
+  // Événements de filtrage
+  searchInput.addEventListener('input', filterPlaces);
+  tagFilter.addEventListener('change', filterPlaces);
+  resetButton.addEventListener('click', resetFilters);
+}
+
+// Filtrer les lieux
+function filterPlaces() {
+  const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+  const selectedTag = document.getElementById('tagFilter').value;
+  
+  let filteredPlaces = originalData.filter(place => {
+    const matchesSearch = place.title.toLowerCase().includes(searchTerm) || 
+                         place.description.toLowerCase().includes(searchTerm);
+    const matchesTag = !selectedTag || place.tags.includes(selectedTag);
+    
+    return matchesSearch && matchesTag;
+  });
+  
+  addMarkersToMap(filteredPlaces);
+  
+  // Ajuster la vue si des résultats existent
+  if (filteredPlaces.length > 0 && markers.length > 0) {
+    const group = new L.featureGroup(markers);
+    map.fitBounds(group.getBounds().pad(0.1));
+  }
+}
+
+// Réinitialiser les filtres
+function resetFilters() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('tagFilter').value = '';
+  addMarkersToMap(originalData);
+  
+  if (originalData.length > 0) {
+    const group = new L.featureGroup(markers);
+    map.fitBounds(group.getBounds().pad(0.1));
+  }
+}
+
+// Initialiser quand le DOM est prêt
+document.addEventListener('DOMContentLoaded', function() {
+  initMap();
+  initFilters();
+});
+</script>
+
+</body>
+</html>
