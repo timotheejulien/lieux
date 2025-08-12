@@ -51,12 +51,11 @@
          const placeMap = L.map('placeMap').setView([48.86114457210821, 2.3811438585079627], 13);
 
          // Ajouter la couche OSM Bright
-         L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png', {
-            maxZoom: 20,
-            attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
-                        '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
-                        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-         }).addTo(placeMap);
+         L.tileLayer('https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://www.carto.com/">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 20
+   }).addTo(map);
 
          // Icône SVG personnalisée
          const svgIcon = L.divIcon({
