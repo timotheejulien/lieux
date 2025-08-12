@@ -41,30 +41,41 @@ let map;
 let markers = [];
 let originalData = [...places];
 
+// Icône SVG personnalisée
+const svgIcon = L.divIcon({
+  className: "custom-svg-pin",
+  html: `
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
+      <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#202020"/>
+      <circle cx="15" cy="15" r="6" fill="#fff"/>
+    </svg>
+  `,
+  iconSize: [30, 42],
+  iconAnchor: [15, 42],
+  popupAnchor: [0, -42]
+});
+
 // Initialisation de la carte
 function initMap() {
-  // Créer la carte centrée sur la France
   map = L.map('map').setView([46.603354, 1.888334], 6);
   
-  // Ajouter les tuiles OpenStreetMap
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors',
-    maxZoom: 18
+  L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png', {
+    maxZoom: 20,
+    attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
+                 '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
+                 '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map);
   
-  // Ajouter les marqueurs
   addMarkersToMap(places);
   
-  // Ajuster la vue pour montrer tous les marqueurs
   if (places.length > 0) {
     const group = new L.featureGroup(markers);
     map.fitBounds(group.getBounds().pad(0.1));
   }
 }
 
-// Ajouter les marqueurs sur la carte
+// Ajouter les marqueurs avec icône SVG
 function addMarkersToMap(placesToShow) {
-  // Supprimer les marqueurs existants
   markers.forEach(marker => map.removeLayer(marker));
   markers = [];
   
@@ -78,7 +89,7 @@ function addMarkersToMap(placesToShow) {
       </div>
     `;
     
-    const marker = L.marker([place.lat, place.lon])
+    const marker = L.marker([place.lat, place.lon], { icon: svgIcon })
       .addTo(map)
       .bindPopup(popupContent);
     
@@ -86,16 +97,14 @@ function addMarkersToMap(placesToShow) {
   });
 }
 
-// Initialiser les filtres
+// Filtres
 function initFilters() {
   const tagFilter = document.getElementById('tagFilter');
   const searchInput = document.getElementById('searchInput');
   const resetButton = document.getElementById('resetFilters');
   
-  // Récupérer tous les tags uniques
   const allTags = [...new Set(places.flatMap(place => place.tags))].sort();
   
-  // Ajouter les options de tags
   allTags.forEach(tag => {
     const option = document.createElement('option');
     option.value = tag;
@@ -103,35 +112,30 @@ function initFilters() {
     tagFilter.appendChild(option);
   });
   
-  // Événements de filtrage
   searchInput.addEventListener('input', filterPlaces);
   tagFilter.addEventListener('change', filterPlaces);
   resetButton.addEventListener('click', resetFilters);
 }
 
-// Filtrer les lieux
 function filterPlaces() {
   const searchTerm = document.getElementById('searchInput').value.toLowerCase();
   const selectedTag = document.getElementById('tagFilter').value;
   
   let filteredPlaces = originalData.filter(place => {
     const matchesSearch = place.title.toLowerCase().includes(searchTerm) || 
-                         place.description.toLowerCase().includes(searchTerm);
+                          place.description.toLowerCase().includes(searchTerm);
     const matchesTag = !selectedTag || place.tags.includes(selectedTag);
-    
     return matchesSearch && matchesTag;
   });
   
   addMarkersToMap(filteredPlaces);
   
-  // Ajuster la vue si des résultats existent
   if (filteredPlaces.length > 0 && markers.length > 0) {
     const group = new L.featureGroup(markers);
     map.fitBounds(group.getBounds().pad(0.1));
   }
 }
 
-// Réinitialiser les filtres
 function resetFilters() {
   document.getElementById('searchInput').value = '';
   document.getElementById('tagFilter').value = '';
@@ -143,9 +147,9 @@ function resetFilters() {
   }
 }
 
-// Initialiser quand le DOM est prêt
 document.addEventListener('DOMContentLoaded', function() {
   initMap();
   initFilters();
 });
 </script>
+

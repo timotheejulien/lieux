@@ -12,7 +12,7 @@
    --color-text-secondary: #707070;
    --color-text-third: #BABABA;
    --color-focus: #202020;
-   --color-primary: #019074;
+   --color-primary: #202020;
 
    /* SPACE TOKEN */
    --space-none: 0;
@@ -264,6 +264,17 @@ main {
    outline: 2px solid var(--color-primary);
 }
 
+#tagFilter {
+   appearance: none;
+   background-image: url('../assets/caret-down.svg');
+   background-repeat: no-repeat;
+   background-position: right 10px center;
+}
+
+#tagFilter:focus {
+   outline: none;
+}
+
 #map {
    height: 100vh;
    width: 100%;
@@ -368,10 +379,6 @@ ul.post-list-meta li {
 }
 
 /* FOOTER */
-#footer {
-    padding-top: var(--space-x-large);
-}
-
 #footer .divider {
     margin-bottom: var(--space-x-large);
 }
@@ -450,7 +457,6 @@ ul.footer-nav li {
 
    /* FOOTER */
     #footer {
-        padding-top: var(--space-xxx-large);
         padding-bottom: var(--space-x-large);
     }
 
@@ -486,6 +492,6 @@ ul.footer-nav li {
       --color-text-secondary: #BABABA;
       --color-text-third: #DEDEDE;
       --color-focus: #FBFBFB;
-      --color-primary: #FFD363;
+      --color-primary: #FBFBFB;
    }
 }
