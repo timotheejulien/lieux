@@ -6,5 +6,5 @@ description: La bouffe est bonne et cadre vraiment sympa et original ! Il y a au
 lat: '48.8755484'
 lon: '2.3502117'
 address: 44 Rue de Paradis, Paris 75010
-tags: Bar,Décoration,Italien,Restaurant
+tags: bar restaurant italien
 ---

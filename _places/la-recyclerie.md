@@ -1,9 +1,8 @@
 ---
-
-title: La REcyclerie
+title: La Recyclerie
 description: ''
 lat: '48.89762'
 lon: '2.34404'
 address: 83 boulevard Ornano
-tags: Brunch,Restaurant,Terrasse
+tags: restaurant brunch terrasse
 ---

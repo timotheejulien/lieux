@@ -1,5 +1,4 @@
 ---
-
 title: La Cabane Du Bout
 description: 'Penser à la marée, bien mieux quand elle est haute ! '
 lat: '44.765296359958924'

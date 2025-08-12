@@ -1,9 +1,9 @@
 ---
-
 title: Chez Fanch
-description: ''
+description: 'Une petite pépite rennaise pour manger une belle planche de bar-à-fromages de qualité !'
 lat: '48.11246906488076'
 lon: '-1.681511686841527'
 address: 1-3 Rue Rallier du Baty, 35000 Rennes, France
-tags: Fromage,Bar,Restaurant,Vin
+website: https://www.chezfanch.fr
+tags: commerce fromagerie restaurant bar bar-à-fromage
 ---

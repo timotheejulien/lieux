@@ -302,6 +302,7 @@ main {
 
 .popup-content p {
    margin-bottom: var(--space-regular);
+   -webkit-line-clamp: 4 !important;
    font-family: UncutSans-Variable, sans-serif;
    font-size: 14px;
    color: var(--color-text-secondary);

@@ -653,7 +653,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 /* Printing */
 
 @media print {
-	/* Prevent printers from removing background-images of controls. */
+	/* Prevent printers from remobar-à-ving background-images of controls. */
 	.leaflet-control {
 		-webkit-print-color-adjust: exact;
 		print-color-adjust: exact;
