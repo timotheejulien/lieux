@@ -277,6 +277,12 @@ main {
    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
 }
 
+.leaflet-popup-tip {
+   background: rgba(251, 251, 251, 0.85) !important;
+   backdrop-filter: blur(10px) saturate(120%) !important;
+   -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
+}
+
 .popup-content {
    max-width: 250px;
 }
