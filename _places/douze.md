@@ -1,5 +1,5 @@
 ---
-title: Douze (fermé défnitivement)
+title: Douze (fermé définitivement)
 description: ''
 lat: '48.8483477'
 lon: '2.3858711'
