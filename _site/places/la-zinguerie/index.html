@@ -1,60 +1,113 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Zinguerie - Mes Voyages</title>
-    
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
-    <!-- Leaflet JavaScript -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>La Zinguerie - Mes Voyages</title>
+   <meta name="description" content="Cartographie de mes lieux visités">
+   <link rel="stylesheet" href="/css/style.css">
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+   <meta property="og:locale"  content="fr_FR" />
+   <meta property="og:site_name" content="La Zinguerie | Lieux">
+   <meta property="og:image" content="/cover.jpg"/>
+   <meta property="og:description" content="" />
+   <meta property="og:url" content="/places/la-zinguerie/">
+   <meta name="fediverse:creator" content="@timothee@mastodon.design" />
+   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+   <script src="/assets/script.js"></script>
 </head>
 <body>
-    <div class="place-content">
-    <a href="/" class="back-link">← Retour à la carte</a>
-    
-    <div class="place-header">
-        <h1 class="place-title">La Zinguerie</h1>
-        
-        
-        
-        
-        <div class="place-tags tags">
-            
-            <span class="tag">Vin,Brunch,Tapas,Bar,Bière,Brasserie</span>
-            
-        </div>
-        
-    </div>
-    
-    <div class="place-body">
-        
+   <main>
+   <section class="container flex post-header">
+      <div class="post-header-content">
+         <h1>La Zinguerie</h1>
+         <p class="post-review-comment"></p>
+         
+         <div class="place-tags tags">
+               
+               <span class="tag">Vin,Brunch,Tapas,Bar,Bière,Brasserie</span>
+               
+         </div>
+         
+      </div>
+   </section>
 
-    </div>
-    
-    
-    <div style="margin-top: 40px;">
-        <h2 style="margin-bottom: 20px; color: #333;">Localisation</h2>
-        <div id="placeMap" style="height: 300px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);"></div>
-    </div>
-    
-    <script>
-        // Créer une carte pour ce lieu spécifique
-        const placeMap = L.map('placeMap').setView([48.86102168503112, 2.380521208922759], 13);
-        
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(placeMap);
-        
-        L.marker([48.86102168503112, 2.380521208922759])
-            .addTo(placeMap)
-            .bindPopup('La Zinguerie')
-            .openPopup();
-    </script>
-    
-</div>
+   <section class="container">
+      <ul class="post-list-meta">
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 256 256"><path d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z"></path></svg> 4 Rue du Général Guilhem, 75011 Paris, France</li>
+            <li>
+               
+            </li>
+         </ul>
+      
+         <div id="placeMap" style="height: 400px; overflow: hidden;"></div>
 
+         <script>
+            // Créer une carte pour ce lieu spécifique
+            const placeMap = L.map('placeMap').setView([48.86102168503112, 2.380521208922759], 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                  attribution: '© OpenStreetMap contributors'
+            }).addTo(placeMap);
+
+            L.marker([48.86102168503112, 2.380521208922759])
+                  .addTo(placeMap)
+                  .bindPopup('La Zinguerie')
+                  .openPopup();
+         </script>
+      
+   </section>
+
+   <section class="container post-content">
+      
+
+
+      
+   </section>
+</main>
+
+    <footer id="footer" class="container">
+        <div class="divider"></div>
+        <section>
+            <span class="h2">Une remarque ?<br>Un simple bonjour ?</span>
+            <h2 class="color-text-secondary">Contact</h2>
+
+            <button id="footer-btn" class="btn btn-primary" onclick="mailTo()">Envoyer un message</button>
+        </section>
+        
+        <section class="footer-about">
+            <section class="flex">
+                  <div class="flex-width-1">
+                     <h4>Timothée Julien</h4>
+                     <p>Product designer (UX/UI) indépendant, évoluant à Paris.</p>
+                     <ul class="footer-nav">
+                        <li><a href="https://timotheejulien.fr" target="_blank">Portfolio</a>
+                        <li><a href="https://timotheejulien.fr/blog" target="_blank">Blog</a>
+                        <li><a href="https://bloc-notes.timotheejulien.fr" target="_blank">Bloc-notes (veille)</a></li>
+                     </ul>
+                  </div>
+                  <div class="flex-width-1">
+                        <h4>À propos de ce projet</h4>
+                        <p>Il s'agit d'un projet open-source. Si vous souhaitez me faire part d'une erreur ou suggérer une amélioration, ce projet est disponible sur <a href="https://github.com/timotheejulien/lieux/" target="_blank">Github</a>.</p>
+                  </div>
+                  <div class="flex-width-1">
+                     <h4>Mes réseaux</h4>
+                     <ul class="footer-nav">
+                        <li><a href="https://signal.me/#eu/YdauWLl23RV8Aqjkp6jgr7u-hcWB2dPTHfaZNITV6FCIa2ioQYxAdIjgxgEHd5d0" target="_blank">Signal</a>
+                        <li><a href="https://www.linkedin.com/in/timotheejulien/" target="_blank">Linkedin</a></li>
+                        <li><a href="https://mastodon.design/@timothee" target="_blank" rel="me">Mastodon</a></li>
+                        <li><a href="https://pixelfed.social/timothee" target="_blank">Pixelfed</a></li>
+                     </ul>
+                </div>
+            </section>
+        
+            <section class="footer-legals">
+                <p>© 2024 Timothée ・ <a href="https://timotheejulien.fr/credits/" title="Crédits">Crédits</a> ・ <a href="https://timotheejulien.fr/politique-de-confidentialite/" title="Politique de confidentialité">Politique de confidentialité</a> ・ <a href="https://timotheejulien.fr/politique-de-confidentialite/" title="Mentions légales">Mentions légales</a></p>
+            </section>
+        </section>
+
+    </footer>
+</body>
+</html>
 </body>
 </html>

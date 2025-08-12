@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
-    
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
-    <!-- Leaflet JavaScript -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+   <meta name="description" content="Cartographie de mes lieux visités">
+   <link rel="stylesheet" href="/css/style.css">
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+   <meta property="og:locale"  content="fr_FR" />
+   <meta property="og:site_name" content="{{ page.title }} | Lieux">
+   <meta property="og:image" content="/cover.jpg"/>
+   <meta property="og:description" content="{{ page.tags-preview }}" />
+   <meta property="og:url" content="{{ page.url }}">
+   <meta name="fediverse:creator" content="@timothee@mastodon.design" />
+   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+   <script src="/assets/script.js"></script>
 </head>
 <body>
-    {{ content }}
+   {{ content }}
 </body>
 </html>

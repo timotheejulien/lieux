@@ -6,5 +6,5 @@ description: 'Rapport qualité/prix imbattable ! Bruyant mais c’est l’esprit
 lat: '48.86602783203125'
 lon: '2.364701986312866'
 address: 39 Boulevard du Temple, 75003 Paris, France
-tags: Brasserie,Restaurant
+tags: Brasserie Restaurant
 ---

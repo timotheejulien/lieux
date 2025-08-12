@@ -1,57 +1,56 @@
-# Site de Cartographie Jekyll
+# My places
 
-Un site Jekyll pour cartographier et documenter vos lieux visités avec OpenStreetMap.
+## Introduction
 
-## Installation rapide
+A Jekyll site that uses OpenStreetMap and that I created using AI to map and document the places I visit.
 
-1. **Installer les dépendances**
-   ```bash
+## Installation
+
+### Install Jekyll
+You can find the tutorial here : [https://jekyllrb.com/docs/installation/](https://jekyllrb.com/docs/installation/)
+
+### Install the project
+
+1. Clone the repository
+```bash
+git clone https://github.com/timotheejulien/lieux.git
+cd ./lieux
+```
+
+2. **Install dependencies**
+```bash
    bundle install
    ```
 
-2. **Lancer le serveur de développement**
-   ```bash
+3. **Start the development server**
+```bash
    bundle exec jekyll serve
    ```
+4. **Visit the site**
+   Open your browser to `http://localhost:4000`
 
-3. **Visiter le site**
-   Ouvrez votre navigateur sur `http://localhost:4000`
+## Add a new place
 
-## Ajouter un nouveau lieu
-
-Créez un fichier dans `_places/` avec ce format :
+Create a file in `_places/` with this format:
 
 ```yaml
 ---
-title: "Nom du lieu"
-lat: 48.8566
-lon: 2.3522
-tags: ["tag1", "tag2"]
-description: "Description courte"
-image: "/images/photo.jpg"  # optionnel
+title: "Name of the place"
+description: "Short description"
+lat: ""
+lon: ""
+address: ""
+website: "" # optional
+tags: "tag1 tag2"
+image: "/images/photo.jpg"  # optional
 ---
 
-Contenu en Markdown...
-```
+## Features
 
-## Fonctionnalités
+- 🗺️ Interactive OpenStreetMap map
+- 🔍 Search by name
+- 🏷️ Filter by tags
 
-- 🗺️ Carte interactive OpenStreetMap
-- 🔍 Recherche par nom
-- 🏷️ Filtrage par tags
-- 📱 Design responsive
-- 🎨 Interface moderne
+## Released under MIT License
 
-## Structure
-
-```
-├── _config.yml          # Configuration
-├── Gemfile             # Dépendances
-├── index.html          # Page avec carte
-├── _layouts/           # Templates
-├── _places/            # Vos lieux
-├── images/             # Photos
-└── README.md          # Documentation
-```
-
-Consultez les exemples dans `_places/` pour commencer !
+Open sourced under the [MIT license](LICENSE.md).

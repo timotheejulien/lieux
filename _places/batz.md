@@ -6,5 +6,5 @@ description: 'Menu express à 6,50€ pour un petit déjeuner. Fait maison, c’
 lat: '38.710866'
 lon: '-9.149505'
 address: Largo do Doutor António de Sousa Macedo 2 1200-153 Lisbon Portugal
-tags: Brunch,Restaurant,Terrasse
+tags: Brunch Restaurant Terrasse
 ---

@@ -6,5 +6,5 @@ description: Rapport qualité/prix pour le 🍔 est honnête. La viande est exce
 lat: '48.8739843'
 lon: '2.343312899999999'
 address: 47 rue richer, Paris 75009
-tags: Viande,Restaurant
+tags: Viande Restaurant
 ---

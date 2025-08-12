@@ -1,5 +1,5 @@
 # Configuration Jekyll pour le site de cartographie
-title: "Mes Voyages"
+title: "Mes lieux"
 description: "Cartographie de mes lieux visités"
 baseurl: ""
 url: "http://localhost:4000"

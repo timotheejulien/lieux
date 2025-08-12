@@ -6,5 +6,5 @@ description: Excellente épicerie pour préparer un bon apéro ! La saucisse sè
 lat: '48.8343046'
 lon: '2.3288174'
 address: 30 Rue Daguerre 75014 Paris France
-tags: Commerce,Épicerie,Décoration,Restaurant,Surlepouce
+tags: Commerce Épicerie Décoration Restaurant SurLePouce
 ---

@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes Voyages</title>
-    
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
-    <!-- Leaflet JavaScript -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Mes Voyages</title>
+   <meta name="description" content="Cartographie de mes lieux visités">
+   <link rel="stylesheet" href="/css/style.css">
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+   <meta property="og:locale"  content="fr_FR" />
+   <meta property="og:site_name" content=" | Lieux">
+   <meta property="og:image" content="/cover.jpg"/>
+   <meta property="og:description" content="" />
+   <meta property="og:url" content="/">
+   <meta name="fediverse:creator" content="@timothee@mastodon.design" />
+   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+   <script src="/assets/script.js"></script>
 </head>
 <body>
-    <div id="controls" class="controls">
-  <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Rechercher un lieu...">
-  </div>
-  
-  <div class="filter-container">
-    <select id="tagFilter">
-      <option value="">Tous les tags</option>
-    </select>
-  </div>
-  
-  <div class="reset-container">
-    <button id="resetFilters" class="btn btn-primary">Réinitialiser</button>
-  </div>
+   <div id="controls" class="controls">
+   <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Rechercher un lieu...">
+   </div>
+
+   <div class="filter-container">
+      <select id="tagFilter">
+         <option value="">Tous les tags</option>
+      </select>
+   </div>
+
+   <div class="reset-container">
+      <button id="resetFilters" class="btn btn-primary">Réinitialiser</button>
+   </div>
 </div>
 
 <div id="map"></div>
@@ -78,7 +83,7 @@ const places = [
     title: "Amagat",
     lat: 48.85804539999999,
     lon: 2.396694799999999,
-    tags: ["Bar,Restaurant,Tapas"],
+    tags: ["Bar","Restaurant","Tapas"],
     url: "/places/amagat/",
     description: "Adresse atypique et tapas sympa ! ",
     image: ""
@@ -88,7 +93,7 @@ const places = [
     title: "Anneaux de Buren",
     lat: 47.215513,
     lon: -1.5456169,
-    tags: ["Bar,Galeried’art"],
+    tags: ["Bar","GalerieArt"],
     url: "/places/anneaux-de-buren/",
     description: "",
     image: ""
@@ -98,7 +103,7 @@ const places = [
     title: "Apertivus",
     lat: 48.8343046,
     lon: 2.3288174,
-    tags: ["Commerce,Épicerie,Décoration,Restaurant,Surlepouce"],
+    tags: ["Commerce","Épicerie","Décoration","Restaurant","SurLePouce"],
     url: "/places/apertivus/",
     description: "Excellente épicerie pour préparer un bon apéro ! La saucisse sèche et leurs tapenades sont bonnes. Leur sandwich sont qualis 👌🏻",
     image: ""
@@ -108,7 +113,7 @@ const places = [
     title: "Arbela 92",
     lat: 48.845245361328125,
     lon: 2.236274003982544,
-    tags: ["Restaurant,Tapas,Vin"],
+    tags: ["Restaurant","Tapas","Vin"],
     url: "/places/arbela-92/",
     description: "Service super sympa ! La bouffe est bonne mais un poil cher à mon sens. Apres c’est souvent le cas des tapas à partager… Déco standard.  Bonne découverte pour des vins ! ",
     image: ""
@@ -128,7 +133,7 @@ const places = [
     title: "Asian wok",
     lat: 48.86472181951019,
     lon: 2.3729843193519473,
-    tags: ["Àessayer,Restaurant,Thaï"],
+    tags: ["Restaurant","Thaï"],
     url: "/places/asian-wok/",
     description: "",
     image: ""
@@ -138,7 +143,7 @@ const places = [
     title: "Au Coeur du Marché",
     lat: 48.8497361,
     lon: 2.378855,
-    tags: ["Commerce,Traiteur,Charcuterie,Fromage"],
+    tags: ["Commerce","Traiteur","Charcuterie","Fromage"],
     url: "/places/au-coeur-du-marche/",
     description: "",
     image: ""
@@ -148,7 +153,7 @@ const places = [
     title: "au-delà du cuir",
     lat: 48.8620665,
     lon: 2.3511458,
-    tags: ["Shopping,Chaussure"],
+    tags: ["Shopping","Chaussure"],
     url: "/places/au-dela-du-cuir/",
     description: "",
     image: ""
@@ -158,7 +163,7 @@ const places = [
     title: "Au Moka",
     lat: 48.84979879999999,
     lon: 2.2948228,
-    tags: ["Bar,Terrasse"],
+    tags: ["Bar","Terrasse"],
     url: "/places/au-moka/",
     description: "Petit bistro qui paye pas de mine. Serveur sympa",
     image: ""
@@ -168,7 +173,7 @@ const places = [
     title: "Au QG de la mer",
     lat: 46.20326,
     lon: -1.393853,
-    tags: ["Bar,Huitre,Vuemer"],
+    tags: ["Bar","Huitre","VueMer"],
     url: "/places/au-qg-de-la-mer/",
     description: "Vue exceptionnelle ! Il faut prendre le vin Ré os très 👌🏻",
     image: ""
@@ -205,16 +210,6 @@ const places = [
   },
   
   {
-    title: "B.O.U.L.O.M",
-    lat: 48.89358759999999,
-    lon: 2.3356451,
-    tags: ["Restaurant,Buffetàvolonté"],
-    url: "/places/b-o-u-l-o-m/",
-    description: "",
-    image: ""
-  },
-  
-  {
     title: "B2",
     lat: 43.48060989379883,
     lon: -1.562222957611084,
@@ -228,7 +223,7 @@ const places = [
     title: "Baaria",
     lat: 51.5133,
     lon: -0.12914,
-    tags: ["Brunch,Restaurant"],
+    tags: ["Brunch","Restaurant"],
     url: "/places/baaria/",
     description: "Croissant au Nutella bon et très gourmand ",
     image: ""
@@ -238,7 +233,7 @@ const places = [
     title: "Bali Bowls",
     lat: 43.481872,
     lon: -1.5596543,
-    tags: ["Restaurant,Surlepouce"],
+    tags: ["Restaurant","SurLePouce"],
     url: "/places/bali-bowls/",
     description: "Tres sympa et rafraîchissant",
     image: ""
@@ -248,7 +243,7 @@ const places = [
     title: "Bambou",
     lat: 48.86935,
     lon: 2.34503,
-    tags: ["Asiatique,Décoration,Restaurant,Patio,Terrasse"],
+    tags: ["Asiatique","Décoration","Restaurant","Patio","Terrasse"],
     url: "/places/bambou/",
     description: "Le cadre est vraiment sympa avec une terrasse en patio. Par trop cher pour ce que c’est… ",
     image: ""
@@ -258,7 +253,7 @@ const places = [
     title: "Bar à Bulles",
     lat: 48.88447459999999,
     lon: 2.3322397,
-    tags: ["Bar,Terrasse"],
+    tags: ["Bar","Terrasse"],
     url: "/places/bar-a-bulles/",
     description: "",
     image: ""
@@ -268,7 +263,7 @@ const places = [
     title: "Bar &amp; Beer Picpus",
     lat: 48.8406,
     lon: 2.40033,
-    tags: ["Bar,Bière,Terrasse,HappyHour"],
+    tags: ["Bar","Bière","Terrasse","HappyHour"],
     url: "/places/bar-beer-picpus/",
     description: "Bar à bières qui tournent toutes les semaines. Petite terrasse extérieure et prix vraiment corrects !",
     image: ""
@@ -278,7 +273,7 @@ const places = [
     title: "Barbica",
     lat: 38.7090213,
     lon: -9.146759099999999,
-    tags: ["Brasserie,Restaurant,Terrasse"],
+    tags: ["Brasserie","Restaurant","Terrasse"],
     url: "/places/barbica/",
     description: "Superbe terrasse au calme. La bouffe est bonne ! Petit moment posé 👌🏻",
     image: ""
@@ -288,7 +283,7 @@ const places = [
     title: "Batz",
     lat: 38.710866,
     lon: -9.149505,
-    tags: ["Brunch,Restaurant,Terrasse"],
+    tags: ["Brunch","Restaurant","Terrasse"],
     url: "/places/batz/",
     description: "Menu express à 6,50€ pour un petit déjeuner. Fait maison, c’est très sympa ! ",
     image: ""
@@ -298,7 +293,7 @@ const places = [
     title: "Beau Passage",
     lat: 48.85433011767516,
     lon: 2.3248510017444555,
-    tags: ["Bar,CoffeeShop,Épicerie,Terrasse,Passage"],
+    tags: ["Bar","CoffeeShop","Épicerie","Terrasse","Passage"],
     url: "/places/beau-passage/",
     description: "",
     image: ""
@@ -308,7 +303,7 @@ const places = [
     title: "Bercy Beaucoup",
     lat: 48.8391439,
     lon: 2.3827415,
-    tags: ["Bar,Guinguette,Terrasse"],
+    tags: ["Bar","Guinguette","Terrasse"],
     url: "/places/bercy-beaucoup/",
     description: "",
     image: ""
@@ -318,7 +313,7 @@ const places = [
     title: "Bien Élevé",
     lat: 48.8739843,
     lon: 2.343312899999999,
-    tags: ["Viande,Restaurant"],
+    tags: ["Viande","Restaurant"],
     url: "/places/bien-eleve/",
     description: "Rapport qualité/prix pour le 🍔 est honnête. La viande est excellente et les frites aussi, cuites dans la graisses de bœuf! Viandes à tester",
     image: ""
@@ -328,7 +323,7 @@ const places = [
     title: "Bistropolitain",
     lat: 48.8674581,
     lon: 2.3351639,
-    tags: ["Brasserie,Àemporter,Restaurant"],
+    tags: ["Brasserie","ÀEmporter","Restaurant"],
     url: "/places/bistropolitain/",
     description: "Brasserie à emporter qui propose deux plat du jour avec garniture au choix. Bon rapport qualité prix quantité. ",
     image: ""
@@ -338,7 +333,7 @@ const places = [
     title: "BISTROT MEE",
     lat: 48.8644675,
     lon: 2.3339743,
-    tags: ["Asiatique,Restaurant,Coréen"],
+    tags: ["Asiatique","Restaurant","Coréen"],
     url: "/places/bistrot-mee/",
     description: "Décoration surprenante sympa, petite terrasse extérieure. Les plats sont bons ! Bonne découverte ",
     image: ""
@@ -348,7 +343,7 @@ const places = [
     title: "Blitz",
     lat: 48.86107332296931,
     lon: 2.3786859916021186,
-    tags: ["Àessayer,Restaurant"],
+    tags: ["ÀEssayer","Restaurant"],
     url: "/places/blitz/",
     description: "",
     image: ""
@@ -358,7 +353,7 @@ const places = [
     title: "Bopain boulangerie",
     lat: 48.84036636352539,
     lon: 2.3952605724334717,
-    tags: ["Commerce,Boulangerie,Pâtisserie"],
+    tags: ["Commerce","Boulangerie","Pâtisserie"],
     url: "/places/bopain-boulangerie/",
     description: "Le marbré est à se taper le cul par terre  !",
     image: ""
@@ -368,7 +363,7 @@ const places = [
     title: "Bopain",
     lat: 48.8522588,
     lon: 2.3741985,
-    tags: ["Commerce,Boulangerie,Pâtisserie"],
+    tags: ["Commerce","Boulangerie","Pâtisserie"],
     url: "/places/bopain/",
     description: "Pâtisseries exceptionnelles ! Le salon de thé manque de décoration mais c’est en cours. ",
     image: ""
@@ -378,7 +373,7 @@ const places = [
     title: "Bouche Paris",
     lat: 48.8681640625,
     lon: 2.378389835357666,
-    tags: ["Àessayer,Bistronomie,Restaurant,Vin,Tapas"],
+    tags: ["ÀEssayer","Bistronomie","Restaurant","Vin","Tapas"],
     url: "/places/bouche-paris/",
     description: "",
     image: ""
@@ -388,7 +383,7 @@ const places = [
     title: "Boucherie Polmard",
     lat: 48.85402870000001,
     lon: 2.3359365,
-    tags: ["Shopping,Boucherie"],
+    tags: ["Shopping","Boucherie"],
     url: "/places/boucherie-polmard/",
     description: "",
     image: ""
@@ -398,9 +393,19 @@ const places = [
     title: "Bouillon République",
     lat: 48.86602783203125,
     lon: 2.364701986312866,
-    tags: ["Brasserie,Restaurant"],
+    tags: ["Brasserie","Restaurant"],
     url: "/places/bouillon-republique/",
     description: "Rapport qualité/prix imbattable ! Bruyant mais c’est l’esprit bouillon.  À refaire ! ",
+    image: ""
+  },
+  
+  {
+    title: "B.O.U.L.O.M",
+    lat: 48.89358759999999,
+    lon: 2.3356451,
+    tags: ["Restaurant","BuffetAVolonté"],
+    url: "/places/boulom/",
+    description: "",
     image: ""
   },
   
@@ -418,7 +423,7 @@ const places = [
     title: "Brasserie Oskare",
     lat: 48.85107,
     lon: 2.40249,
-    tags: ["Caveàbière,Commerce"],
+    tags: ["cave-à-bière","commerce"],
     url: "/places/brasserie-oskare/",
     description: "",
     image: ""
@@ -748,10 +753,10 @@ const places = [
     title: "Domaine du Vallon des Glauges",
     lat: 43.7047607,
     lon: 5.003934,
-    tags: ["Bar,Vin,Tapas,Terrasse,Fromage,Vuedeouf"],
+    tags: ["Bar","Tapas","Terrasse","Fromage","Vue"],
     url: "/places/domaine-du-vallon-des-glauges/",
-    description: "Vue incroyable sur les vignes et la montagne !! 🤩 ! Le vin et la planche sont très bien ! ",
-    image: ""
+    description: "Vue incroyable sur les vignes et la montagne ! Le vin et la planche sont très bons !",
+    image: "/images/domaine-du-vallon-des-glauges.jpg"
   },
   
   {
@@ -1388,7 +1393,7 @@ const places = [
     title: "La Cabane Du Bout",
     lat: 44.765296359958924,
     lon: -1.1362754692009076,
-    tags: ["Bar,Huitre,Vuemer,Restaurant,Tapas,Terrasse"],
+    tags: ["bar","bar-à-huitre","vue-mer","restaurant","tapas","terrasse"],
     url: "/places/la-cabane-du-bout/",
     description: "Penser à la marée, bien mieux quand elle est haute ! ",
     image: ""
@@ -1948,9 +1953,9 @@ const places = [
     title: "Le Nid du Merle",
     lat: 45.8992097,
     lon: 6.121802700000001,
-    tags: ["Bar,Vin"],
+    tags: ["Bar","Vin"],
     url: "/places/le-nid-du-merle/",
-    description: "Une excellente bière, de supers vins et un conseil au top ! ",
+    description: "Une excellente bière, de supers vins et un conseil au top !",
     image: ""
   },
   
@@ -3310,7 +3315,7 @@ const places = [
     lon: 4.356280599999999,
     tags: ["Restaurant,Foodhall"],
     url: "/places/wolf/",
-    description: "Cuisine du monde, assez bruyant forcément mais le stand de pâte est top ! Bon rapport qualité prix 👌🏻",
+    description: "Cuisine du monde, assez bruyant forcément mais le stand de pâtes est top ! Bon rapport qualité prix 👌🏻",
     image: ""
   },
   
