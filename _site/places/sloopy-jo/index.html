@@ -38,55 +38,54 @@
    </section>
 
    <section class="container">
-      <ul class="post-list-meta">
+      <div class="post-map-container">
+         <ul class="post-list-meta">
             <li><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 256 256"><path d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z"></path></svg> 23 Boulevard des italiens, 75002 Paris, France</li>
                
             </li>
          </ul>
-      
+         
          <div id="placeMap" style="height: 400px; overflow: hidden;"></div>
 
          <script>
-         // Créer une carte pour ce lieu spécifique
-         const placeMap = L.map('placeMap').setView([48.871097564697266, 2.335775136947632], 13);
+            // Créer une carte pour ce lieu spécifique
+            const placeMap = L.map('placeMap').setView([48.871097564697266, 2.335775136947632], 13);
 
-         // Ajouter la couche OSM Bright
-         L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png', {
-            maxZoom: 20,
-            attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
-                        '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
-                        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-         }).addTo(placeMap);
+            // Ajouter la couche OSM Bright
+            L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png', {
+               maxZoom: 20,
+               attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
+                           '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
+                           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            }).addTo(placeMap);
 
-         // Ajouter la couche CartoDB Light
-         L.tileLayer('https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://www.carto.com/">CARTO</a>',
-            subdomains: 'abcd',
-            maxZoom: 20
-         }).addTo(placeMap);
+            // Ajouter la couche CartoDB Light
+            L.tileLayer('https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png', {
+               attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://www.carto.com/">CARTO</a>',
+               subdomains: 'abcd',
+               maxZoom: 20
+            }).addTo(placeMap);
 
-         // Icône SVG personnalisée
-         const svgIcon = L.divIcon({
-            className: "custom-svg-pin",
-            html: `
-                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
-                  <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#202020"/>
-                  <circle cx="15" cy="15" r="6" fill="#fff"/>
-                  </svg>
-            `,
-            iconSize: [30, 42],
-            iconAnchor: [15, 42],
-            popupAnchor: [0, -42]
-         });
+            // Icône SVG personnalisée
+            const svgIcon = L.divIcon({
+               className: "custom-svg-pin",
+               html: `
+                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
+                     <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#202020"/>
+                     <circle cx="15" cy="15" r="6" fill="#fff"/>
+                     </svg>
+               `,
+               iconSize: [30, 42],
+               iconAnchor: [15, 42],
+               popupAnchor: [0, -42]
+            });
 
-         // Ajouter un marqueur avec icône SVG
-         L.marker([48.871097564697266, 2.335775136947632], { icon: svgIcon })
-            .addTo(placeMap)
-            .bindPopup('Sloopy Jo');
-      </script>
-
-
-
+            // Ajouter un marqueur avec icône SVG
+            L.marker([48.871097564697266, 2.335775136947632], { icon: svgIcon })
+               .addTo(placeMap)
+               .bindPopup('Sloopy Jo');
+         </script>
+      </div>
       
    </section>
    
