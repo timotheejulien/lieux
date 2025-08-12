@@ -44,6 +44,7 @@ website: "" # optional
 tags: "tag1 tag2"
 image: "/images/photo.jpg"  # optional
 ---
+```
 
 ## Features
 
