@@ -7,5 +7,5 @@ lat: '43.7047607'
 lon: '5.003934'
 address: Voie d'Aureille, 13430 Eyguières, France
 image: images/domaine-du-vallon-des-glauges.jpg
-tags: bar tapas terrasse bar-à-fromage vue
+tags: bar bar-à-fromage tapas terrasse vue
 ---
