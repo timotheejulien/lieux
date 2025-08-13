@@ -378,16 +378,16 @@ ul.post-list-meta {
    flex-wrap: wrap;
    gap: var(--space-regular);
    list-style: none;
-   /* border-top: 1px solid var(--color-divider);
-   border-left: 1px solid var(--color-divider);
-   border-right: 1px solid var(--color-divider); */
 } 
 
 ul.post-list-meta li {
    display: flex;
-   align-content: center;
    gap: var(--space-small);
    color: var(--color-text-primary);
+}
+
+ul.post-list-meta li svg {
+   min-width: 28px;
 }
 
 .post-content p {
