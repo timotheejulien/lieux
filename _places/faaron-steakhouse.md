@@ -1,6 +1,6 @@
 ---
 title: Faaron Steakhouse
-description: 'terrasse bien symp pour prendre un verre ! Les plats ont l’air sympa.
+description: 'Terrasse bien symp pour prendre un verre ! Les plats ont l’air sympa.
   Super service ! '
 lat: '37.016299'
 lon: '-7.934237'
