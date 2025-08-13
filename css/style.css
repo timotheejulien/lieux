@@ -265,8 +265,9 @@ main {
 }
 
 #tagFilter {
+   color: var(--color-text-primary);
    appearance: none;
-   background-image: url('../assets/caret-down.svg');
+   background-image: url('../assets/caret-down-dark.svg');
    background-repeat: no-repeat;
    background-position: right 10px center;
 }
@@ -276,6 +277,8 @@ main {
 }
 
 #resetFilters {
+   background: #202020;
+   color: #FBFBFB;
    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
@@ -296,6 +299,10 @@ main {
    background: rgba(251, 251, 251, 0.85) !important;
    backdrop-filter: blur(10px) saturate(120%) !important;
    -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+   color: var(--color-text-primary) !important;
 }
 
 .popup-content {
@@ -329,7 +336,21 @@ main {
    color: var(--color-text-secondary);
 }
 
+.popup-content .tags {
+   color: var(--color-primary) !important;
+}
+
 /* PLACE PAGE */
+a.back-link {
+   margin-bottom: var(--space-large);
+   display: block;
+   text-decoration: none;
+}
+
+a.back-link:hover {
+   text-decoration: underline;
+}
+
 .post-header {
    width: 100%;
 }
@@ -501,5 +522,31 @@ ul.footer-nav li {
       --color-text-third: #DEDEDE;
       --color-focus: #FBFBFB;
       --color-primary: #FBFBFB;
+   }
+
+   #searchInput,
+   #tagFilter {
+      background: rgba(32, 32, 32, 0.85);
+   }
+
+   #tagFilter {
+      color: var(--color-text-primary);
+      appearance: none;
+      background-image: url('../assets/caret-down-light.svg');
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+   }
+
+   .leaflet-popup-content-wrapper {
+      background: rgba(32, 32, 32, 0.85) !important;
+      backdrop-filter: blur(10px) saturate(120%) !important;
+      -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+   }
+
+   .leaflet-popup-tip {
+      background: rgba(32, 32, 32, 0.85) !important;
+      backdrop-filter: blur(10px) saturate(120%) !important;
+      -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
    }
 }
