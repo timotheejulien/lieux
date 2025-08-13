@@ -372,11 +372,11 @@ a.back-link:hover {
 ul.post-list-meta {
    width: 100%;
    margin: var(--space-none) var(--space-none) var(--space-none) var(--space-none);
-   padding: var(--space-small);
+   padding: var(--space-regular);
    display: flex;
    flex-direction: row;
    flex-wrap: wrap;
-   gap: var(--space-regular);
+   gap: var(--space-large);
    list-style: none;
 } 
 
