@@ -1,5 +1,5 @@
 ---
-title: MONBLEU Le Comptoir
+title: Monbleu Le Comptoir
 description: Lieu très cool mais pas une bonne idée pour les raclettes. On mange sur des poufs…
 lat: '48.86541'
 lon: '2.36194'

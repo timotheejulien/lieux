@@ -1,6 +1,6 @@
 ---
 title: Gillardeau - la cabanajam
-description: ''
+description:
 lat: '46.2040827'
 lon: '-1.3863493'
 address: Le Chaffaud, 17410 Saint-Martin-de-Ré, France

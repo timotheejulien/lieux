@@ -1,6 +1,6 @@
 ---
 title: Le Transition
-description: ''
+description: 
 lat: '47.2184422'
 lon: '-1.5656418'
 address: 11 bis Rue de la Bastille, 44000 Nantes, France

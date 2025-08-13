@@ -1,5 +1,4 @@
 ---
-
 title: Café Moco
 description: Fuir !
 lat: '48.854237'

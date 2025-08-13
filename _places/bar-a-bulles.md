@@ -1,5 +1,5 @@
 ---
-title: bar à Bulles
+title: Bar à Bulles
 description: "Lieu atypique puisqu'il se cache derrière le Moulin Rouge. Les deux terrasses sont vraiment sympa. L'une en mode guinguette et l'autre offre la vue sur le moulin. À noter que la bouffe est dégeulasse !"
 lat: '48.88447459999999'
 lon: '2.3322397'

@@ -1,6 +1,6 @@
 ---
 title: Le Voltigeur
-description: ''
+description: 
 lat: '48.85817126980759'
 lon: '2.3591778220323936'
 address: 12 Rue des Hospitalières Saint-Gervais, 75004 Paris, France
