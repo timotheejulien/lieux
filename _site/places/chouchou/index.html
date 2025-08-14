@@ -17,13 +17,29 @@
    <script src="/assets/script.js"></script>
 </head>
 <body>
-   <main>
+   <script>
+function openMap(address) {
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address);
+    const appleMapsUrl = 'https://maps.apple.com/?q=' + encodeURIComponent(address);
+
+    window.location.href = isIOS ? appleMapsUrl : googleMapsUrl;
+}
+</script>
+
+
+<a href="#" onclick="openMap('11 rue du Helder 75009 Paris'); return false;">
+    11 rue du Helder 75009 Paris
+</a>
+
+
+<main>
    <section class="container flex post-header">
       <div class="post-header-content">
          <a href="/" class="back-link">← Retour à la carte</a>
          <h1>Chouchou</h1>
          
-            <p class="post-review-comment">Cet hôtel est idéalmeent situé dans le 9ème arrondissement de Paris. il offre également des jacuzzis privativables. Les chambres sont de bonnes qualités avec une belle décoration. Un restaurant est aussi présent en mode buffet festif puisqu'à partir d'une certaine heure, un piste de danse est ouverte !</p>
+            <p class="post-review-comment">Cet hôtel est idéalmeent situé dans le 9ème arrondissement de Paris. Il offre également des jacuzzis privativables. Les chambres sont de bonnes qualités avec une belle décoration. Un restaurant est aussi présent en mode buffet festif puisqu'à partir d'une certaine heure, un piste de danse est ouverte !</p>
          
          
          

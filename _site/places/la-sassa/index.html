@@ -17,7 +17,23 @@
    <script src="/assets/script.js"></script>
 </head>
 <body>
-   <main>
+   <script>
+function openMap(address) {
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address);
+    const appleMapsUrl = 'https://maps.apple.com/?q=' + encodeURIComponent(address);
+
+    window.location.href = isIOS ? appleMapsUrl : googleMapsUrl;
+}
+</script>
+
+
+<a href="#" onclick="openMap('20217 Nonza France'); return false;">
+    20217 Nonza France
+</a>
+
+
+<main>
    <section class="container flex post-header">
       <div class="post-header-content">
          <a href="/" class="back-link">← Retour à la carte</a>
