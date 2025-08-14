@@ -1,10 +1,10 @@
 ---
 title: ""
-description: ""
+description: 
 lat: 
 lon: 
 address: ""
-website: ""
+website: 
 tags: ""
-image: ""
+image:
 ---
