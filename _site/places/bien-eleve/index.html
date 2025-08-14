@@ -17,23 +17,7 @@
    <script src="/assets/script.js"></script>
 </head>
 <body>
-   <script>
-function openMap(address) {
-    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    const googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address);
-    const appleMapsUrl = 'https://maps.apple.com/?q=' + encodeURIComponent(address);
-
-    window.location.href = isIOS ? appleMapsUrl : googleMapsUrl;
-}
-</script>
-
-
-<a href="#" onclick="openMap('47 rue richer, Paris 75009'); return false;">
-    47 rue richer, Paris 75009
-</a>
-
-
-<main>
+   <main>
    <section class="container flex post-header">
       <div class="post-header-content">
          <a href="/" class="back-link">← Retour à la carte</a>
@@ -56,8 +40,18 @@ function openMap(address) {
 
    <section class="container">
       <div class="post-map-container">
+         <script>
+            function openMap(address) {
+               const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+               const googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address);
+               const appleMapsUrl = 'https://maps.apple.com/?q=' + encodeURIComponent(address);
+
+               window.location.href = isIOS ? appleMapsUrl : googleMapsUrl;
+            }
+         </script>
+
          <ul class="post-list-meta">
-            <li><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000" viewBox="0 0 256 256" style="--noir-inline-fill: #e8e6e3;" data-noir-inline-fill=""><path d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z"></path></svg> 47 rue richer, Paris 75009</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#000000" viewBox="0 0 256 256" style="--noir-inline-fill: #e8e6e3;" data-noir-inline-fill=""><path d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z"></path></svg> <a href="#" onclick="openMap('47 rue richer, Paris 75009'); return false;">47 rue richer, Paris 75009</a></li>
             
          </ul>
          
