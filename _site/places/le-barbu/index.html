@@ -63,7 +63,7 @@
 
          <script>
             // Créer une carte pour ce lieu spécifique
-            const placeMap = L.map('placeMap').setView([43.484961279982855, -1.562350589449524], 13);
+            const placeMap = L.map('placeMap').setView([43.473589, -1.563321], 13);
 
             // Ajouter la couche CartoDB Light
             L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d', {
@@ -88,7 +88,7 @@
             });
 
             // Ajouter un marqueur avec icône SVG
-            L.marker([43.484961279982855, -1.562350589449524], { icon: svgIcon })
+            L.marker([43.473589, -1.563321], { icon: svgIcon })
                .addTo(placeMap)
                .bindPopup('Le barbu (fermé définitivement)');
          </script>
