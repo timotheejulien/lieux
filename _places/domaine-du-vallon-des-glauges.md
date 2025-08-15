@@ -4,6 +4,7 @@ description: 'Vue incroyable sur les vignes et la montagne ! Le bar à vin et l
 lat: '43.7047607'
 lon: '5.003934'
 address: Voie d'Aureille, 13430 Eyguières, France
+website: https://www.vallondesglauges.com
 image: images/domaine-du-vallon-des-glauges.jpg
 tags: bar bar-à-fromage tapas terrasse vue
 ---

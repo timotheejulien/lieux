@@ -267,7 +267,7 @@ main {
 #tagFilter {
    color: var(--color-text-primary);
    appearance: none;
-   background-image: url('../assets/caret-down-dark.svg');
+   background-image: url('../assets/chevron-down-dark.svg');
    background-repeat: no-repeat;
    background-position: right 10px center;
 }
@@ -532,7 +532,7 @@ ul.footer-nav li {
    #tagFilter {
       color: var(--color-text-primary);
       appearance: none;
-      background-image: url('../assets/caret-down-light.svg');
+      background-image: url('../assets/chevron-down-light.svg');
       background-repeat: no-repeat;
       background-position: right 10px center;
    }
