@@ -1,5 +1,5 @@
 ---
-title: Le Sevigne
+title: Le Sevigne (fermé définitivement)
 description:
 lat: '48.858691'
 lon: '2.362643'

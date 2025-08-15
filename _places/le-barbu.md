@@ -1,5 +1,5 @@
 ---
-title: Le barbu
+title: Le barbu (fermé définitivement)
 description:
 lat: '43.484961279982855'
 lon: '-1.562350589449524'

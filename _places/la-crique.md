@@ -1,5 +1,5 @@
 ---
-title: La Crique
+title: La Crique (fermé définitivement)
 description:
 lat: '43.4793552'
 lon: '-1.5640608'

@@ -4,5 +4,6 @@ description: Esprit guinguette dans la Station F ! Très jolie lieux où l'on pe
 lat: '48.8321419'
 lon: '2.3730124'
 address: 5 Parvis Alan Turing, Paris 75013
+website: https://www.lafelicita.fr
 tags: bar restaurant food-hall
 ---

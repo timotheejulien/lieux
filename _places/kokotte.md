@@ -1,5 +1,5 @@
 ---
-title: Kokotte
+title: Kokotte (fermé définitivement)
 description:
 lat: '48.86392584875072'
 lon: '2.3720262895843676'

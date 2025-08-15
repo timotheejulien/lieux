@@ -1,5 +1,5 @@
 ---
-title: La Cigogne
+title: La Cigogne (fermé définitivement)
 description: 
 lat: '48.87692699999999'
 lon: '2.33849'

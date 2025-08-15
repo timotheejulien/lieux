@@ -4,5 +4,6 @@ description: Les moules frites sont top ! En revanche, le service n’est pas ai
 lat: '49.76039429999999'
 lon: '0.3674185999999999'
 address: 2 Place Nicolas Selle 76400 Fécamp France
+website: https://www.facebook.com/cheznounoutefecamp/
 tags: restaurant bar-à-huitre poisson
 ---

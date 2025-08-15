@@ -4,5 +4,6 @@ description: "Lieu atypique puisqu'il se cache derrière le Moulin Rouge. Les de
 lat: '48.88447459999999'
 lon: '2.3322397'
 address: 90 Boulevard de Clichy, 75018 Paris, France
+website: https://www.lamachinedumoulinrouge.com/le-bar-a-bulles/
 tags: bar terrasse guinguette
 ---

@@ -4,5 +4,6 @@ description:
 lat: '48.88356018066406'
 lon: '2.3319742679595947'
 address: 1 Rue de Bruxelles, Paris, France
+website: https://beerproject.be/
 tags: bar bar-à-bière
 ---

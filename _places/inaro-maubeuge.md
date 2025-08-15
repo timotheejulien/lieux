@@ -1,5 +1,5 @@
 ---
-title: Inaro Maubeuge
+title: Inaro Maubeuge (fermé définitivement)
 description: Décoration sympa, service très agréable. Rapport qualité/prix 👌🏻.
 lat: '48.8766427'
 lon: '2.3417704'

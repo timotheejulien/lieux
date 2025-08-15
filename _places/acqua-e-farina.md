@@ -1,5 +1,5 @@
 ---
-title: Acqua e Farina
+title: Acqua e Farina (fermé définitivement)
 description: 
 lat: '48.853105'
 lon: '2.3830354'

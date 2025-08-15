@@ -1,5 +1,5 @@
 ---
-title: Iodé Bistrot Marin
+title: Iodé Bistrot Marin (fermé définitivement)
 description: 
 lat: '48.8417301'
 lon: '2.2401624'

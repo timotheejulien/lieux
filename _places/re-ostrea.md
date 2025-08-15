@@ -4,6 +4,7 @@ description: 'Vue exceptionnelle pour déguster des fruits de mer ! Il faut pre
 lat: '46.20459899999999'
 lon: '-1.381819'
 address: Chemin de la Galère, 17410 Saint-Martin-de-Ré, France
+website: https://www.instagram.com/re_ostrea/
 tags: bar bar-à-huitre tapas
 image: images/re-ostrea.jpg
 ---

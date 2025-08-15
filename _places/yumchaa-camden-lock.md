@@ -1,5 +1,5 @@
 ---
-title: Yumchaa Camden Lock
+title: Yumchaa Camden Lock (définitivement fermé)
 description:
 lat: '51.5413'
 lon: '-0.1466855'

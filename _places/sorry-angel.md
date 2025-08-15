@@ -1,5 +1,5 @@
 ---
-title: Sorry Angel
+title: Sorry Angel (fermé définitivement)
 description:
 lat: '48.85330641873916'
 lon: '2.37558827838399'

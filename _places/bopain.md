@@ -4,5 +4,6 @@ description: 'Pâtisseries exceptionnelles ! Le salon de thé manque de décorat
 lat: '48.8522588'
 lon: '2.3741985'
 address: 8 Rue de Charonne, 75011 Paris, France
+website: https://www.instagram.com/bopain.paris/
 tags: commerce boulangerie pâtisserie
 ---

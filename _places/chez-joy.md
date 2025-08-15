@@ -4,5 +4,6 @@ description: 'Le bobun est top ! Les nems sont délicieux. Plus qu’à tester l
 lat: '48.83579'
 lon: '2.32482'
 address: 84 Rue Daguerre, 75014 Paris, France
+website: https://www.facebook.com/chezjoydaguerre
 tags: restaurant asiatique sur-le-pouce
 ---

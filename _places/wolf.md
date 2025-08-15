@@ -4,5 +4,6 @@ description: Cuisine du monde, assez bruyant forcément mais le stand de pâtes 
 lat: '50.8499341'
 lon: '4.356280599999999'
 address: Rue du Fossé aux Loups 48, 1000 Bruxelles/Brussel, Belgique
+website: https://wolf.be/bxl/
 tags: restaurant food-hall
 ---

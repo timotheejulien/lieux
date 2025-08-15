@@ -4,5 +4,6 @@ description: 'Le burger est pas mal mais les prix sont trop chers. Beaucoup d’
 lat: '48.8683099'
 lon: '2.341750499999999'
 address: 17 Rue Notre-Dame des Victoires, 75002 Paris, France
+website: https://calisisters.thecalisisters.com
 tags: restaurant cocktails brasserie burger
 ---

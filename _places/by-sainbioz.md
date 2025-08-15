@@ -1,5 +1,5 @@
 ---
-title: By Sainbioz
+title: By Sainbioz (fermé définitivement)
 description:
 lat: '47.21957'
 lon: '-1.55899'

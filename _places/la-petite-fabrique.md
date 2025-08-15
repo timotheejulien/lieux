@@ -4,5 +4,6 @@ description: "Prenez un parquet de bois clair, des tables et chaises coordonné
 lat: '48.85361940000001'
 lon: '2.3988498'
 address: 15 Rue des Vignoles, 75020 Paris, France
+website: https://www.instagram.com/lapetitefabriquebio/
 tags: restaurant
 ---

@@ -4,5 +4,6 @@ description: 'Créer la première année du voyage à Nantes, cette guinguette g
 lat: '47.2018004'
 lon: '-1.5727683'
 address: 20 Quai des Antilles, 44200 Nantes, France
+website: https://lacantineduvoyage.fr
 tags: bar vue-mer pétanque
 ---

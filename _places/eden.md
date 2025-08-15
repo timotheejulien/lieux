@@ -1,6 +1,5 @@
 ---
-
-title: Eden
+title: Eden (fermé définitivement)
 description: Bar à bières normandes artisanales, le barman est super sympa ! On peut commander les pizzas d’en face tout en restant au bar 👌🏻.
 lat: '48.862782'
 lon: '2.36297'

@@ -4,5 +4,6 @@ description: 'Très bon mais très copieux ! 1 assiettes représentés au moins 
 lat: '48.8731135'
 lon: '2.3807876'
 address: 47 Rue de Belleville, 75019 Paris, France
+website: https://www.tripadvisor.fr/Restaurant_Review-g187147-d3842523-Reviews-Guo_Xin-Paris_Ile_de_France.html
 tags: restaurant thaï
 ---

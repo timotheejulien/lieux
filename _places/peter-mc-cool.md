@@ -4,5 +4,6 @@ description:
 lat: '47.2140053'
 lon: '-1.5624338'
 address: 22 Rue Scribe, 44000 Nantes, France
+website: https://foodcollect.fr/store/peter-mccool/restaurant
 tags: bar bar-à-bière pub terrasse
 ---

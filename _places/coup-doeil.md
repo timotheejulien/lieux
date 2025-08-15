@@ -1,5 +1,5 @@
 ---
-title: Coup D’oeil
+title: Coup D’œil (fermé définitivement)
 description: 
 lat: '48.8585930053824'
 lon: '2.3781371413955985'

@@ -4,5 +4,6 @@ description: 'Qualité pas folle… les serveurs étaient pressés. C’est domm
 lat: '48.8338373'
 lon: '2.329772799999999'
 address: 19 Rue Daguerre Paris France
+website: https://www.labelleronde.com/fr/
 tags: restaurant crêperie terrasse patio
 ---

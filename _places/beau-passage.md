@@ -1,8 +1,9 @@
 ---
 title: Beau Passage
 description: 
-lat: '48.85433011767516'
-lon: '2.3248510017444555'
-address: 83P Rue du Bac 75007 Paris France
+lat: '48.854369'
+lon: '2.32517'
+address: 53 Rue de Grenelle, 75007 Paris
+website: https://www.instagram.com/beaupassageparis/
 tags: bar coffee-shop épicerie terrasse passage
 ---

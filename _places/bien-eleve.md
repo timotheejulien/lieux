@@ -4,5 +4,6 @@ description: Rapport qualité/prix pour le hamburger est honnête. La viande est
 lat: '48.8739843'
 lon: '2.343312899999999'
 address: 47 rue richer, Paris 75009
+website: http://www.bieneleve.fr
 tags: restaurant viande
 ---

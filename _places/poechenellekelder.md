@@ -4,5 +4,6 @@ description: 'Très sympa, typique pour déguster des bières belges authentique
 lat: '50.8447359'
 lon: '4.3500102'
 address: Rue du Chêne, 5, 1000 Brussel, Belgique
+website: https://poechenellekelder.be/fr
 tags: bar bar-à-bière restaurant brasserie
 ---

@@ -1,5 +1,5 @@
 ---
-title: Les Petites Sorcières
+title: Les Petites Sorcières (fermé défintitivement)
 description: Bon rapport qualité prix, mais décevant de ne pas avoir des produits de saison.
 lat: '48.83386609999999'
 lon: '2.3279254'

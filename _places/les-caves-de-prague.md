@@ -4,5 +4,6 @@ description: "Terrasse sur rue très calme. Le service est top, pas de carte on 
 lat: '48.84992299999999'
 lon: '2.3759858'
 address: 8 Rue de Prague, 75012 Paris, France
+website: https://www.cavesdeprague.fr
 tags: commerce cave-à-vin bar bar-à-bière bar-à-vin terrasse
 ---

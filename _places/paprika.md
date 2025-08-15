@@ -1,5 +1,5 @@
 ---
-title: Paprika
+title: Paprika (fermé défintivement)
 description:
 lat: '48.864327330033746'
 lon: '2.360152858604935'

@@ -1,5 +1,5 @@
 ---
-title: Le Rhinoceros
+title: Le Rhinoceros (fermé définitivement)
 description: 
 lat: '48.8636396'
 lon: '2.349255400000001'

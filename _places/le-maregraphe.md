@@ -1,5 +1,5 @@
 ---
-title: Le Marégraphe
+title: Le Marégraphe (fermé définitivement)
 description: Très bonne crêperie avec une terrasse au soleil 👌🏻.
 lat: '48.63607'
 lon: '-2.067917'

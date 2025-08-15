@@ -4,5 +4,6 @@ description: 'Hyper sympa : musique, bouffe, bar-à-vin. Aucune idée de comment
 lat: '48.8682309'
 lon: '2.3416915'
 address: 15 Rue Notre-Dame-des-Victoires 75002 Paris France
+website: http://www.montezumacafe.com
 tags: restaurant coffee-shop néobistrot
 ---

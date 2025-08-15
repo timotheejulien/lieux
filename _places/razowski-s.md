@@ -1,5 +1,5 @@
 ---
-title: Razowski's
+title: Razowski's (fermé définitivement)
 description:
 lat: '48.8672694'
 lon: '2.3325566'

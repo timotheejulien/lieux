@@ -5,5 +5,6 @@ description: 'Super kebab travaillé avec du poulet mariné ! 7€ le kebab et 1
 lat: '48.89064510000001'
 lon: '2.3452711'
 address: 61 Rue Ramey, 75018 Paris, France
+website: https://gemuseparis.fr
 tags: restaurant kebab sur-le-pouce
 ---

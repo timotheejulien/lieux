@@ -1,5 +1,5 @@
 ---
-title: Uma
+title: Uma (fermé définitivement)
 description:
 lat: '48.8651625'
 lon: '2.3304951'

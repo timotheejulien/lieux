@@ -1,5 +1,5 @@
 ---
-title: Sette
+title: Sette (fermé définitivement)
 description:
 lat: '48.85648684419265'
 lon: '2.373997454373452'

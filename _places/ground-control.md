@@ -4,5 +4,6 @@ description: Lieu très cool avec une énorme terrasse en plein air. Différents
 lat: '48.8439199'
 lon: '2.381509599999999'
 address: Gare de Lyon, 81 Rue du Charolais, 75012 Paris, France
+website: https://www.groundcontrolparis.com
 tags: bar restaurant terrasse food-hall
 ---

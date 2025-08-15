@@ -1,5 +1,5 @@
 ---
-title: Fuxia
+title: Fuxia (fermé définitivement)
 description:
 lat: '48.8675472'
 lon: '2.3323177'

@@ -1,5 +1,5 @@
 ---
-title: Sauver le monde des hommes
+title: Sauver le monde des hommes (fermé définitivement)
 description:
 lat: '48.88345482892111'
 lon: '2.34170786831803'

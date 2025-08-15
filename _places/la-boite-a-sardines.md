@@ -1,5 +1,5 @@
 ---
-title: La Boite à Sardines
+title: La Boite à Sardines (fermé définitivement)
 description: Les plats sont bons mais un peu cher pour la quantité dans l’assiette. Beaucoup d’attente…
 lat: '47.8611056'
 lon: '-3.9865581'

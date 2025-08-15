@@ -1,5 +1,5 @@
 ---
-title: Palacito
+title: Palacito (fermé définitivement)
 description:
 lat: '43.48229651670517'
 lon: '-1.561893050447179'

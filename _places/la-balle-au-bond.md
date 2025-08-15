@@ -4,5 +4,6 @@ description: Péniche sur les quais de Seine 🤘🏻.
 lat: '48.85812490000001'
 lon: '2.335672'
 address: 3 Quai Malaquais Paris France
+website: https://www.laballeaubond.fr
 tags: bar vue-mer terrasse
 ---

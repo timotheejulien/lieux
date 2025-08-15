@@ -4,5 +4,6 @@ description: 'Très belle découverte. Le cadre est très sympa, la nourriture e
 lat: '48.6522847'
 lon: '-2.0117065'
 address: 53 Quai Duguay-Trouin, 35400 Saint-Malo, France
+website: https://www.otonali.fr/izakaya-restaurant-japonais
 tags: restaurant bistronomique asiatique japonais
 ---

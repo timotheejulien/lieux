@@ -1,5 +1,5 @@
 ---
-title: Lalà, la Lasagneria
+title: Lalà, la Lasagneria (fermé définitivement)
 description:
 lat: '48.88108159999999'
 lon: '2.334690499999999'

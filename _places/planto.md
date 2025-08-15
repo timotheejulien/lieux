@@ -5,5 +5,6 @@ description: 'Très belle décoration et les plats sont bons. Très belle prése
 lat: '38.70878'
 lon: '-9.14896'
 address: Rua da Boavista, Lisboa, Portugal, Lisboa, Portugal
+website: https://planorestaurante.com
 tags: restaurant bistronomique terrasse
 ---

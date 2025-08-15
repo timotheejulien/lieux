@@ -4,5 +4,6 @@ description: 'Le cadre est vraiment sympa avec une terrasse en patio. Par trop c
 lat: '48.86935'
 lon: '2.34503'
 address: 23 rue des Jeuneurs, 75002 Paris
+website: https://www.bambouparis.fr
 tags: restaurant asiatique patio terrasse
 ---

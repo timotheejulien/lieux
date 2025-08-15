@@ -1,5 +1,5 @@
 ---
-title: La Zinguerie
+title: La Zinguerie (fermé définitivement)
 description:
 lat: '48.86102168503112'
 lon: '2.380521208922759'

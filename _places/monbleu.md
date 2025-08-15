@@ -4,5 +4,6 @@ description: 'La bouffe est un peu décevante quoique les gougères étaient pas
 lat: '48.8741'
 lon: '2.342127000000001'
 address: 37 rue du faubourg Montmartre, Paris 75009
+website: http://monbleu.fr
 tags: restaurant bar-à-fromage commerce fromagerie
 ---

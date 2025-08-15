@@ -1,5 +1,5 @@
 ---
-title: Pigalle Fromage Club
+title: Pigalle Fromage Club (fermé définitivement)
 description:
 lat: '48.8797856'
 lon: '2.3340303'

@@ -4,5 +4,6 @@ description: 'Cadre (dans le jardin) et repas (menu du midi) excellents ! La di
 lat: '48.865657'
 lon: '2.338916'
 address: 110 Galerie de Valois, 75001 Paris, France
+website: https://palaisroyalrestaurantparis.com
 tags: restaurant gastronomique ⭐️⭐️
 ---

@@ -1,5 +1,5 @@
 ---
-title: 'L’intr"pide'
+title: 'L’intrépide'
 description: "Ils ont 12 bières artisanales à la pression. À tester."
 lat: '48.88438267737241'
 lon: '2.3346957111931586'
