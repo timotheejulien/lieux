@@ -297,8 +297,6 @@ main {
 
 .leaflet-popup-tip {
    background: rgba(251, 251, 251, 0.85) !important;
-   backdrop-filter: blur(10px) saturate(120%) !important;
-   -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
 }
 
 .leaflet-container a.leaflet-popup-close-button {
