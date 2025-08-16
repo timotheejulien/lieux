@@ -3519,7 +3519,7 @@ function addMarkersToMap(placesToShow) {
     const popupContent = `
       <div class="popup-content">
         <h3><a href="${place.url}">${place.title}</a></h3>
-        ${place.image ? `<img src="${place.image}" alt="${place.title}" style="width: 200px; height: 150px; object-fit: cover;">` : ''}
+        ${place.image ? `<img src="${place.image}" alt="${place.title}" style="height: 150px; object-fit: cover;">` : ''}
         ${place.description ? `<p>${place.description}</p>` : ''}
         ${place.tags.length > 0 ? `<div class="tags">${place.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</div>` : ''}
       </div>
@@ -3539,7 +3539,9 @@ function initFilters() {
   const searchInput = document.getElementById('searchInput');
   const resetButton = document.getElementById('resetFilters');
   
-  const allTags = [...new Set(places.flatMap(place => place.tags))].sort();
+  // Tri alphabétique insensible à la casse et aux accents
+  const allTags = [...new Set(places.flatMap(place => place.tags))]
+    .sort((a, b) => a.localeCompare(b, 'fr', { sensitivity: 'base' }));
   
   allTags.forEach(tag => {
     const option = document.createElement('option');
@@ -3588,7 +3590,5 @@ document.addEventListener('DOMContentLoaded', function() {
   initFilters();
 });
 </script>
-
-
 </body>
 </html>

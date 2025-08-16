@@ -289,14 +289,22 @@ main {
 
 /* POPUPS */
 .leaflet-popup-content-wrapper {
+   margin: 0 !important;
+   padding: var(--space-xx-small) !important;
    background: rgba(251, 251, 251, 0.85) !important;
    backdrop-filter: blur(10px) saturate(120%) !important;
    -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
 }
 
+.leaflet-popup-content {
+   width: 240px !important;
+}
+
 .leaflet-popup-tip {
    background: rgba(251, 251, 251, 0.85) !important;
+   -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
+   box-shadow: none !important;
 }
 
 .leaflet-container a.leaflet-popup-close-button {
@@ -304,7 +312,7 @@ main {
 }
 
 .popup-content {
-   max-width: 250px;
+   max-width: 260px;
 }
 
 .popup-content h3 {
@@ -544,5 +552,7 @@ ul.footer-nav li {
 
    .leaflet-popup-tip {
       background: rgba(32, 32, 32, 0.85) !important;
+      -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
+      box-shadow: none !important;
    }
 }
