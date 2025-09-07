@@ -117,246 +117,322 @@
     });
 
     // Données des lieux pour ce voyage
-    const voyagePlaces = [
+   const voyagePlaces = [
+   
       
-        
-        
-        {
-          title: "Bonbon cafe",
-          lat: 29.001111946535,
-          lon: -13.48733121226,
-          url: "/places/bonbon-cafe/"
-        },
-        
       
-        
-        
-        {
-          title: "Piscinas naturales",
-          lat: 29.143112282801,
-          lon: -13.450535244053,
-          url: "/places/piscinas-naturales/"
-        },
-        
+      {
+         title: "Bonbon cafe",
+         lat: 29.001111946535,
+         lon: -13.48733121226,
+         url: "/places/bonbon-cafe/",
+         
+         description: "Le brunch le plus copieux et le moins cher possible tout en étant plutôt bon ! J’ai pris le pancake Sausage, la saucisse est curieuse car elle ressemble à une saucisse de Strasbourg tout en étant un peu croustillante…",
+         tags: ["restaurant", "brunch", "coffee-shop", "cocktails"],
+      },
       
-        
-        
-        {
-          title: "El Rincón",
-          lat: 28.996788468093733,
-          lon: -13.491479143969375,
-          url: "/places/el-rincon/"
-        },
-        
+   
       
-        
-        
-        {
-          title: "El Patio Crêperie",
-          lat: 29.058751522466,
-          lon: -13.560614200666,
-          url: "/places/el-patio/"
-        },
-        
       
-        
-        
-        {
-          title: "El Diablo",
-          lat: 29.005486,
-          lon: -13.753111,
-          url: "/places/el-diablo/"
-        },
-        
+      {
+         title: "Piscinas naturales",
+         lat: 29.143112282801,
+         lon: -13.450535244053,
+         url: "/places/piscinas-naturales/",
+         image: "/images/piscinas-naturales.jpg",
+         description: "Des piscines d’eau de mer « naturelles ». Un lieu idéal pour se rafraîchir avant de repartir. Les places pour se poser sont rares… La vue est cool !",
+         tags: ["plage"],
+      },
       
-        
-        
+   
       
-        
-        
-        {
-          title: "La Galeria",
-          lat: 29.059598017046,
-          lon: -13.560791971889,
-          url: "/places/la-galeria/"
-        },
-        
       
-        
-        
-        {
-          title: "La tabla",
-          lat: 28.99999200861599,
-          lon: -13.489290367604463,
-          url: "/places/la-tabla/"
-        },
-        
+      {
+         title: "El Rincón",
+         lat: 28.996788468093733,
+         lon: -13.491479143969375,
+         url: "/places/el-rincon/",
+         
+         description: "On a pris le calamar frit, très bon et ensuite les tacos : ils sont excellents ! Vraiment un très bon restaurant. La serveuse est super sympa. Il y a aussi une terrasse. Je recommande !",
+         tags: ["restaurant", "tapas"],
+      },
       
-        
-        
-        {
-          title: "Marais salants de Janubio",
-          lat: 28.93791651085635,
-          lon: -13.820693492889404,
-          url: "/places/marais-salants-de-janubio/"
-        },
-        
+   
       
-        
-        
-        {
-          title: "Marché de Teguise",
-          lat: 29.060183572387,
-          lon: -13.560569294817,
-          url: "/places/marche-de-teguise/"
-        },
-        
       
-        
-        
-        {
-          title: "Mirador del Rio",
-          lat: 29.195798,
-          lon: -13.479358,
-          url: "/places/mirador-del-rio/"
-        },
-        
+      {
+         title: "El Patio Crêperie",
+         lat: 29.058751522466,
+         lon: -13.560614200666,
+         url: "/places/el-patio/",
+         image: "/images/el-patio.jpg",
+         description: "Le cadre est super mignon. Dans une rue au calme, vous pourrez profiter de cette terrasse fait de bric et de broc. Les crêpes sont réchauffés ce qui n&#39;est pas terrible… En revanche vous pourrez déguster une bière locale. Bon à savoir : paiement en espèce uniquement.",
+         tags: ["restaurant", "crêperie", "bar", "terrasse"],
+      },
       
-        
-        
-        {
-          title: "Oppa",
-          lat: 28.99778242815145,
-          lon: -13.492267517463343,
-          url: "/places/oppa/"
-        },
-        
+   
       
-        
-        
-        {
-          title: "Parc national de Timanfaya",
-          lat: 29.02521585217567,
-          lon: -13.78337860107422,
-          url: "/places/parc-national-de-timanfaya/"
-        },
-        
       
-        
-        
-        {
-          title: "Peskara",
-          lat: 28.999408,
-          lon: -13.488247,
-          url: "/places/peskara/"
-        },
-        
+      {
+         title: "El Diablo",
+         lat: 29.005486,
+         lon: -13.753111,
+         url: "/places/el-diablo/",
+         image: "/images/parc-timanfaya.jpg",
+         description: "Ce restaurant est situé dans le parc de Timanfaya (à faire absolument). La viande est cuite grâce à la chaleur du volcan. Même si la promesse semble alléchante, vous pouvez vous en passer.",
+         tags: ["restaurant", "barbecue"],
+      },
       
-        
-        
-        {
-          title: "Piscinas naturales",
-          lat: 29.143112282801,
-          lon: -13.450535244053,
-          url: "/places/piscinas-naturales/"
-        },
-        
+   
       
-        
-        
-        {
-          title: "Plage de Blanca",
-          lat: 28.86260841299176,
-          lon: -13.829775452613832,
-          url: "/places/playa-blanca/"
-        },
-        
       
-        
-        
-        {
-          title: "Playa de Famara",
-          lat: 29.1193202,
-          lon: -13.5461197,
-          url: "/places/playa-de-famara/"
-        },
-        
+   
       
-        
-        
-        {
-          title: "Playa de Janubio",
-          lat: 28.93457387254879,
-          lon: -13.829705715179445,
-          url: "/places/playa-de-janubio/"
-        },
-        
       
-        
-        
-        {
-          title: "Playa de la Cera",
-          lat: 28.844730292805973,
-          lon: -13.788753747940065,
-          url: "/places/playa-de-la-cera/"
-        },
-        
+      {
+         title: "La Galeria",
+         lat: 29.059598017046,
+         lon: -13.560791971889,
+         url: "/places/la-galeria/",
+         
+         description: "Ce bar/restaurant offre une petite terrasse sur une rue au calme. Nous y avons pris seulement un café.",
+         tags: ["restaurant", "tapas", "bar", "terrasse"],
+      },
       
-        
-        
-        {
-          title: "Playa de Papagayo",
-          lat: 28.842428336175185,
-          lon: -13.7881475687027,
-          url: "/places/playa-de-papagayo/"
-        },
-        
+   
       
-        
-        
-        {
-          title: "Playa del Caleton Blanco",
-          lat: 29.216709769351425,
-          lon: -13.442512750625612,
-          url: "/places/playa-del-caleton-blanco/"
-        },
-        
       
-        
-        
-        {
-          title: "Route LZ-67",
-          lat: 29.026287667151674,
-          lon: -13.70919179108184,
-          url: "/places/route-lz-67/"
-        },
-        
+      {
+         title: "La tabla",
+         lat: 28.99999200861599,
+         lon: -13.489290367604463,
+         url: "/places/la-tabla/",
+         
+         description: "Très bonne adresse. Les tapas sont bons, sauf erreur de traduction pour la sauce au miel qui ressemble plus à du réglisse. Service au top et petite terrasse avec la musique du concert d’à côté. À refaire !",
+         tags: ["restaurant", "tapas", "bar", "terrasse"],
+      },
       
-        
-        
-        {
-          title: "Sal y Pimienta",
-          lat: 28.920388540321525,
-          lon: -13.671291961219636,
-          url: "/places/sal-y-pimenta/"
-        }
-        
+   
       
-    ];
+      
+      {
+         title: "Marais salants de Janubio",
+         lat: 28.93791651085635,
+         lon: -13.820693492889404,
+         url: "/places/marais-salants-de-janubio/",
+         
+         
+         tags: ["marais-salants"],
+      },
+      
+   
+      
+      
+      {
+         title: "Marché de Teguise",
+         lat: 29.060183572387,
+         lon: -13.560569294817,
+         url: "/places/marche-de-teguise/",
+         
+         description: "C’est nul, tout simplement ! C’est un énorme marché où on y vend pas mal de babioles. Peut de stands de gastronomie et rien d’artisanal. (Uniquement le dimanche).",
+         tags: ["marché"],
+      },
+      
+   
+      
+      
+      {
+         title: "Mirador del Rio",
+         lat: 29.195798,
+         lon: -13.479358,
+         url: "/places/mirador-del-rio/",
+         image: "/images/mirador-del-rio.jpg",
+         description: "Un super point de vue pour admirer un coucher de soleil. Entre mer, île et montagne, c’est compliqué de ne pas apprécier cette beauté de la nature !",
+         tags: ["vue", "vue-mer"],
+      },
+      
+   
+      
+      
+      {
+         title: "Oppa",
+         lat: 28.99778242815145,
+         lon: -13.492267517463343,
+         url: "/places/oppa/",
+         image: "/images/oppa.jpg",
+         description: "Excellent coffee shop / brunch. Les « burgers » sont vraiment trop bon avec la mayonnaise au sriracha. Petite terrasse au calme même si elle donne sur un parking. Potentiellement possible d’avoir une place dans la ruelle qui est plus intime. Super service !",
+         tags: ["coffee-shop", "brunch"],
+      },
+      
+   
+      
+      
+      {
+         title: "Parc national de Timanfaya",
+         lat: 29.02521585217567,
+         lon: -13.78337860107422,
+         url: "/places/parc-national-de-timanfaya/",
+         image: "/images/parc-timanfaya.jpg",
+         description: "À faire absolument ! Ce parc nous donne l&#39;impression d&#39;être sur un autre planète (sûrement sur Mars). La beauté des paysages est tout simplement incroyable, on y voit des volcans de près. Bon à savoir : l&#39;accès vous coûtera 22 € par personne et je vous recommande d&#39;y aller tôt pour éviter la queue. Une fois arrivé sur le parking, il faut prendre la navette qui vous fera visiter le parc. Dans le bus, placez vous à droite.",
+         tags: ["parc"],
+      },
+      
+   
+      
+      
+      {
+         title: "Peskara",
+         lat: 28.999408,
+         lon: -13.488247,
+         url: "/places/peskara/",
+         
+         description: "Restaurant très touristique qui propose une multitude de plats différents (pizzas, pâtes, tapas, poisson, etc). La terrasse offre une vue mer. Un lieux disons « pratique ».",
+         tags: ["restaurant", "terrasse", "vue-mer"],
+      },
+      
+   
+      
+      
+      {
+         title: "Piscinas naturales",
+         lat: 29.143112282801,
+         lon: -13.450535244053,
+         url: "/places/piscinas-naturales/",
+         image: "/images/piscinas-naturales.jpg",
+         description: "Des piscines d’eau de mer « naturelles ». Un lieu idéal pour se rafraîchir avant de repartir. Les places pour se poser sont rares… La vue est cool !",
+         tags: ["plage"],
+      },
+      
+   
+      
+      
+      {
+         title: "Plage de Blanca",
+         lat: 28.86260841299176,
+         lon: -13.829775452613832,
+         url: "/places/playa-blanca/",
+         image: "/images/playa-blanca.jpg",
+         description: "Une petite plage le long des restaurants mais qui offre une mer transparente, à l’abri du vent. On se croirait dans une piscine !",
+         tags: ["plage"],
+      },
+      
+   
+      
+      
+      {
+         title: "Playa de Famara",
+         lat: 29.1193202,
+         lon: -13.5461197,
+         url: "/places/playa-de-famara/",
+         image: "/images/playa-de-famara.jpg",
+         description: "La couleur de l’eau est magnifique, presque translucide. La côte rocheuse offre un beau contraste avec la mer. En revanche la partie de sable n’est pas très grande et énormément de vent… Ça ressemble à un spot pour kitesurf.",
+         tags: ["plage"],
+      },
+      
+   
+      
+      
+      {
+         title: "Playa de Janubio",
+         lat: 28.93457387254879,
+         lon: -13.829705715179445,
+         url: "/places/playa-de-janubio/",
+         image: "/images/playa-de-janubio.jpg",
+         description: "Une plage de sable noir situé à côté des marais salants. Beaucoup de vent et la mer était très agitée. Cette plage est à voir mais pas nécessairement agréable pour s’y poser.",
+         tags: ["plage"],
+      },
+      
+   
+      
+      
+      {
+         title: "Playa de la Cera",
+         lat: 28.844730292805973,
+         lon: -13.788753747940065,
+         url: "/places/playa-de-la-cera/",
+         image: "/images/playa-de-la-cera.jpg",
+         description: "Une petite plage intimiste très sympa, sans trop de vent qui se trouve à côté de la plage de Papagayo. Attention aux vagues qui peuvent mouiller les affaires ! L’accès est un peu long sur une route de terre mais c’est à faire !",
+         tags: ["plage"],
+      },
+      
+   
+      
+      
+      {
+         title: "Playa de Papagayo",
+         lat: 28.842428336175185,
+         lon: -13.7881475687027,
+         url: "/places/playa-de-papagayo/",
+         image: "/images/playa-de-papagayo.jpg",
+         description: "Une belle plage à côté de la plage de Cera qui est plus intimiste. L’accès est un peu long sur une route de terre mais c’est à faire !",
+         tags: ["plage"],
+      },
+      
+   
+      
+      
+      {
+         title: "Playa del Caleton Blanco",
+         lat: 29.216709769351425,
+         lon: -13.442512750625612,
+         url: "/places/playa-del-caleton-blanco/",
+         
+         description: "Une plage de sable blanc, entouré de roches noires. La couleur de l’eau est magnifique ! La route pour y parvenir est superbe, roche volcanique à perte de vue.",
+         tags: ["plage"],
+      },
+      
+   
+      
+      
+      {
+         title: "Route LZ-67",
+         lat: 29.026287667151674,
+         lon: -13.70919179108184,
+         url: "/places/route-lz-67/",
+         image: "/images/route-lz-67.jpg",
+         description: "Une route à absolument prendre car elle offre des paysages magnifiques : un désert de roches et volcans noirs ! J’ai parcouru le tronçon du kilomètre 5 à 19.",
+         tags: ["parc"],
+      },
+      
+   
+      
+      
+      {
+         title: "Sal y Pimienta",
+         lat: 28.920388540321525,
+         lon: -13.671291961219636,
+         url: "/places/sal-y-pimenta/",
+         image: "/images/sal-y-pienta.jpg",
+         description: "On y sera allé pour la vue mer et le coucher de soleil. La bouffe est ok mais encore un restaurant où ils servent beaucoup trop de plats, ce qui impasse la qualité. La paëlla est ok.",
+         tags: ["restaurant", "fruits-de-mer", "terrasse", "vue-mer"],
+      }
+      
+   
+   ];
 
-    let markers = [];
+   let markers = [];
 
-    voyagePlaces.forEach(place => {
-      const marker = L.marker([place.lat, place.lon], { icon: svgIcon })
-        .addTo(map)
-        .bindPopup(`<a href="${place.url}"><strong>${place.title}</strong></a>`);
-      markers.push(marker);
-    });
+   voyagePlaces.forEach(place => {
+   const popupContent = `
+      <div class="popup-content">
+         <h3><a href="${place.url}">${place.title}</a></h3>
+         ${place.image ? `<img src="${place.image}" alt="${place.title}" style="height: 150px; object-fit: cover;">` : ''}
+         ${place.description ? `<p>${place.description}</p>` : ''}
+         ${place.tags && place.tags.length > 0 ? `<div class="tags">${place.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</div>` : ''}
+      </div>
+   `;
 
-    if (markers.length > 0) {
-      const group = new L.featureGroup(markers);
-      map.fitBounds(group.getBounds().pad(0.1));
-    }
+   const marker = L.marker([place.lat, place.lon], { icon: svgIcon })
+      .addTo(map)
+      .bindPopup(popupContent);
+
+   markers.push(marker);
+   });
+
+   if (markers.length > 0) {
+   const group = new L.featureGroup(markers);
+   map.fitBounds(group.getBounds().pad(0.1));
+   }
   });
 </script>
 
@@ -402,5 +478,7 @@
     </footer>
 </body>
 </html>
+
+
 </body>
 </html>
