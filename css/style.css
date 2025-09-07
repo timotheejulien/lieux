@@ -414,6 +414,19 @@ ul.post-list-meta li svg {
    text-align: center;
 }
 
+.travel-list-places {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  column-count: 1;
+  column-gap: var(--space-regular);
+}
+
+.travel-list-places li {
+  break-inside: avoid;
+  padding-bottom: var(--space-regular);
+}
+
 /* FOOTER */
 #footer .divider {
     margin-bottom: var(--space-x-large);
@@ -489,6 +502,11 @@ ul.footer-nav li {
    /* LAYOUT */
    .container {
       padding: var(--space-x-large);
+   }
+
+   .travel-list-places {
+      column-count: 3;
+      column-gap: var(--space-regular);
    }
 
    /* FOOTER */

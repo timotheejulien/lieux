@@ -9,6 +9,9 @@ collections:
   places:
     output: true
     permalink: /:collection/:name/
+  voyages:
+    output: true
+    permalink: /:collection/:name/
 
 # Plugins
 plugins:

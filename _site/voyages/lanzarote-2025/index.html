@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Lanzarote 2025 - Mes lieux</title>
+   <meta name="description" content="Cartographie de mes lieux visités">
+   <link rel="stylesheet" href="/css/style.css">
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+   <meta property="og:locale" content="fr_FR" />
+   <meta property="og:site_name" content="Lanzarote 2025 | Mes lieux">
+   <meta property="og:image" content="/cover.jpg"/>
+   <meta property="og:description" content="" />
+   <meta property="og:url" content="/voyages/lanzarote-2025/">
+   <meta name="fediverse:creator" content="@timothee@mastodon.design" />
+   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+   <script src="/assets/script.js"></script>
+</head>
+<body>
+   <main>
+   <section class="container flex post-header">
+      <div class="post-header-content">
+         <a href="/" class="back-link">← Retour à la carte</a>
+         <h1>Lanzarote 2025</h1>
+         
+            <p class="post-review-comment">Restaurants, plages, lieux touristiques… Voici les lieux que j'ai visité durant mon voyage à Lanzarote, pendant l'été 2025.</p>
+         
+      </div>
+   </section>
+
+   <section class="container">
+      <ul class="travel-list-places">
+         
+
+         
+
+         
+
+         
+            <li><a href="/places/bonbon-cafe/">Bonbon cafe</a></li>
+         
+            <li><a href="/places/el-diablo/">El Diablo</a></li>
+         
+            <li><a href="/places/el-patio/">El Patio Crêperie</a></li>
+         
+            <li><a href="/places/el-rincon/">El Rincón</a></li>
+         
+            <li><a href="/places/la-galeria/">La Galeria</a></li>
+         
+            <li><a href="/places/la-tabla/">La tabla</a></li>
+         
+            <li><a href="/places/marais-salants-de-janubio/">Marais salants de Janubio</a></li>
+         
+            <li><a href="/places/marche-de-teguise/">Marché de Teguise</a></li>
+         
+            <li><a href="/places/mirador-del-rio/">Mirador del Rio</a></li>
+         
+            <li><a href="/places/oppa/">Oppa</a></li>
+         
+            <li><a href="/places/parc-national-de-timanfaya/">Parc national de Timanfaya</a></li>
+         
+            <li><a href="/places/peskara/">Peskara</a></li>
+         
+            <li><a href="/places/piscinas-naturales/">Piscinas naturales</a></li>
+         
+            <li><a href="/places/piscinas-naturales/">Piscinas naturales</a></li>
+         
+            <li><a href="/places/playa-blanca/">Plage de Blanca</a></li>
+         
+            <li><a href="/places/playa-de-famara/">Playa de Famara</a></li>
+         
+            <li><a href="/places/playa-de-janubio/">Playa de Janubio</a></li>
+         
+            <li><a href="/places/playa-de-papagayo/">Playa de Papagayo</a></li>
+         
+            <li><a href="/places/playa-de-la-cera/">Playa de la Cera</a></li>
+         
+            <li><a href="/places/playa-del-caleton-blanco/">Playa del Caleton Blanco</a></li>
+         
+            <li><a href="/places/route-lz-67/">Route LZ-67</a></li>
+         
+            <li><a href="/places/sal-y-pimenta/">Sal y Pimienta</a></li>
+         
+      </ul>
+   </section>
+
+   <section class="container voyage">
+      <div id="voyage-map" style="height: 500px; margin-bottom: 2rem;"></div>
+   </section>
+</main>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Initialisation de la carte
+    const map = L.map('voyage-map').setView([46.603354, 1.888334], 5);
+
+    // Fond de carte : OSM Bright via Stadia Maps
+    L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d', {
+      maxZoom: 20,
+      attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
+                   '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
+                   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    // Icône SVG personnalisée
+    const svgIcon = L.divIcon({
+      className: "custom-svg-pin",
+      html: `
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
+          <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#202020"/>
+          <circle cx="15" cy="15" r="6" fill="#fff"/>
+        </svg>
+      `,
+      iconSize: [30, 42],
+      iconAnchor: [15, 42],
+      popupAnchor: [0, -42]
+    });
+
+    // Données des lieux pour ce voyage
+    const voyagePlaces = [
+      
+        
+        
+        {
+          title: "Bonbon cafe",
+          lat: 29.001111946535,
+          lon: -13.48733121226,
+          url: "/places/bonbon-cafe/"
+        },
+        
+      
+        
+        
+        {
+          title: "Piscinas naturales",
+          lat: 29.143112282801,
+          lon: -13.450535244053,
+          url: "/places/piscinas-naturales/"
+        },
+        
+      
+        
+        
+        {
+          title: "El Rincón",
+          lat: 28.996788468093733,
+          lon: -13.491479143969375,
+          url: "/places/el-rincon/"
+        },
+        
+      
+        
+        
+        {
+          title: "El Patio Crêperie",
+          lat: 29.058751522466,
+          lon: -13.560614200666,
+          url: "/places/el-patio/"
+        },
+        
+      
+        
+        
+        {
+          title: "El Diablo",
+          lat: 29.005486,
+          lon: -13.753111,
+          url: "/places/el-diablo/"
+        },
+        
+      
+        
+        
+      
+        
+        
+        {
+          title: "La Galeria",
+          lat: 29.059598017046,
+          lon: -13.560791971889,
+          url: "/places/la-galeria/"
+        },
+        
+      
+        
+        
+        {
+          title: "La tabla",
+          lat: 28.99999200861599,
+          lon: -13.489290367604463,
+          url: "/places/la-tabla/"
+        },
+        
+      
+        
+        
+        {
+          title: "Marais salants de Janubio",
+          lat: 28.93791651085635,
+          lon: -13.820693492889404,
+          url: "/places/marais-salants-de-janubio/"
+        },
+        
+      
+        
+        
+        {
+          title: "Marché de Teguise",
+          lat: 29.060183572387,
+          lon: -13.560569294817,
+          url: "/places/marche-de-teguise/"
+        },
+        
+      
+        
+        
+        {
+          title: "Mirador del Rio",
+          lat: 29.195798,
+          lon: -13.479358,
+          url: "/places/mirador-del-rio/"
+        },
+        
+      
+        
+        
+        {
+          title: "Oppa",
+          lat: 28.99778242815145,
+          lon: -13.492267517463343,
+          url: "/places/oppa/"
+        },
+        
+      
+        
+        
+        {
+          title: "Parc national de Timanfaya",
+          lat: 29.02521585217567,
+          lon: -13.78337860107422,
+          url: "/places/parc-national-de-timanfaya/"
+        },
+        
+      
+        
+        
+        {
+          title: "Peskara",
+          lat: 28.999408,
+          lon: -13.488247,
+          url: "/places/peskara/"
+        },
+        
+      
+        
+        
+        {
+          title: "Piscinas naturales",
+          lat: 29.143112282801,
+          lon: -13.450535244053,
+          url: "/places/piscinas-naturales/"
+        },
+        
+      
+        
+        
+        {
+          title: "Plage de Blanca",
+          lat: 28.86260841299176,
+          lon: -13.829775452613832,
+          url: "/places/playa-blanca/"
+        },
+        
+      
+        
+        
+        {
+          title: "Playa de Famara",
+          lat: 29.1193202,
+          lon: -13.5461197,
+          url: "/places/playa-de-famara/"
+        },
+        
+      
+        
+        
+        {
+          title: "Playa de Janubio",
+          lat: 28.93457387254879,
+          lon: -13.829705715179445,
+          url: "/places/playa-de-janubio/"
+        },
+        
+      
+        
+        
+        {
+          title: "Playa de la Cera",
+          lat: 28.844730292805973,
+          lon: -13.788753747940065,
+          url: "/places/playa-de-la-cera/"
+        },
+        
+      
+        
+        
+        {
+          title: "Playa de Papagayo",
+          lat: 28.842428336175185,
+          lon: -13.7881475687027,
+          url: "/places/playa-de-papagayo/"
+        },
+        
+      
+        
+        
+        {
+          title: "Playa del Caleton Blanco",
+          lat: 29.216709769351425,
+          lon: -13.442512750625612,
+          url: "/places/playa-del-caleton-blanco/"
+        },
+        
+      
+        
+        
+        {
+          title: "Route LZ-67",
+          lat: 29.026287667151674,
+          lon: -13.70919179108184,
+          url: "/places/route-lz-67/"
+        },
+        
+      
+        
+        
+        {
+          title: "Sal y Pimienta",
+          lat: 28.920388540321525,
+          lon: -13.671291961219636,
+          url: "/places/sal-y-pimenta/"
+        }
+        
+      
+    ];
+
+    let markers = [];
+
+    voyagePlaces.forEach(place => {
+      const marker = L.marker([place.lat, place.lon], { icon: svgIcon })
+        .addTo(map)
+        .bindPopup(`<a href="${place.url}"><strong>${place.title}</strong></a>`);
+      markers.push(marker);
+    });
+
+    if (markers.length > 0) {
+      const group = new L.featureGroup(markers);
+      map.fitBounds(group.getBounds().pad(0.1));
+    }
+  });
+</script>
+
+    <footer id="footer" class="container">
+        <div class="divider"></div>
+        <section>
+            <span class="h2">Une remarque ?<br>Un simple bonjour ?</span>
+            <h2 class="color-text-secondary">Contact</h2>
+
+            <button id="footer-btn" class="btn btn-primary" onclick="mailTo()">Envoyer un message</button>
+        </section>
+        
+        <section class="footer-about">
+            <section class="flex">
+                  <div class="flex-width-1">
+                     <h4>Timothée Julien</h4>
+                     <p>Product designer (UX/UI) indépendant, évoluant à Paris.</p>
+                     <ul class="footer-nav">
+                        <li><a href="https://timotheejulien.fr" target="_blank">Portfolio</a>
+                        <li><a href="https://timotheejulien.fr/blog" target="_blank">Blog</a>
+                        <li><a href="https://bloc-notes.timotheejulien.fr" target="_blank">Bloc-notes (veille)</a></li>
+                     </ul>
+                  </div>
+                  <div class="flex-width-1">
+                        <h4>À propos de ce projet</h4>
+                        <p>Il s'agit d'un projet open-source. Si vous souhaitez me faire part d'une erreur ou suggérer une amélioration, ce projet est disponible sur <a href="https://github.com/timotheejulien/lieux/" target="_blank">Github</a>.</p>
+                  </div>
+                  <div class="flex-width-1">
+                     <h4>Mes réseaux</h4>
+                     <ul class="footer-nav">
+                        <li><a href="https://signal.me/#eu/YdauWLl23RV8Aqjkp6jgr7u-hcWB2dPTHfaZNITV6FCIa2ioQYxAdIjgxgEHd5d0" target="_blank">Signal</a>
+                        <li><a href="https://www.linkedin.com/in/timotheejulien/" target="_blank">Linkedin</a></li>
+                        <li><a href="https://mastodon.design/@timothee" target="_blank" rel="me">Mastodon</a></li>
+                     </ul>
+                </div>
+            </section>
+        
+            <section class="footer-legals">
+                <p>© 2024-2025 ・ <a href="https://timotheejulien.fr/politique-de-confidentialite">Politique de confidentialité</a> ・ <a href="https://timotheejulien.fr/mentions-legales">Mentions légales</a></p>
+            </section>
+        </section>
+
+    </footer>
+</body>
+</html>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Route LZ-67 - Mes lieux</title>
+   <meta name="description" content="Cartographie de mes lieux visités">
+   <link rel="stylesheet" href="/css/style.css">
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+   <meta property="og:locale" content="fr_FR" />
+   <meta property="og:site_name" content="Route LZ-67 | Mes lieux">
+   <meta property="og:image" content="/cover.jpg"/>
+   <meta property="og:description" content="" />
+   <meta property="og:url" content="/places/route-lz-67/">
+   <meta name="fediverse:creator" content="@timothee@mastodon.design" />
+   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+   <script src="/assets/script.js"></script>
+</head>
+<body>
+   <main>
+   <section class="container flex post-header">
+      <div class="post-header-content">
+         <a href="/" class="back-link">← Retour à la carte</a>
+         <h1>Route LZ-67</h1>
+         
+            <p class="post-review-comment">Une route à absolument prendre car elle offre des paysages magnifiques : un désert de roches et volcans noirs ! J’ai parcouru le tronçon du kilomètre 5 à 19.</p>
+         
+         
+         
+         <div class="place-tags tags">
+               
+               <span class="tag">parc</span>
+               
+         </div>
+         
+      </div>
+   </section>
+
+   <section class="container">
+      <div class="post-map-container">
+         <script>
+            function openMap(address) {
+               const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+               const googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address);
+               const appleMapsUrl = 'https://maps.apple.com/?q=' + encodeURIComponent(address);
+
+               window.location.href = isIOS ? appleMapsUrl : googleMapsUrl;
+            }
+         </script>
+
+         <ul class="post-list-meta">
+            <li>
+               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14 11C14 10.4696 13.7891 9.96101 13.4141 9.58594C13.039 9.21087 12.5304 9 12 9C11.4696 9 10.961 9.21087 10.5859 9.58594C10.2109 9.96101 10 10.4696 10 11C10 11.5304 10.2109 12.039 10.5859 12.4141C10.961 12.7891 11.4696 13 12 13C12.5304 13 13.039 12.7891 13.4141 12.4141C13.7891 12.039 14 11.5304 14 11ZM16 11C16 12.0609 15.5783 13.078 14.8281 13.8281C14.078 14.5783 13.0609 15 12 15C10.9391 15 9.92202 14.5783 9.17188 13.8281C8.42173 13.078 8 12.0609 8 11C8 9.93913 8.42173 8.92202 9.17188 8.17188C9.92202 7.42173 10.9391 7 12 7C13.0609 7 14.078 7.42173 14.8281 8.17188C15.5783 8.92202 16 9.93913 16 11Z"/>
+                  <path d="M11.9999 2C13.7799 2 15.5199 2.52774 16.9999 3.5166C18.4799 4.50547 19.6332 5.91125 20.3144 7.55566C20.9956 9.20017 21.1743 11.01 20.8271 12.7559C20.4798 14.5016 19.6228 16.1056 18.3642 17.3643L14.121 21.6064V21.6074C13.5586 22.1693 12.7959 22.4842 12.0009 22.4844C11.2058 22.4844 10.4423 22.1694 9.87981 21.6074V21.6064L5.63567 17.3643C4.37709 16.1056 3.52004 14.5016 3.17278 12.7559C2.82555 11.01 3.00428 9.20017 3.68548 7.55566C4.36669 5.91125 5.51996 4.50547 6.99993 3.5166C8.47994 2.52774 10.22 2 11.9999 2ZM11.9999 4C10.6156 4 9.26235 4.41062 8.11126 5.17969C6.96012 5.94884 6.06296 7.04223 5.53313 8.32129C5.00334 9.60028 4.86468 11.0074 5.1347 12.3652C5.40473 13.7229 6.071 14.9703 7.04974 15.9492L11.2939 20.1924L11.3671 20.2588C11.545 20.4043 11.7691 20.4844 12.0009 20.4844C12.2657 20.4842 12.5196 20.3795 12.707 20.1924L16.9501 15.9492C17.9289 14.9703 18.5951 13.7229 18.8652 12.3652C19.1352 11.0074 18.9965 9.60028 18.4667 8.32129C17.9369 7.04223 17.0397 5.94884 15.8886 5.17969C14.7375 4.41062 13.3843 4 11.9999 4Z"/>
+               </svg>
+               <a href="#" onclick="openMap('LZ-67 35570 Yaiza, Las Palmas de Grande Canarie, Espagne'); return false;">LZ-67 35570 Yaiza, Las Palmas de Grande Canarie, Espagne</a>
+            </li>
+            
+         </ul>
+         
+         <div id="placeMap" style="height: 400px; overflow: hidden;"></div>
+
+         <script>
+            // Créer une carte pour ce lieu spécifique
+            const placeMap = L.map('placeMap').setView([29.026287667151674, -13.70919179108184], 13);
+
+            // Ajouter la couche CartoDB Light
+            L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d', {
+               maxZoom: 20,
+               attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
+                           '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
+                           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(placeMap);
+
+            // Icône SVG personnalisée
+            const svgIcon = L.divIcon({
+               className: "custom-svg-pin",
+               html: `
+                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
+                     <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#202020"/>
+                     <circle cx="15" cy="15" r="6" fill="#fff"/>
+                     </svg>
+               `,
+               iconSize: [30, 42],
+               iconAnchor: [15, 42],
+               popupAnchor: [0, -42]
+            });
+
+            // Ajouter un marqueur avec icône SVG
+            L.marker([29.026287667151674, -13.70919179108184], { icon: svgIcon })
+               .addTo(placeMap)
+               .bindPopup('Route LZ-67');
+         </script>
+      </div>
+      
+   </section>
+   
+   <section class="container post-content">
+      
+
+
+      
+         <h2>Photo du lieu</h2>
+         <img src="/images/route-lz-67.jpg" alt="Photographie du lieu : Route LZ-67" class="place-image">
+      
+   </section>
+</main>
+
+    <footer id="footer" class="container">
+        <div class="divider"></div>
+        <section>
+            <span class="h2">Une remarque ?<br>Un simple bonjour ?</span>
+            <h2 class="color-text-secondary">Contact</h2>
+
+            <button id="footer-btn" class="btn btn-primary" onclick="mailTo()">Envoyer un message</button>
+        </section>
+        
+        <section class="footer-about">
+            <section class="flex">
+                  <div class="flex-width-1">
+                     <h4>Timothée Julien</h4>
+                     <p>Product designer (UX/UI) indépendant, évoluant à Paris.</p>
+                     <ul class="footer-nav">
+                        <li><a href="https://timotheejulien.fr" target="_blank">Portfolio</a>
+                        <li><a href="https://timotheejulien.fr/blog" target="_blank">Blog</a>
+                        <li><a href="https://bloc-notes.timotheejulien.fr" target="_blank">Bloc-notes (veille)</a></li>
+                     </ul>
+                  </div>
+                  <div class="flex-width-1">
+                        <h4>À propos de ce projet</h4>
+                        <p>Il s'agit d'un projet open-source. Si vous souhaitez me faire part d'une erreur ou suggérer une amélioration, ce projet est disponible sur <a href="https://github.com/timotheejulien/lieux/" target="_blank">Github</a>.</p>
+                  </div>
+                  <div class="flex-width-1">
+                     <h4>Mes réseaux</h4>
+                     <ul class="footer-nav">
+                        <li><a href="https://signal.me/#eu/YdauWLl23RV8Aqjkp6jgr7u-hcWB2dPTHfaZNITV6FCIa2ioQYxAdIjgxgEHd5d0" target="_blank">Signal</a>
+                        <li><a href="https://www.linkedin.com/in/timotheejulien/" target="_blank">Linkedin</a></li>
+                        <li><a href="https://mastodon.design/@timothee" target="_blank" rel="me">Mastodon</a></li>
+                     </ul>
+                </div>
+            </section>
+        
+            <section class="footer-legals">
+                <p>© 2024-2025 ・ <a href="https://timotheejulien.fr/politique-de-confidentialite">Politique de confidentialité</a> ・ <a href="https://timotheejulien.fr/mentions-legales">Mentions légales</a></p>
+            </section>
+        </section>
+
+    </footer>
+</body>
+</html>
+</body>
+</html>

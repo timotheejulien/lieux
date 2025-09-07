@@ -3,12 +3,12 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Mes lieux</title>
+   <title>Accueil - Mes lieux</title>
    <meta name="description" content="Cartographie de mes lieux visités">
    <link rel="stylesheet" href="/css/style.css">
    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
    <meta property="og:locale" content="fr_FR" />
-   <meta property="og:site_name" content=" | Mes lieux">
+   <meta property="og:site_name" content="Accueil | Mes lieux">
    <meta property="og:image" content="/cover.jpg"/>
    <meta property="og:description" content="" />
    <meta property="og:url" content="/">
@@ -75,7 +75,7 @@ const places = [
     lon: 2.36932,
     tags: ["restaurant","tapas"],
     url: "/places/ama/",
-    description: "Le cadre est super cool ainsi que les serveurs. La bouffe est très bonne, faudrait pas plus cher mais très bonne adresse ! Le bar-à-vin est un poil cher.",
+    description: "Le cadre est super cool ainsi que les serveurs. Les plats sont vraiment bons, très bonne adresse ! En revanche les prix ne sont pas donnés, notamment le vin.",
     image: ""
   },
   
@@ -320,6 +320,16 @@ const places = [
   },
   
   {
+    title: "Bonbon cafe",
+    lat: 29.001111946535,
+    lon: -13.48733121226,
+    tags: ["restaurant","brunch","coffee-shop","cocktails"],
+    url: "/places/bonbon-cafe/",
+    description: "Le brunch le plus copieux et le moins cher possible tout en étant plutôt bon ! J’ai pris le pancake Sausage, la saucisse est curieuse car elle ressemble à une saucisse de Strasbourg tout en étant un peu croustillante…",
+    image: ""
+  },
+  
+  {
     title: "Bopain boulangerie",
     lat: 48.84036636352539,
     lon: 2.3952605724334717,
@@ -373,7 +383,7 @@ const places = [
     title: "Boulom",
     lat: 48.89358759999999,
     lon: 2.3356451,
-    tags: ["restaurant","buffet-à-volonté"],
+    tags: ["restaurant","buffet"],
     url: "/places/boulom/",
     description: "",
     image: ""
@@ -556,6 +566,16 @@ const places = [
     tags: ["restaurant","gastronomique"],
     url: "/places/chai-nous-comme-chai-vous/",
     description: "",
+    image: ""
+  },
+  
+  {
+    title: "Le chalet Savoyard",
+    lat: 48.853174,
+    lon: 2.378225,
+    tags: ["restaurant"],
+    url: "/places/chalet-savoyard/",
+    description: "Idéal pour déguster une raclette. Très bons ingrédients mais on n&#39;est jamais aussi bien qu&#39;à la maison pour manger une raclette !",
     image: ""
   },
   
@@ -800,6 +820,36 @@ const places = [
   },
   
   {
+    title: "El Diablo",
+    lat: 29.005486,
+    lon: -13.753111,
+    tags: ["restaurant","barbecue"],
+    url: "/places/el-diablo/",
+    description: "Ce restaurant est situé dans le parc de Timanfaya (à faire absolument). La viande est cuite grâce à la chaleur du volcan. Même si la promesse semble alléchante, vous pouvez vous en passer.",
+    image: "/images/parc-timanfaya.jpg"
+  },
+  
+  {
+    title: "El Patio Crêperie",
+    lat: 29.058751522466,
+    lon: -13.560614200666,
+    tags: ["restaurant","crêperie","bar","terrasse"],
+    url: "/places/el-patio/",
+    description: "Le cadre est super mignon. Dans une rue au calme, vous pourrez profiter de cette terrasse fait de bric et de broc. Les crêpes sont réchauffés ce qui n&#39;est pas terrible… En revanche vous pourrez déguster une bière locale. Bon à savoir : paiement en espèce uniquement.",
+    image: "/images/el-patio.jpg"
+  },
+  
+  {
+    title: "El Rincón",
+    lat: 28.996788468093733,
+    lon: -13.491479143969375,
+    tags: ["restaurant","tapas"],
+    url: "/places/el-rincon/",
+    description: "On a pris le calamar frit, très bon et ensuite les tacos : ils sont excellents ! Vraiment un très bon restaurant. La serveuse est super sympa. Il y a aussi une terrasse. Je recommande !",
+    image: ""
+  },
+  
+  {
     title: "Enzo",
     lat: 48.835454,
     lon: 2.325926,
@@ -973,7 +1023,7 @@ const places = [
     title: "Gabriela",
     lat: 48.87697,
     lon: 2.340454,
-    tags: ["restauranr","brésilien"],
+    tags: ["restaurant","brésilien"],
     url: "/places/gabriela/",
     description: "Nourriture brésilienne typique, c’était bon. Un chouïa cher.",
     image: ""
@@ -1390,6 +1440,16 @@ const places = [
   },
   
   {
+    title: "La Antigua Escuela",
+    lat: 28.952676804338,
+    lon: -13.764218274282,
+    tags: ["restaurant","brunch","tapas","terrasse","patio"],
+    url: "/places/la-antigua-escuala/",
+    description: "Encore une fois, le service est sympa ! Les tapas sont bons, bonne adresse. La bière blonde Ale est vraiment sympa !",
+    image: ""
+  },
+  
+  {
     title: "La Balle au Bond",
     lat: 48.85812490000001,
     lon: 2.335672,
@@ -1560,6 +1620,16 @@ const places = [
   },
   
   {
+    title: "La Galeria",
+    lat: 29.059598017046,
+    lon: -13.560791971889,
+    tags: ["restaurant","tapas","bar","terrasse"],
+    url: "/places/la-galeria/",
+    description: "Ce bar/restaurant offre une petite terrasse sur une rue au calme. Nous y avons pris seulement un café.",
+    image: ""
+  },
+  
+  {
     title: "La Garçonnière",
     lat: 48.86809681274442,
     lon: 2.3477743928011705,
@@ -1616,6 +1686,16 @@ const places = [
     tags: ["glacier"],
     url: "/places/la-martiniere-saint-martin-de-re/",
     description: "Tout simplement des glaces exceptionnelles ! Je déconseille la glace à l&#39;huitre 🤢.",
+    image: ""
+  },
+  
+  {
+    title: "La mère Pouchet",
+    lat: 48.847872013621,
+    lon: 2.392759016898,
+    tags: ["bar","restaurant","brasserie","terrasse"],
+    url: "/places/la-m%C3%A8re-pouchet/",
+    description: "Bar et restaurant proche de Nation. La trerrasse est sympa. Le burger n’est pas si mal opur cette brasserie.",
     image: ""
   },
   
@@ -1696,6 +1776,16 @@ const places = [
     tags: ["shopping"],
     url: "/places/la-station/",
     description: "",
+    image: ""
+  },
+  
+  {
+    title: "La tabla",
+    lat: 28.99999200861599,
+    lon: -13.489290367604463,
+    tags: ["restaurant","tapas","bar","terrasse"],
+    url: "/places/la-tabla/",
+    description: "Très bonne adresse. Les tapas sont bons, sauf erreur de traduction pour la sauce au miel qui ressemble plus à du réglisse. Service au top et petite terrasse avec la musique du concert d’à côté. À refaire !",
     image: ""
   },
   
@@ -2520,6 +2610,16 @@ const places = [
   },
   
   {
+    title: "L’entrepotes ",
+    lat: 48.8473075,
+    lon: 2.3945362,
+    tags: ["bar","terrasse"],
+    url: "/places/l-entrepotes/",
+    description: "Terrasse au calme de la place Nation. Le soleil se couche de ce côté.",
+    image: ""
+  },
+  
+  {
     title: "Le Mabillon",
     lat: 48.8530297,
     lon: 2.3357003,
@@ -2580,6 +2680,16 @@ const places = [
   },
   
   {
+    title: "Marais salants de Janubio",
+    lat: 28.93791651085635,
+    lon: -13.820693492889404,
+    tags: ["marais-salants"],
+    url: "/places/marais-salants-de-janubio/",
+    description: "",
+    image: ""
+  },
+  
+  {
     title: "Marché Aligre/Beauvau",
     lat: 48.848712,
     lon: 2.378116,
@@ -2596,6 +2706,16 @@ const places = [
     tags: ["marché"],
     url: "/places/marche-couvert-des-enfants-rouges/",
     description: "Un marché à faire rien que pour visiter le lieu.",
+    image: ""
+  },
+  
+  {
+    title: "Marché de Teguise",
+    lat: 29.060183572387,
+    lon: -13.560569294817,
+    tags: ["marché"],
+    url: "/places/marche-de-teguise/",
+    description: "C’est nul, tout simplement ! C’est un énorme marché où on y vend pas mal de babioles. Peut de stands de gastronomie et rien d’artisanal. (Uniquement le dimanche).",
     image: ""
   },
   
@@ -2627,6 +2747,16 @@ const places = [
     url: "/places/melt/",
     description: "",
     image: ""
+  },
+  
+  {
+    title: "Mirador del Rio",
+    lat: 29.195798,
+    lon: -13.479358,
+    tags: ["vue","vue-mer"],
+    url: "/places/mirador-del-rio/",
+    description: "Un super point de vue pour admirer un coucher de soleil. Entre mer, île et montagne, c’est compliqué de ne pas apprécier cette beauté de la nature !",
+    image: "/images/mirador-del-rio.jpg"
   },
   
   {
@@ -2790,6 +2920,16 @@ const places = [
   },
   
   {
+    title: "Oppa",
+    lat: 28.99778242815145,
+    lon: -13.492267517463343,
+    tags: ["coffee-shop","brunch"],
+    url: "/places/oppa/",
+    description: "Excellent coffee shop / brunch. Les « burgers » sont vraiment trop bon avec la mayonnaise au sriracha. Petite terrasse au calme même si elle donne sur un parking. Potentiellement possible d’avoir une place dans la ruelle qui est plus intime. Super service !",
+    image: "/images/oppa.jpg"
+  },
+  
+  {
     title: "Otonali",
     lat: 48.6522847,
     lon: -2.0117065,
@@ -2827,6 +2967,16 @@ const places = [
     url: "/places/paprika/",
     description: "",
     image: ""
+  },
+  
+  {
+    title: "Parc national de Timanfaya",
+    lat: 29.02521585217567,
+    lon: -13.78337860107422,
+    tags: ["parc"],
+    url: "/places/parc-national-de-timanfaya/",
+    description: "À faire absolument ! Ce parc nous donne l&#39;impression d&#39;être sur un autre planète (sûrement sur Mars). La beauté des paysages est tout simplement incroyable, on y voit des volcans de près. Bon à savoir : l&#39;accès vous coûtera 22 € par personne et je vous recommande d&#39;y aller tôt pour éviter la queue. Une fois arrivé sur le parking, il faut prendre la navette qui vous fera visiter le parc. Dans le bus, placez vous à droite.",
+    image: "/images/parc-timanfaya.jpg"
   },
   
   {
@@ -2870,6 +3020,16 @@ const places = [
   },
   
   {
+    title: "Peskara",
+    lat: 28.999408,
+    lon: -13.488247,
+    tags: ["restaurant","terrasse","vue-mer"],
+    url: "/places/peskara/",
+    description: "Restaurant très touristique qui propose une multitude de plats différents (pizzas, pâtes, tapas, poisson, etc). La terrasse offre une vue mer. Un lieux disons « pratique ».",
+    image: ""
+  },
+  
+  {
     title: "Peter Mc Cool",
     lat: 47.2140053,
     lon: -1.5624338,
@@ -2900,6 +3060,16 @@ const places = [
   },
   
   {
+    title: "Piscinas naturales",
+    lat: 29.143112282801,
+    lon: -13.450535244053,
+    tags: ["plage"],
+    url: "/places/piscinas-naturales/",
+    description: "Des piscines d’eau de mer « naturelles ». Un lieu idéal pour se rafraîchir avant de repartir. Les places pour se poser sont rares… La vue est cool !",
+    image: "/images/piscinas-naturales.jpg"
+  },
+  
+  {
     title: "Plan B",
     lat: 48.84896469116211,
     lon: 2.2906301021575928,
@@ -2916,6 +3086,66 @@ const places = [
     tags: ["restaurant","bistronomique","terrasse"],
     url: "/places/planto/",
     description: "Très belle décoration et les plats sont bons. Très belle présentation des plats.",
+    image: ""
+  },
+  
+  {
+    title: "Plage de Blanca",
+    lat: 28.86260841299176,
+    lon: -13.829775452613832,
+    tags: ["plage"],
+    url: "/places/playa-blanca/",
+    description: "Une petite plage le long des restaurants mais qui offre une mer transparente, à l’abri du vent. On se croirait dans une piscine !",
+    image: "/images/playa-blanca.jpg"
+  },
+  
+  {
+    title: "Playa de Famara",
+    lat: 29.1193202,
+    lon: -13.5461197,
+    tags: ["plage"],
+    url: "/places/playa-de-famara/",
+    description: "La couleur de l’eau est magnifique, presque translucide. La côte rocheuse offre un beau contraste avec la mer. En revanche la partie de sable n’est pas très grande et énormément de vent… Ça ressemble à un spot pour kitesurf.",
+    image: "/images/playa-de-famara.jpg"
+  },
+  
+  {
+    title: "Playa de Janubio",
+    lat: 28.93457387254879,
+    lon: -13.829705715179445,
+    tags: ["plage"],
+    url: "/places/playa-de-janubio/",
+    description: "Une plage de sable noir situé à côté des marais salants. Beaucoup de vent et la mer était très agitée. Cette plage est à voir mais pas nécessairement agréable pour s’y poser.",
+    image: "/images/playa-de-janubio.jpg"
+  },
+  
+  {
+    title: "Playa de la Cera",
+    lat: 28.844730292805973,
+    lon: -13.788753747940065,
+    tags: ["plage"],
+    url: "/places/playa-de-la-cera/",
+    description: "Une petite plage intimiste très sympa, sans trop de vent qui se trouve à côté de la plage de Papagayo. Attention aux vagues qui peuvent mouiller les affaires ! L’accès est un peu long sur une route de terre mais c’est à faire !",
+    image: "/images/playa-de-la-cera.jpg"
+  },
+  
+  {
+    title: "Playa de Papagayo",
+    lat: 28.842428336175185,
+    lon: -13.7881475687027,
+    tags: ["plage"],
+    url: "/places/playa-de-papagayo/",
+    description: "Une belle plage à côté de la plage de Cera qui est plus intimiste. L’accès est un peu long sur une route de terre mais c’est à faire !",
+    image: "/images/playa-de-papagayo.jpg"
+  },
+  
+  {
+    title: "Playa del Caleton Blanco",
+    lat: 29.216709769351425,
+    lon: -13.442512750625612,
+    tags: ["plage"],
+    url: "/places/playa-del-caleton-blanco/",
+    description: "Une plage de sable blanc, entouré de roches noires. La couleur de l’eau est magnifique ! La route pour y parvenir est superbe, roche volcanique à perte de vue.",
     image: ""
   },
   
@@ -3060,6 +3290,16 @@ const places = [
   },
   
   {
+    title: "Rosie",
+    lat: 48.851818,
+    lon: 2.374113,
+    tags: ["restaurant","brasserie"],
+    url: "/places/rosie-brasserie/",
+    description: "Un restaurant super sympa ! On est typiquement sur une cuisine traditionnelle (saucisse purée) mais bien réalisée. Pour les groupe de 8 personnes ou plus, il est possible de privatiser des pièces, un peu comme à la maison… Cela dit, c&#39;est un peu bruyant.",
+    image: ""
+  },
+  
+  {
     title: "Rosie Lou",
     lat: 48.8702844,
     lon: 2.348848,
@@ -3070,6 +3310,16 @@ const places = [
   },
   
   {
+    title: "Route LZ-67",
+    lat: 29.026287667151674,
+    lon: -13.70919179108184,
+    tags: ["parc"],
+    url: "/places/route-lz-67/",
+    description: "Une route à absolument prendre car elle offre des paysages magnifiques : un désert de roches et volcans noirs ! J’ai parcouru le tronçon du kilomètre 5 à 19.",
+    image: "/images/route-lz-67.jpg"
+  },
+  
+  {
     title: "Sadara",
     lat: 46.1986,
     lon: 6.12563,
@@ -3077,6 +3327,16 @@ const places = [
     url: "/places/sadara/",
     description: "Une belle surprise au cœeur de Genève. Une belle vue vient compléter cette buvette atypique avec cette pelouse.",
     image: "/images/sadara.jpg"
+  },
+  
+  {
+    title: "Sal y Pimienta",
+    lat: 28.920388540321525,
+    lon: -13.671291961219636,
+    tags: ["restaurant","fruits-de-mer","terrasse","vue-mer"],
+    url: "/places/sal-y-pimenta/",
+    description: "On y sera allé pour la vue mer et le coucher de soleil. La bouffe est ok mais encore un restaurant où ils servent beaucoup trop de plats, ce qui impasse la qualité. La paëlla est ok.",
+    image: "/images/sal-y-pienta.jpg"
   },
   
   {
