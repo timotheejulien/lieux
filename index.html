@@ -1,158 +1,199 @@
 ---
 layout: default
-title: "Accueil"
+title: Carte de Voyages
 ---
+  <!-- Carte -->
+  <div id="map"></div>
 
-<div id="controls" class="controls">
-   <div class="search-container">
-      <input type="text" id="searchInput" title="Rechercher un lieu. La recherche fait disparaître les pins snon concernés par la recherche." placeholder="Rechercher un lieu...">
-   </div>
+  <!-- Panneau flottant -->
+  <aside id="nav-panel" class="nav-panel">
+    <div class="nav-section">
+      <input type="text" id="search-input" placeholder="Rechercher un lieu" title="Rechercher un lieux">
+    </div>
 
-   <div class="filter-container">
-      <select id="tagFilter">
-         <option value="" title="Liste des catérogies de lieux">Catégories</option>
-      </select>
-   </div>
+    <div class="nav-section">
+      <h3>Voyages</h3>
+         <ul>
+         {% for voyage in site.voyages %}
+         <li>
+            <a class="nav-item" href="{{ voyage.url | relative_url }}">
+               {% if voyage.icon-light and voyage.icon-dark %}
+               <img src="{{ '/assets/images/' | append: voyage.icon-light }}" alt="{{ voyage.title }} icon" class="nav-item-icon nav-item-icon-light-mode">
+               <img src="{{ '/assets/images/' | append: voyage.icon-dark }}" alt="{{ voyage.title }} icon" class="nav-item-icon nav-item-icon-dark-mode">
+               {% endif %}
+               <span class="nav-item-label">{{ voyage.title }}</span>
+            </a>
+         </li>
+         {% endfor %}
+      </ul>
+    </div>
 
-   <div class="reset-container">
-      <button id="resetFilters" class="btn btn-primary">Réinitialiser</button>
-   </div>
-</div>
+    <div class="nav-section">
+      <h3>Tags</h3>
+      <div id="tags-list">
+      {% assign all_tags = site.places | map: "tags" | join: "," | split: "," | uniq | sort %}
+      {% for tag in all_tags %}
+         {% assign clean_tag = tag | strip %}
+         {% if clean_tag and clean_tag != "" %}
+            <label class="nav-item">
+            <input type="checkbox" value="{{ clean_tag }}" class="tag-checkbox">
+            <span class="checkbox-icon"></span>
+            {{ clean_tag }}
+            </label>
+         {% endif %}
+      {% endfor %}
+      </div>
 
-<div id="map"></div>
+      <button id="clear-filters" class="btn btn-primary" style="display:none;">Supprimer les filtres</button>
+    </div>
+  </aside>
 
-<script>
-// Données des lieux depuis Jekyll
-const places = [
-  {% for place in site.places %}
-  {
-    title: "{{ place.title | escape }}",
-    lat: {{ place.lat }},
-    lon: {{ place.lon }},
-    tags: [{% if place.tags %}{% for tag in place.tags %}"{{ tag }}"{% unless forloop.last %},{% endunless %}{% endfor %}{% endif %}],
-    url: "{{ place.url | relative_url }}",
-    description: "{{ place.description | escape }}",
-    image: "{{ place.image | relative_url }}"
-  }{% unless forloop.last %},{% endunless %}
-  {% endfor %}
-];
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-// Variables globales
-let map;
-let markers = [];
-let originalData = [...places];
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("search-input");
+    const clearFiltersBtn = document.getElementById("clear-filters");
 
-// Icône SVG personnalisée
-const svgIcon = L.divIcon({
-  className: "custom-svg-pin",
-  html: `
-    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
-      <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#202020"/>
-      <circle cx="15" cy="15" r="6" fill="#fff"/>
-    </svg>
-  `,
-  iconSize: [30, 42],
-  iconAnchor: [15, 42],
-  popupAnchor: [0, -42]
-});
+    let activeSearch = "";
+    let activeVoyage = null;
+    let activeTags = [];
 
-// Initialisation de la carte
-function initMap() {
-  map = L.map('map').setView([46.603354, 1.888334], 6);
-  
-   // OSM Bright via Stadia Maps
-   L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d', {
+    // Initialisation carte
+    const map = L.map('map').setView([46.8, 2.2], 6);
+    L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d', {
       maxZoom: 20,
       attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
-                  '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
-                  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-   }).addTo(map);
-  
-  addMarkersToMap(places);
-  
-  if (places.length > 0) {
-    const group = new L.featureGroup(markers);
-    map.fitBounds(group.getBounds().pad(0.1));
-  }
-}
+                   '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
+                   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
 
-// Ajouter les marqueurs avec icône SVG
-function addMarkersToMap(placesToShow) {
-  markers.forEach(marker => map.removeLayer(marker));
-  markers = [];
-  
-  placesToShow.forEach(place => {
-    const popupContent = `
-      <div class="popup-content">
-        <h3><a href="${place.url}">${place.title}</a></h3>
-        ${place.image ? `<img src="${place.image}" alt="${place.title}" style="height: 150px; object-fit: cover;">` : ''}
-        ${place.description ? `<p>${place.description}</p>` : ''}
-        ${place.tags.length > 0 ? `<div class="tags">${place.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</div>` : ''}
-      </div>
-    `;
-    
-    const marker = L.marker([place.lat, place.lon], { icon: svgIcon })
-      .addTo(map)
-      .bindPopup(popupContent);
-    
-    markers.push(marker);
+    // Données générées par Jekyll
+    const placesData = [
+      {% for place in site.places %}
+        {% if place.lat and place.lon %}
+          {
+            title: {{ place.title | jsonify }},
+            description: {{ place.description | default: place.description | default: "" | jsonify }},
+            lat: {{ place.lat }},
+            lon: {{ place.lon }},
+            voyage: {{ place.voyage | default: "" | jsonify }},
+            tags: [
+              {% for tag in place.tags %}
+                {{ tag | jsonify }}{% unless forloop.last %},{% endunless %}
+              {% endfor %}
+            ],
+            url: {{ place.url | jsonify }},
+            date: {{ place.date | default: "" | jsonify }}
+          }{% unless forloop.last %},{% endunless %}
+        {% endif %}
+      {% endfor %}
+    ];
+
+    const markers = [];
+    placesData.forEach((place, index) => {
+      const svgIcon = L.divIcon({
+        className: "custom-svg-pin",
+        html: `
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
+            <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#202020"/>
+            <circle cx="15" cy="15" r="6" fill="#fff"/>
+          </svg>
+        `,
+        iconSize: [30, 42],
+        iconAnchor: [15, 42],
+        popupAnchor: [0, -42]
+      });
+      
+      const marker = L.marker([place.lat, place.lon], { icon: svgIcon }).addTo(map);
+      
+      let popupContent = `
+        <h4><a href="${place.url}">${place.title}</a></h4>
+        <p>${place.description}</p>
+        ${place.tags && place.tags.length > 0 ? `<div class="tags">${place.tags.map(tag => `<span class="tag">${tag}</span>`).join("")}</div>` : ""}
+      `;
+      
+      marker.bindPopup(popupContent);
+      
+      markers.push({
+        element: marker,
+        title: (place.title || "").toLowerCase(),
+        voyage: place.voyage || "",
+        tags: place.tags || []
+      });
+    });
+
+    function updateMap() {
+      const visibleMarkers = markers.filter(m => {
+        let visible = true;
+        if (activeSearch && !m.title.includes(activeSearch)) visible = false;
+        if (activeVoyage && m.voyage !== activeVoyage) visible = false;
+        if (activeTags.length > 0 && !activeTags.every(tag => m.tags.includes(tag))) visible = false;
+
+        if (visible) {
+          if (!map.hasLayer(m.element)) m.element.addTo(map);
+        } else {
+          if (map.hasLayer(m.element)) map.removeLayer(m.element);
+        }
+        return visible;
+      });
+
+      if (visibleMarkers.length > 0) {
+        const group = L.featureGroup(visibleMarkers.map(m => m.element));
+        map.fitBounds(group.getBounds().pad(0.1));
+      }
+
+      clearFiltersBtn.style.display = (activeTags.length > 0 || activeVoyage || activeSearch) ? "block" : "none";
+      document.querySelectorAll('.voyage-link').forEach(link => {
+        link.classList.toggle('active', link.dataset.voyage === activeVoyage);
+      });
+    }
+
+    searchInput.addEventListener("input", function () {
+      activeSearch = this.value.toLowerCase();
+      updateMap();
+    });
+
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('voyage-link')) {
+        e.preventDefault();
+        const voyage = e.target.dataset.voyage;
+        activeVoyage = activeVoyage === voyage ? null : voyage;
+        updateMap();
+      }
+    });
+
+    document.addEventListener('change', function(e) {
+      if (e.target.classList.contains('tag-checkbox')) {
+        const tagCheckboxes = document.querySelectorAll('.tag-checkbox');
+        activeTags = Array.from(tagCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
+        updateMap();
+      }
+    });
+
+    clearFiltersBtn.addEventListener("click", function() {
+      activeSearch = "";
+      activeVoyage = null;
+      activeTags = [];
+      searchInput.value = "";
+      document.querySelectorAll('.tag-checkbox').forEach(cb => cb.checked = false);
+      document.querySelectorAll('.voyage-link').forEach(link => link.classList.remove('active'));
+      markers.forEach(m => { if (!map.hasLayer(m.element)) m.element.addTo(map); });
+      if (markers.length > 0) {
+        const allMarkersGroup = L.featureGroup(markers.map(m => m.element));
+        map.fitBounds(allMarkersGroup.getBounds().pad(0.1));
+      }
+      updateMap();
+    });
+
+    // Initialisation
+    updateMap();
+    if (markers.length > 0) {
+      const allMarkersGroup = L.featureGroup(markers.map(m => m.element));
+      map.fitBounds(allMarkersGroup.getBounds().pad(0.1));
+    }
   });
-}
-
-// Filtres
-function initFilters() {
-  const tagFilter = document.getElementById('tagFilter');
-  const searchInput = document.getElementById('searchInput');
-  const resetButton = document.getElementById('resetFilters');
-  
-  // Tri alphabétique insensible à la casse et aux accents
-  const allTags = [...new Set(places.flatMap(place => place.tags))]
-    .sort((a, b) => a.localeCompare(b, 'fr', { sensitivity: 'base' }));
-  
-  allTags.forEach(tag => {
-    const option = document.createElement('option');
-    option.value = tag;
-    option.textContent = tag;
-    tagFilter.appendChild(option);
-  });
-  
-  searchInput.addEventListener('input', filterPlaces);
-  tagFilter.addEventListener('change', filterPlaces);
-  resetButton.addEventListener('click', resetFilters);
-}
-
-function filterPlaces() {
-  const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-  const selectedTag = document.getElementById('tagFilter').value;
-  
-  let filteredPlaces = originalData.filter(place => {
-    const matchesSearch = place.title.toLowerCase().includes(searchTerm) || 
-                          place.description.toLowerCase().includes(searchTerm);
-    const matchesTag = !selectedTag || place.tags.includes(selectedTag);
-    return matchesSearch && matchesTag;
-  });
-  
-  addMarkersToMap(filteredPlaces);
-  
-  if (filteredPlaces.length > 0 && markers.length > 0) {
-    const group = new L.featureGroup(markers);
-    map.fitBounds(group.getBounds().pad(0.1));
-  }
-}
-
-function resetFilters() {
-  document.getElementById('searchInput').value = '';
-  document.getElementById('tagFilter').value = '';
-  addMarkersToMap(originalData);
-  
-  if (originalData.length > 0) {
-    const group = new L.featureGroup(markers);
-    map.fitBounds(group.getBounds().pad(0.1));
-  }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  initMap();
-  initFilters();
-});
-</script>
+  </script>
+</body>
+</html>

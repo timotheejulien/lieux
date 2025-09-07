@@ -1,0 +1,14 @@
+{% assign icon_name = include.name | downcase | replace: ' ', '-' | replace: 'é', 'e' | replace: 'è', 'e' | replace: 'à', 'a' | replace: 'ç', 'c' | replace: 'ô', 'o' %}
+{% assign icon_file = "assets/icons/" | append: icon_name | append: ".svg" %}
+
+{% capture icon_path %}{{ icon_file }}{% endcapture %}
+
+{% assign all_paths = site.static_files | map: "path" %}
+{% if all_paths contains icon_path %}
+  {% include_relative {{ icon_path }} %}
+{% else %}
+  <!-- SVG par défaut si l’icône n’existe pas -->
+  <svg width="24" height="24" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10" fill="#ccc" />
+  </svg>
+{% endif %}

@@ -1,6 +1,8 @@
 ---
 layout: voyage
-title: "Lanzarote 2025"
+icon-light: icon-lanzarote-dark.svg
+icon-dark: icon-lanzarote-light.svg
+title: "Lanzarote"
 description: "Restaurants, plages, lieux touristiques… Voici les lieux que j'ai visité durant mon voyage à Lanzarote, pendant l'été 2025."
 places:
    - bonbon-cafe
