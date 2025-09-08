@@ -16,7 +16,7 @@ places:
    - la-martiniere-saint-martin-de-re
    - la-part-des-anages
    - la-tribu
-   - le-bistrot
+   - le-bistrot-flottais
    - le-cervane
    - le-tout-du-cru
    - re-ostrea
