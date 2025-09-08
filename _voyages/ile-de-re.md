@@ -10,6 +10,8 @@ places:
    - creme
    - fromagerie-gaidon
    - gillardeau-la-cabanajam
+   - marche-de-la-flotte
+   - marche-du-bois-plage-en-re
    - la-cible
    - la-martiniere-latelier
    - la-martiniere-saint-clement-des-baleines
