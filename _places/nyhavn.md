@@ -1,4 +1,5 @@
 ---
+created-date: 08/09/2025
 title: "Nyhavn"
 description: La carte postale de Copenhague ! Ces maisons colorées se reflètent sur l'eau, on y est bien. C’est évidemment à faire. 
 lat: 55.67976
@@ -7,5 +8,4 @@ address: Nyhavn, 1051 København K, Danemark
 website: 
 tags: "touristique"
 image: images/nyhavn.jpg
-created: 08/09/2025
 ---
