@@ -6,5 +6,5 @@ lon: -13.671291961219636
 address: Avenida del Varadero 4, 35510 Tías, Las Palmas de Grande Canarie, Espagne
 website: https://salypimienta-restaurante.com
 tags: "restaurant fruits-de-mer terrasse vue-mer"
-image: images/sal-y-pienta.jpg 
+image: images/sal-y-pimenta.jpg 
 ---
