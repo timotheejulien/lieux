@@ -1,5 +1,5 @@
 ---
-title: A L'Ouest
+title: À L'Ouest
 description: Positionné sur une petite place avec ses tonneaux, lieu très sympa et bouffe très bonne. Le service manque un peu de chaleur mais reste agréable. Jerecommande !
 lat: '46.2281769'
 lon: '-1.5429466'
