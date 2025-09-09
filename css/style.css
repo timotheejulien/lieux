@@ -399,6 +399,7 @@ border-radius: 8px;
 .leaflet-popup-content {
    width: 240px !important;
    color: var(--color-text-secondary);
+   font-family: UncutSans-Variable;
 }
 
 .leaflet-popup-tip {
