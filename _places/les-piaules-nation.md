@@ -1,5 +1,5 @@
 ---
-title: The people ou Les Piaules - (Nation)
+title: The people (Nation)
 description: 'Une sacrée vue sur la place Nation.'
 lat: '48.8475227355957'
 lon: '2.3970658779144287'
