@@ -1,5 +1,5 @@
 ---
-title: Le Bistrot
+title: Bistrotteur
 description: Petit troquet pour boire un coup sur le port de La Flotte. L'emplacement est top !
 lat: '46.18744'
 lon: '-1.32353'
