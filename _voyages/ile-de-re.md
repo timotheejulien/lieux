@@ -21,6 +21,7 @@ places:
    - le-bistrot-flottais
    - le-cervane
    - le-tout-du-cru
+   - plage-de-gros-jonc
    - re-ostrea
    - zadore
 ---
