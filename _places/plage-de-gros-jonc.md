@@ -7,4 +7,5 @@ lon: -1.3784690746094899
 address: "8 Route de Gros Jonc 17580 Le Bois-Plage-en-Ré"
 website: 
 tags: "plage"
+image: images/plage-de-gros-jonc.jpg
 ---

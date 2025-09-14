@@ -7,18 +7,19 @@ description: "Une de mes destinations favorites, j'y vais depuis de nombreuses a
 places:
    - a-l-ouest
    - au-qg-de-la-mer
+   - bistrotteur
    - creme
    - fromagerie-gaidon
    - gillardeau-la-cabanajam
    - marche-de-la-flotte
    - marche-du-bois-plage-en-re
+   - le-bariolé
    - la-cible
    - la-martiniere-latelier
    - la-martiniere-saint-clement-des-baleines
    - la-martiniere-saint-martin-de-re
-   - la-part-des-anages
+   - la-part-des-anges
    - la-tribu
-   - le-bistrot-flottais
    - le-cervane
    - le-tout-du-cru
    - plage-de-gros-jonc
