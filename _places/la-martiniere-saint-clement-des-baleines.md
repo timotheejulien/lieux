@@ -1,5 +1,5 @@
 ---
-title: La Martiniere (Saint-Clément-des-Baleines)
+title: La Martinière (Saint-Clément-des-Baleines)
 description: Tout simplement des glaces exceptionnelles ! Je déconseille la glace à l'huitre 🤢.
 lat: '46.243189'
 lon: '-1.55935'
