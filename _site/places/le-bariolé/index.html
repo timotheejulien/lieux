@@ -3,15 +3,15 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Le Bistrot - Mes lieux</title>
+   <title>Le Bariolé - Mes lieux</title>
    <meta name="description" content="Cartographie de mes lieux visités">
    <link rel="stylesheet" href="/css/style.css">
    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
    <meta property="og:locale" content="fr_FR" />
-   <meta property="og:site_name" content="Le Bistrot | Mes lieux">
+   <meta property="og:site_name" content="Le Bariolé | Mes lieux">
    <meta property="og:image" content="/cover.jpg"/>
    <meta property="og:description" content="" />
-   <meta property="og:url" content="/places/le-bistrot-flottais/">
+   <meta property="og:url" content="/places/le-bariol%C3%A9/">
    <meta name="fediverse:creator" content="@timothee@mastodon.design" />
    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
    <script src="/assets/script.js"></script>
@@ -21,7 +21,7 @@
    <section class="container flex post-header">
       <div class="post-header-content">
          <a href="/" class="back-link">← Retour à la carte</a>
-         <h1>Le Bistrot</h1>
+         <h1>Le Bariolé</h1>
          
             <p class="post-review-comment">Petit troquet pour boire un coup sur le port de La Flotte. L'emplacement est top !</p>
          
@@ -69,7 +69,7 @@
 
          <script>
             // Créer une carte pour ce lieu spécifique
-            const placeMap = L.map('placeMap').setView([46.18744, -1.32353], 13);
+            const placeMap = L.map('placeMap').setView([46.18752881671102, -1.3234053223820121], 13);
 
             // Ajouter la couche CartoDB Light
             L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d', {
@@ -94,9 +94,9 @@
             });
 
             // Ajouter un marqueur avec icône SVG
-            L.marker([46.18744, -1.32353], { icon: svgIcon })
+            L.marker([46.18752881671102, -1.3234053223820121], { icon: svgIcon })
                .addTo(placeMap)
-               .bindPopup('Le Bistrot');
+               .bindPopup('Le Bariolé');
          </script>
       </div>
       
@@ -108,7 +108,7 @@
 
       
          <h2>Photo du lieu</h2>
-         <img src="/images/le-bistrot-la-flotte.jpg" alt="Photographie du lieu : Le Bistrot" class="place-image">
+         <img src="/images/le-bistrot-la-flotte.jpg" alt="Photographie du lieu : Le Bariolé" class="place-image">
       
    </section>
 </main>

@@ -13,7 +13,7 @@ title: Carte de mes lieux
 
     <div class="nav-section">
       <h3>Voyages</h3>
-         <ul>
+         <ul class="sort-by-alphabetical">
          {% for voyage in site.voyages %}
          <li>
             <a class="nav-item" href="{{ voyage.url | relative_url }}">
@@ -30,7 +30,7 @@ title: Carte de mes lieux
 
     <div class="nav-section">
       <h3>Tags</h3>
-      <div id="tags-list">
+      <div id="tags-list" class="sort-by-alphabetical">
       {% assign all_tags = site.places | map: "tags" | join: "," | split: "," | uniq | sort %}
       {% for tag in all_tags %}
          {% assign clean_tag = tag | strip %}
