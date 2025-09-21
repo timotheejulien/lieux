@@ -85,7 +85,7 @@
 
          <script>
             // Créer une carte pour ce lieu spécifique
-            const placeMap = L.map('placeMap').setView([44.765296359958924, -1.1362754692009076], 13);
+            const placeMap = L.map('placeMap').setView([44.76424567300749, -1.1511383950710299], 13);
 
             // Ajouter la couche CartoDB Light
             L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d', {
@@ -110,7 +110,7 @@
             });
 
             // Ajouter un marqueur avec icône SVG
-            L.marker([44.765296359958924, -1.1362754692009076], { icon: svgIcon })
+            L.marker([44.76424567300749, -1.1511383950710299], { icon: svgIcon })
                .addTo(placeMap)
                .bindPopup('La cabane du bout');
          </script>
