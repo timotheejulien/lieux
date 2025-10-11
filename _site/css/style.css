@@ -228,7 +228,7 @@ main {
    overflow-y: auto;
    display: flex;
    flex-direction: column;
-   gap: var(--space-medium);
+   gap: var(--space-regular);
    color: var(--color-text-primary);
    background: rgba(251, 251, 251, 0.85);
    backdrop-filter: blur(10px) saturate(120%);
@@ -239,6 +239,15 @@ main {
 
 .nav-section {
    margin: 0;
+   padding-top: var(--space-regular);
+   border-top: 1px solid var(--color-divider);
+}
+
+
+.nav-section:first-child {
+   margin: 0;
+   padding-top: var(--space-none);
+   border-top: none;
 }
 
 .nav-section h3 {
@@ -355,6 +364,10 @@ main {
    display: none;
 }
 
+.nav-item svg {
+   min-width: 24px;
+}
+
 #clear-filters {
    position: sticky;
    bottom: 0;
@@ -370,6 +383,78 @@ main {
 
 .leaflet-popup-content-wrapper {
 border-radius: 8px;
+}
+
+.nav-mobile {
+   width: 100%;
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   z-index: 800;
+   background: rgba(251, 251, 251, 0.85);
+   backdrop-filter: blur(10px) saturate(120%);
+   -webkit-backdrop-filter: blur(10px) saturate(120%);
+}
+
+.nav-mobile > ul {
+   width: 100%;
+   margin: 0;
+   padding: var(--space-none) var(--space-small) var(--space-none) var(--space-small);
+   display: flex;
+   gap: var(--space-small);
+}
+
+.nav-mobile > ul > li {
+   margin: var(--space-none);
+   padding: var(--space-none);
+   display: flex;
+   gap: 0;
+   align-items: center;
+   flex: 1;
+   list-style: none;
+}
+
+.nav-mobile-item {
+   width: 100%;
+   padding: var(--space-small) var(--space-xx-small) var(--space-small) var(--space-xx-small); 
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   flex-wrap: nowrap;
+   justify-content: center;
+   align-items: center;
+   align-content: normal;
+   gap: 0;
+   font-weight: 500;
+   font-size: 12px;
+   font-family: UncutSans-Variable, sans-serif;
+   line-height: 1.4;
+   letter-spacing: 0px; 
+   text-decoration: none;
+}
+
+.nav-mobile-item svg {
+   min-width: 24px;
+}
+
+.nav-mobile-item-icon {
+   width: 24px;
+   min-width: 24px;
+   height: 24px;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+.nav-item-label {
+   width: 100%;
+}
+
+.nav-mobile-item-value {
+   padding: var(--space-x-small)  var(--space-small) var(--space-x-small)  var(--space-small);
+   font-size: 14px;
+   color: var(--color-text-secondary);
+   border: 1px solid var(--color-divider);
+   border-radius: 100px;
 }
 
 /* HOME*/
@@ -601,6 +686,10 @@ ul.footer-nav li {
       height: calc(100% - 32px);
    }
 
+   .nav-mobile {
+      display: none;
+   }
+
    /* MAP */
    .travel-list-places {
       column-count: 3;
@@ -662,6 +751,12 @@ ul.footer-nav li {
 
    .nav-panel {
       background: rgba(32, 32, 32, 0.85);
+   }
+
+   .nav-mobile {
+      background: rgba(32, 32, 32, 0.85);
+      backdrop-filter: blur(10px) saturate(120%);
+      -webkit-backdrop-filter: blur(10px) saturate(120%);
    }
 
    .checkbox-icon {
