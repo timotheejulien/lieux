@@ -7,5 +7,5 @@ lon:
 address: ""
 website: 
 tags: ""
-image:
+image: images/
 ---
