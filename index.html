@@ -156,28 +156,35 @@ document.addEventListener("DOMContentLoaded", function () {
     markers.forEach(m => m.element.setIcon(getPinIcon(isDark)));
   });
 
-  function updateMap() {
-    const visibleMarkers = markers.filter(m => {
-      let visible = true;
-      if (activeSearch && !m.title.includes(activeSearch)) visible = false;
-      if (activeVoyage && m.voyage !== activeVoyage) visible = false;
-      if (activeTags.length > 0 && !activeTags.every(tag => m.tags.includes(tag))) visible = false;
+  function updateMap({ fitBounds = false } = {}) {
+  const visibleMarkers = markers.filter(m => {
+    let visible = true;
+    if (activeSearch && !m.title.includes(activeSearch)) visible = false;
+    if (activeVoyage && m.voyage !== activeVoyage) visible = false;
+    if (activeTags.length > 0 && !activeTags.every(tag => m.tags.includes(tag))) visible = false;
 
-      if (visible) {
-        if (!map.hasLayer(m.element)) m.element.addTo(map);
-      } else {
-        if (map.hasLayer(m.element)) map.removeLayer(m.element);
-      }
-      return visible;
-    });
-
-    clearFiltersBtn.style.display = (activeTags.length > 0 || activeVoyage || activeSearch) ? "block" : "none";
-  }
-
-  searchInput.addEventListener("input", function () {
-    activeSearch = this.value.toLowerCase();
-    updateMap();
+    if (visible) {
+      if (!map.hasLayer(m.element)) m.element.addTo(map);
+    } else {
+      if (map.hasLayer(m.element)) map.removeLayer(m.element);
+    }
+    return visible;
   });
+
+  clearFiltersBtn.style.display = (activeTags.length > 0 || activeVoyage || activeSearch) ? "block" : "none";
+
+  // 🧭 Ajuste la vue seulement si fitBounds est demandé et qu’il y a des résultats
+  if (fitBounds && visibleMarkers.length > 0) {
+    const group = L.featureGroup(visibleMarkers.map(m => m.element));
+    map.fitBounds(group.getBounds(), { padding: [50, 50] });
+  }
+}
+
+// --- Recherche ---
+searchInput.addEventListener("input", function () {
+  activeSearch = this.value.toLowerCase();
+  updateMap({ fitBounds: true }); // 🧭 recadre la carte sur les résultats de la recherche
+});
 
   document.addEventListener('click', function(e) {
     if (e.target.classList.contains('voyage-link')) {

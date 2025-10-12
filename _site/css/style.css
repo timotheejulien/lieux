@@ -198,6 +198,51 @@ main {
    padding: var(--space-medium) var(--space-medium) var(--space-none) var(--space-medium);
 }
 
+.cell {
+   position: relative;
+   display: flex;
+   flex-direction: row;
+   flex-wrap: nowrap;
+   justify-content: normal;
+   align-items: center;
+   align-content: normal;
+   gap: var(--space-regular);
+   font-weight: 500;
+   font-size: 18px;
+   font-family: UncutSans-Variable, sans-serif;
+   line-height: 1.4;
+   letter-spacing: 0px; 
+   text-decoration: none;
+   text-rendering: optimizeLegibility;
+   z-index: 10;
+}
+
+.cell-label {
+   width: 100%;
+}
+
+.cell svg {
+   min-width: 20px;
+   min-height: 20px;
+}
+
+a.cell::before {
+   content: '';
+   width: calc(100% + 16px);
+   height: 40px;
+   position: absolute;
+   top: -7px;
+   left: -8px;
+   border-radius: 8px;
+   background: var(--color-background-elevated);
+   display: none;
+   z-index: -1;
+}
+
+a.cell:hover::before {
+   display: block;
+}
+
 .tags {
    display: flex;
    flex-wrap: wrap;
@@ -628,6 +673,32 @@ ul.post-list-meta li svg {
    min-width: 28px;
 }
 
+.related-travels {
+   width: auto;
+   height: 100%;
+   padding: var(--space-medium);
+   border: 1px solid var(--color-divider);
+}
+
+.related-travels ul {
+   margin: var(--space-regular) var(--space-none) var(--space-none) var(--space-none);
+   padding: var(--space-none);
+   display: flex;
+   flex-direction: column;
+   gap: var(--space-regular);
+}
+
+.related-travels ul li {
+   padding: var(--space-none) var(--space-xx-small) var(--space-regular) var(--space-xx-small);
+   list-style: none;
+   border-bottom: 1px solid var(--color-divider);
+}
+
+.related-travels ul li:last-child {
+   padding: var(--space-none) var(--space-xx-small) var(--space-none) var(--space-xx-small); 
+   border-bottom: none;
+}
+
 .post-content p {
    max-width: 700px;
    margin-top: var(--space-medium);
@@ -818,7 +889,12 @@ ul.footer-nav li {
       padding: var(--space-none);
    }
 
-   /* MAP */
+   /* PLACE */
+   .related-travels {
+      margin-top: var(--space-medium);
+   }  
+
+   /* TRAVELS */
    .travel-list-places {
       column-count: 3;
       column-gap: var(--space-large);
