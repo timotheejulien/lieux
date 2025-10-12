@@ -112,321 +112,368 @@
 </main>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // Initialisation de la carte
-    const map = L.map('voyage-map').setView([46.603354, 1.888334], 5);
+document.addEventListener("DOMContentLoaded", function() {
+  // === 1. Initialisation de la carte ===
+  const map = L.map('voyage-map').setView([46.603354, 1.888334], 5);
 
-    // Fond de carte : OSM Bright via Stadia Maps
-    L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d', {
+  // === 2. Définition des fonds de carte clair / sombre ===
+  const lightTiles = L.tileLayer(
+    'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d',
+    {
       maxZoom: 20,
-      attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
-                   '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
-                   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
+      attribution:
+        '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
+        '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }
+  );
 
-    // Icône SVG personnalisée
-    const svgIcon = L.divIcon({
+  const darkTiles = L.tileLayer(
+    'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d',
+    {
+      maxZoom: 20,
+      attribution:
+        '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
+        '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }
+  );
+
+  // === 3. Définition des icônes SVG ===
+  const lightPinSVG = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
+      <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#202020"/>
+      <circle cx="15" cy="15" r="6" fill="#fff"/>
+    </svg>
+  `;
+
+  const darkPinSVG = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
+      <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#fff"/>
+      <circle cx="15" cy="15" r="6" fill="#202020"/>
+    </svg>
+  `;
+
+  function getPinIcon(isDark) {
+    return L.divIcon({
       className: "custom-svg-pin",
-      html: `
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
-          <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#202020"/>
-          <circle cx="15" cy="15" r="6" fill="#fff"/>
-        </svg>
-      `,
+      html: isDark ? darkPinSVG : lightPinSVG,
       iconSize: [30, 42],
       iconAnchor: [15, 42],
       popupAnchor: [0, -42]
     });
+  }
 
-    // Données des lieux pour ce voyage
-   const voyagePlaces = [
-   
+  // === 4. Détermination du thème courant ===
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+  let isDark = prefersDark.matches;
+
+  let currentTiles = isDark ? darkTiles : lightTiles;
+  currentTiles.addTo(map);
+
+  // === 5. Données Jekyll des lieux ===
+  const voyagePlaces = [
+    
       
       
       {
-         title: "À L&#39;Ouest",
-         lat: 46.2281769,
-         lon: -1.5429466,
-         url: "/places/a-l-ouest/",
-         
-         description: "Positionné sur une petite place avec ses tonneaux, lieu très sympa et bouffe très bonne. Le service manque un peu de chaleur mais reste agréable. Jerecommande !",
-         tags: ["bar", "brasserie", "restaurant"],
+        title: "À L&#39;Ouest",
+        lat: 46.2281769,
+        lon: -1.5429466,
+        url: "/places/a-l-ouest/",
+        
+        description: "Positionné sur une petite place avec ses tonneaux, lieu très sympa et bouffe très bonne. Le service manque un peu de chaleur mais reste agréable. Jerecommande !",
+        tags: ["bar", "brasserie", "restaurant"],
       },
       
-   
+    
       
       
       {
-         title: "Au QG de la mer",
-         lat: 46.20326,
-         lon: -1.393853,
-         url: "/places/au-qg-de-la-mer/",
-         
-         description: "Vue exceptionnelle pour déguster des fruits de mer !",
-         tags: ["bar", "bar-à-huitre", "vue-mer"],
+        title: "Au QG de la mer",
+        lat: 46.20326,
+        lon: -1.393853,
+        url: "/places/au-qg-de-la-mer/",
+        
+        description: "Vue exceptionnelle pour déguster des fruits de mer !",
+        tags: ["bar", "bar-à-huitre", "vue-mer"],
       },
       
-   
+    
       
       
       {
-         title: "Bistrotteur",
-         lat: 46.18743840911037,
-         lon: -1.3234688583355503,
-         url: "/places/bistrotteur/",
-         image: "/images/le-bistrot-la-flotte.jpg",
-         description: "Petit troquet pour boire un coup sur le port de La Flotte. L&#39;emplacement est top !",
-         tags: ["bar", "terrasse", "vue-mer"],
+        title: "Bistrotteur",
+        lat: 46.18743840911037,
+        lon: -1.3234688583355503,
+        url: "/places/bistrotteur/",
+        image: "/images/le-bistrot-la-flotte.jpg",
+        description: "Petit troquet pour boire un coup sur le port de La Flotte. L&#39;emplacement est top !",
+        tags: ["bar", "terrasse", "vue-mer"],
       },
       
-   
+    
       
       
       {
-         title: "Crème",
-         lat: 46.187179,
-         lon: -1.325723,
-         url: "/places/creme/",
-         image: "/images/creme.jpg",
-         description: "Rien que la devanture donne envie, l&#39;intérieur est tout aussi mignon. Les fromages sont de super qualité et le beurre est à se taper le cul par terre !",
-         tags: ["commerce", "fromagerie"],
+        title: "Crème",
+        lat: 46.187179,
+        lon: -1.325723,
+        url: "/places/creme/",
+        image: "/images/creme.jpg",
+        description: "Rien que la devanture donne envie, l&#39;intérieur est tout aussi mignon. Les fromages sont de super qualité et le beurre est à se taper le cul par terre !",
+        tags: ["commerce", "fromagerie"],
       },
       
-   
+    
       
       
       {
-         title: "Fromagerie Gaidon (fermé définitivement)",
-         lat: 46.1858918,
-         lon: -1.3923989,
-         url: "/places/fromagerie-gaidon/",
-         
-         description: "La planche « Au dessus du sommet » est top ! Rapport quantité/qualité/prix est parfaite ! Depuis 3 générations ils sont fromagers. Belle histoire, bons produits : tout ce qu’on aime !",
-         tags: ["bar", "bar-à-fromage", "commerce", "fromagerie"],
+        title: "Fromagerie Gaidon (fermé définitivement)",
+        lat: 46.1858918,
+        lon: -1.3923989,
+        url: "/places/fromagerie-gaidon/",
+        
+        description: "La planche « Au dessus du sommet » est top ! Rapport quantité/qualité/prix est parfaite ! Depuis 3 générations ils sont fromagers. Belle histoire, bons produits : tout ce qu’on aime !",
+        tags: ["bar", "bar-à-fromage", "commerce", "fromagerie"],
       },
       
-   
+    
       
       
       {
-         title: "Gillardeau - la cabanajam",
-         lat: 46.2040827,
-         lon: -1.3863493,
-         url: "/places/gillardeau-la-cabanajam/",
-         
-         
-         tags: ["bar", "bar-à-huitre", "vue-mer"],
+        title: "Gillardeau - la cabanajam",
+        lat: 46.2040827,
+        lon: -1.3863493,
+        url: "/places/gillardeau-la-cabanajam/",
+        
+        
+        tags: ["bar", "bar-à-huitre", "vue-mer"],
       },
       
-   
+    
       
       
       {
-         title: "Marché de la Flotte",
-         lat: 46.187618009833,
-         lon: -1.326468028746,
-         url: "/places/marche-de-la-flotte/",
-         
-         description: "L&#39;endroit incontournable pour acheter ses fruits et légumes, et bien plus. Ce marché ressemble à des halles à ciel ouvert.",
-         tags: ["marché"],
+        title: "Marché de la Flotte",
+        lat: 46.187618009833,
+        lon: -1.326468028746,
+        url: "/places/marche-de-la-flotte/",
+        
+        description: "L&#39;endroit incontournable pour acheter ses fruits et légumes, et bien plus. Ce marché ressemble à des halles à ciel ouvert.",
+        tags: ["marché"],
       },
       
-   
+    
       
       
       {
-         title: "Marché du Bois-Plage-en-Ré",
-         lat: 46.182388030542,
-         lon: -1.393548530082,
-         url: "/places/marche-du-bois-plage-en-re/",
-         
-         description: "Un grand marché pour trouver nourriture mais aussi vêtements et compagnie. Des halles sont également présentes en cas de pluie !",
-         tags: ["marché"],
+        title: "Marché du Bois-Plage-en-Ré",
+        lat: 46.182388030542,
+        lon: -1.393548530082,
+        url: "/places/marche-du-bois-plage-en-re/",
+        
+        description: "Un grand marché pour trouver nourriture mais aussi vêtements et compagnie. Des halles sont également présentes en cas de pluie !",
+        tags: ["marché"],
       },
       
-   
+    
       
       
       {
-         title: "Le Bariolé",
-         lat: 46.18752881671102,
-         lon: -1.3234053223820121,
-         url: "/places/le-bariol%C3%A9/",
-         image: "/images/le-bistrot-la-flotte.jpg",
-         description: "Petit troquet pour boire un coup sur le port de La Flotte. L&#39;emplacement est top !",
-         tags: ["bar", "terrasse", "vue-mer"],
+        title: "Le Bariolé",
+        lat: 46.18752881671102,
+        lon: -1.3234053223820121,
+        url: "/places/le-bariol%C3%A9/",
+        image: "/images/le-bistrot-la-flotte.jpg",
+        description: "Petit troquet pour boire un coup sur le port de La Flotte. L&#39;emplacement est top !",
+        tags: ["bar", "terrasse", "vue-mer"],
       },
       
-   
+    
       
       
       {
-         title: "La Cible",
-         lat: 46.2042508,
-         lon: -1.3543452,
-         url: "/places/la-cible/",
-         
-         description: "On a littéralement les pieds dans le sable. Un petit bonheur pour prendre un verre afin de contempler l&#39;océan !",
-         tags: ["bar", "restaurant", "terrasse", "vue-mer", "plage"],
+        title: "La Cible",
+        lat: 46.2042508,
+        lon: -1.3543452,
+        url: "/places/la-cible/",
+        
+        description: "On a littéralement les pieds dans le sable. Un petit bonheur pour prendre un verre afin de contempler l&#39;océan !",
+        tags: ["bar", "restaurant", "terrasse", "vue-mer", "plage"],
       },
       
-   
+    
       
       
       {
-         title: "La Martinière (L&#39;Atelier)",
-         lat: 46.1873488,
-         lon: -1.3245013,
-         url: "/places/la-martiniere-latelier/",
-         
-         description: "Tout simplement des glaces exceptionnelles ! Je déconseille la glace à l&#39;huitre 🤢.",
-         tags: ["glacier"],
+        title: "La Martinière (L&#39;Atelier)",
+        lat: 46.1873488,
+        lon: -1.3245013,
+        url: "/places/la-martiniere-latelier/",
+        
+        description: "Tout simplement des glaces exceptionnelles ! Je déconseille la glace à l&#39;huitre 🤢.",
+        tags: ["glacier"],
       },
       
-   
+    
       
       
       {
-         title: "La Martinière (Saint-Clément-des-Baleines)",
-         lat: 46.243189,
-         lon: -1.55935,
-         url: "/places/la-martiniere-saint-clement-des-baleines/",
-         
-         description: "Tout simplement des glaces exceptionnelles ! Je déconseille la glace à l&#39;huitre 🤢.",
-         tags: ["glacier"],
+        title: "La Martinière (Saint-Clément-des-Baleines)",
+        lat: 46.243189,
+        lon: -1.55935,
+        url: "/places/la-martiniere-saint-clement-des-baleines/",
+        
+        description: "Tout simplement des glaces exceptionnelles ! Je déconseille la glace à l&#39;huitre 🤢.",
+        tags: ["glacier"],
       },
       
-   
+    
       
       
       {
-         title: "La Martinière (Saint-Martin-de-Ré)",
-         lat: 46.2045881,
-         lon: -1.3682314,
-         url: "/places/la-martiniere-saint-martin-de-re/",
-         
-         description: "Tout simplement des glaces exceptionnelles ! Je déconseille la glace à l&#39;huitre 🤢.",
-         tags: ["glacier"],
+        title: "La Martinière (Saint-Martin-de-Ré)",
+        lat: 46.2045881,
+        lon: -1.3682314,
+        url: "/places/la-martiniere-saint-martin-de-re/",
+        
+        description: "Tout simplement des glaces exceptionnelles ! Je déconseille la glace à l&#39;huitre 🤢.",
+        tags: ["glacier"],
       },
       
-   
+    
       
       
       {
-         title: "La Part des Anges",
-         lat: 46.194199,
-         lon: -1.4253584,
-         url: "/places/la-part-des-anges/",
-         
-         
-         tags: ["à-essayer", "bar", "bar-à-vin"],
+        title: "La Part des Anges",
+        lat: 46.194199,
+        lon: -1.4253584,
+        url: "/places/la-part-des-anges/",
+        
+        
+        tags: ["à-essayer", "bar", "bar-à-vin"],
       },
       
-   
+    
       
       
       {
-         title: "La Tribu (fermé définitivement)",
-         lat: 46.1868791,
-         lon: -1.32478,
-         url: "/places/la-tribu/",
-         
-         description: "Il y a un super patio, le cadre est top ! Bonne planche de fromages.",
-         tags: ["bar", "restaurant", "tapas", "patio"],
+        title: "La Tribu (fermé définitivement)",
+        lat: 46.1868791,
+        lon: -1.32478,
+        url: "/places/la-tribu/",
+        
+        description: "Il y a un super patio, le cadre est top ! Bonne planche de fromages.",
+        tags: ["bar", "restaurant", "tapas", "patio"],
       },
       
-   
+    
       
       
       {
-         title: "Le Cervane",
-         lat: 46.205931,
-         lon: -1.36797,
-         url: "/places/le-cervane/",
-         image: "/images/le-cervane.jpg",
-         description: "Un super lieu pour boire un coup ou se restaurer. La terrasse offre une super vue sur une partie du port de Saint-Martin. Les tapas sont vraiment bons !",
-         tags: ["restaurant", "fruits-de-mer", "tapas", "bar", "terrasse"],
+        title: "Le Cervane",
+        lat: 46.205931,
+        lon: -1.36797,
+        url: "/places/le-cervane/",
+        image: "/images/le-cervane.jpg",
+        description: "Un super lieu pour boire un coup ou se restaurer. La terrasse offre une super vue sur une partie du port de Saint-Martin. Les tapas sont vraiment bons !",
+        tags: ["restaurant", "fruits-de-mer", "tapas", "bar", "terrasse"],
       },
       
-   
+    
       
       
       {
-         title: "Le tout du cru",
-         lat: 46.205045,
-         lon: -1.366792,
-         url: "/places/le-tout-du-cru/",
-         
-         
-         tags: ["à-essayer", "restaurant", "fruits-de-mer"],
+        title: "Le tout du cru",
+        lat: 46.205045,
+        lon: -1.366792,
+        url: "/places/le-tout-du-cru/",
+        
+        
+        tags: ["à-essayer", "restaurant", "fruits-de-mer"],
       },
       
-   
+    
       
       
       {
-         title: "Plage de Gros Jonc",
-         lat: 46.170068339522196,
-         lon: -1.3784690746094899,
-         url: "/places/plage-de-gros-jonc/",
-         image: "/images/plage-de-gros-jonc.jpg",
-         description: "Grande plage pour se baigner et faire potentiellement du surf. En mer basse, pas mal de cailloux, en revanche cette plage est top en marée haute.",
-         tags: ["plage"],
+        title: "Plage de Gros Jonc",
+        lat: 46.170068339522196,
+        lon: -1.3784690746094899,
+        url: "/places/plage-de-gros-jonc/",
+        image: "/images/plage-de-gros-jonc.jpg",
+        description: "Grande plage pour se baigner et faire potentiellement du surf. En mer basse, pas mal de cailloux, en revanche cette plage est top en marée haute.",
+        tags: ["plage"],
       },
       
-   
+    
       
       
       {
-         title: "Ré Ostréa",
-         lat: 46.20459899999999,
-         lon: -1.381819,
-         url: "/places/re-ostrea/",
-         image: "/images/re-ostrea.jpg",
-         description: "Vue exceptionnelle pour déguster des fruits de mer ! Il faut prendre le vin Ré os très 👌🏻.",
-         tags: ["bar", "bar-à-huitre", "tapas"],
+        title: "Ré Ostréa",
+        lat: 46.20459899999999,
+        lon: -1.381819,
+        url: "/places/re-ostrea/",
+        image: "/images/re-ostrea.jpg",
+        description: "Vue exceptionnelle pour déguster des fruits de mer ! Il faut prendre le vin Ré os très 👌🏻.",
+        tags: ["bar", "bar-à-huitre", "tapas"],
       },
       
-   
+    
       
       
       {
-         title: "Z&#39;Adore",
-         lat: 46.194474993364,
-         lon: -1.42371897652,
-         url: "/places/zadore/",
-         
-         description: "Un air de village de provence se dégage de cette terrasse au calme. Idéal pour prendre un café à l&#39;ombre.",
-         tags: ["restaurant", "bar", "terrasse"],
+        title: "Z&#39;Adore",
+        lat: 46.194474993364,
+        lon: -1.42371897652,
+        url: "/places/zadore/",
+        
+        description: "Un air de village de provence se dégage de cette terrasse au calme. Idéal pour prendre un café à l&#39;ombre.",
+        tags: ["restaurant", "bar", "terrasse"],
       }
       
-   
-   ];
+    
+  ];
 
-   let markers = [];
+  // === 6. Ajout des marqueurs ===
+  let markers = [];
 
-   voyagePlaces.forEach(place => {
-   const popupContent = `
+  voyagePlaces.forEach(place => {
+    const popupContent = `
       <div class="popup-content">
-         <h3><a href="${place.url}">${place.title}</a></h3>
-         ${place.image ? `<img src="${place.image}" alt="${place.title}" style="height: 150px; object-fit: cover;">` : ''}
-         ${place.description ? `<p>${place.description}</p>` : ''}
-         ${place.tags && place.tags.length > 0 ? `<div class="tags">${place.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</div>` : ''}
+        <h3><a href="${place.url}">${place.title}</a></h3>
+        ${place.image ? `<img src="${place.image}" alt="${place.title}" style="height: 150px; object-fit: cover;">` : ''}
+        ${place.description ? `<p>${place.description}</p>` : ''}
+        ${place.tags && place.tags.length > 0 ? `<div class="tags">${place.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</div>` : ''}
       </div>
-   `;
+    `;
 
-   const marker = L.marker([place.lat, place.lon], { icon: svgIcon })
+    const marker = L.marker([place.lat, place.lon], { icon: getPinIcon(isDark) })
       .addTo(map)
       .bindPopup(popupContent);
 
-   markers.push(marker);
-   });
-
-   if (markers.length > 0) {
-   const group = new L.featureGroup(markers);
-   map.fitBounds(group.getBounds().pad(0.1));
-   }
+    markers.push(marker);
   });
+
+  if (markers.length > 0) {
+    const group = new L.featureGroup(markers);
+    map.fitBounds(group.getBounds().pad(0.1));
+  }
+
+  // === 7. Écoute du changement de thème ===
+  prefersDark.addEventListener("change", (e) => {
+    isDark = e.matches;
+
+    // mise à jour du fond
+    map.removeLayer(currentTiles);
+    currentTiles = isDark ? darkTiles : lightTiles;
+    currentTiles.addTo(map);
+
+    // mise à jour des icônes
+    markers.forEach(marker => marker.setIcon(getPinIcon(isDark)));
+  });
+});
 </script>
 
     <footer id="footer" class="container">

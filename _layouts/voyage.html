@@ -39,74 +39,121 @@ layout: default
 </main>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // Initialisation de la carte
-    const map = L.map('voyage-map').setView([46.603354, 1.888334], 5);
+document.addEventListener("DOMContentLoaded", function() {
+  // === 1. Initialisation de la carte ===
+  const map = L.map('voyage-map').setView([46.603354, 1.888334], 5);
 
-    // Fond de carte : OSM Bright via Stadia Maps
-    L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d', {
+  // === 2. Définition des fonds de carte clair / sombre ===
+  const lightTiles = L.tileLayer(
+    'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d',
+    {
       maxZoom: 20,
-      attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
-                   '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
-                   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
+      attribution:
+        '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
+        '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }
+  );
 
-    // Icône SVG personnalisée
-    const svgIcon = L.divIcon({
+  const darkTiles = L.tileLayer(
+    'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d',
+    {
+      maxZoom: 20,
+      attribution:
+        '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
+        '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }
+  );
+
+  // === 3. Définition des icônes SVG ===
+  const lightPinSVG = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
+      <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#202020"/>
+      <circle cx="15" cy="15" r="6" fill="#fff"/>
+    </svg>
+  `;
+
+  const darkPinSVG = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
+      <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#fff"/>
+      <circle cx="15" cy="15" r="6" fill="#202020"/>
+    </svg>
+  `;
+
+  function getPinIcon(isDark) {
+    return L.divIcon({
       className: "custom-svg-pin",
-      html: `
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
-          <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#202020"/>
-          <circle cx="15" cy="15" r="6" fill="#fff"/>
-        </svg>
-      `,
+      html: isDark ? darkPinSVG : lightPinSVG,
       iconSize: [30, 42],
       iconAnchor: [15, 42],
       popupAnchor: [0, -42]
     });
+  }
 
-    // Données des lieux pour ce voyage
-   const voyagePlaces = [
-   {% for place_slug in page.places %}
+  // === 4. Détermination du thème courant ===
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+  let isDark = prefersDark.matches;
+
+  let currentTiles = isDark ? darkTiles : lightTiles;
+  currentTiles.addTo(map);
+
+  // === 5. Données Jekyll des lieux ===
+  const voyagePlaces = [
+    {% for place_slug in page.places %}
       {% assign place = site.places | where: "slug", place_slug | first %}
       {% if place %}
       {
-         title: "{{ place.title | escape }}",
-         lat: {{ place.lat }},
-         lon: {{ place.lon }},
-         url: "{{ place.url | relative_url }}",
-         {% if place.image %}image: "{{ place.image | relative_url }}",{% endif %}
-         {% if place.description %}description: "{{ place.description | escape }}",{% endif %}
-         {% if place.tags %}tags: [{% for tag in place.tags %}"{{ tag }}"{% unless forloop.last %}, {% endunless %}{% endfor %}],{% else %}tags: [],{% endif %}
+        title: "{{ place.title | escape }}",
+        lat: {{ place.lat }},
+        lon: {{ place.lon }},
+        url: "{{ place.url | relative_url }}",
+        {% if place.image %}image: "{{ place.image | relative_url }}",{% endif %}
+        {% if place.description %}description: "{{ place.description | escape }}",{% endif %}
+        {% if place.tags %}tags: [{% for tag in place.tags %}"{{ tag }}"{% unless forloop.last %}, {% endunless %}{% endfor %}],{% else %}tags: [],{% endif %}
       }{% unless forloop.last %},{% endunless %}
       {% endif %}
-   {% endfor %}
-   ];
+    {% endfor %}
+  ];
 
-   let markers = [];
+  // === 6. Ajout des marqueurs ===
+  let markers = [];
 
-   voyagePlaces.forEach(place => {
-   const popupContent = `
+  voyagePlaces.forEach(place => {
+    const popupContent = `
       <div class="popup-content">
-         <h3><a href="${place.url}">${place.title}</a></h3>
-         ${place.image ? `<img src="${place.image}" alt="${place.title}" style="height: 150px; object-fit: cover;">` : ''}
-         ${place.description ? `<p>${place.description}</p>` : ''}
-         ${place.tags && place.tags.length > 0 ? `<div class="tags">${place.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</div>` : ''}
+        <h3><a href="${place.url}">${place.title}</a></h3>
+        ${place.image ? `<img src="${place.image}" alt="${place.title}" style="height: 150px; object-fit: cover;">` : ''}
+        ${place.description ? `<p>${place.description}</p>` : ''}
+        ${place.tags && place.tags.length > 0 ? `<div class="tags">${place.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</div>` : ''}
       </div>
-   `;
+    `;
 
-   const marker = L.marker([place.lat, place.lon], { icon: svgIcon })
+    const marker = L.marker([place.lat, place.lon], { icon: getPinIcon(isDark) })
       .addTo(map)
       .bindPopup(popupContent);
 
-   markers.push(marker);
-   });
-
-   if (markers.length > 0) {
-   const group = new L.featureGroup(markers);
-   map.fitBounds(group.getBounds().pad(0.1));
-   }
+    markers.push(marker);
   });
+
+  if (markers.length > 0) {
+    const group = new L.featureGroup(markers);
+    map.fitBounds(group.getBounds().pad(0.1));
+  }
+
+  // === 7. Écoute du changement de thème ===
+  prefersDark.addEventListener("change", (e) => {
+    isDark = e.matches;
+
+    // mise à jour du fond
+    map.removeLayer(currentTiles);
+    currentTiles = isDark ? darkTiles : lightTiles;
+    currentTiles.addTo(map);
+
+    // mise à jour des icônes
+    markers.forEach(marker => marker.setIcon(getPinIcon(isDark)));
+  });
+});
 </script>
 
 {% include footer.html %}

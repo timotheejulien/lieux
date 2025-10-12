@@ -84,139 +84,186 @@
 </main>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // Initialisation de la carte
-    const map = L.map('voyage-map').setView([46.603354, 1.888334], 5);
+document.addEventListener("DOMContentLoaded", function() {
+  // === 1. Initialisation de la carte ===
+  const map = L.map('voyage-map').setView([46.603354, 1.888334], 5);
 
-    // Fond de carte : OSM Bright via Stadia Maps
-    L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d', {
+  // === 2. Définition des fonds de carte clair / sombre ===
+  const lightTiles = L.tileLayer(
+    'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d',
+    {
       maxZoom: 20,
-      attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
-                   '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
-                   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
+      attribution:
+        '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
+        '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }
+  );
 
-    // Icône SVG personnalisée
-    const svgIcon = L.divIcon({
+  const darkTiles = L.tileLayer(
+    'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d',
+    {
+      maxZoom: 20,
+      attribution:
+        '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
+        '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }
+  );
+
+  // === 3. Définition des icônes SVG ===
+  const lightPinSVG = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
+      <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#202020"/>
+      <circle cx="15" cy="15" r="6" fill="#fff"/>
+    </svg>
+  `;
+
+  const darkPinSVG = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
+      <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#fff"/>
+      <circle cx="15" cy="15" r="6" fill="#202020"/>
+    </svg>
+  `;
+
+  function getPinIcon(isDark) {
+    return L.divIcon({
       className: "custom-svg-pin",
-      html: `
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
-          <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#202020"/>
-          <circle cx="15" cy="15" r="6" fill="#fff"/>
-        </svg>
-      `,
+      html: isDark ? darkPinSVG : lightPinSVG,
       iconSize: [30, 42],
       iconAnchor: [15, 42],
       popupAnchor: [0, -42]
     });
+  }
 
-    // Données des lieux pour ce voyage
-   const voyagePlaces = [
-   
+  // === 4. Détermination du thème courant ===
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+  let isDark = prefersDark.matches;
+
+  let currentTiles = isDark ? darkTiles : lightTiles;
+  currentTiles.addTo(map);
+
+  // === 5. Données Jekyll des lieux ===
+  const voyagePlaces = [
+    
       
       
       {
-         title: "Maison Dandoy",
-         lat: 50.8461197,
-         lon: 4.3520321,
-         url: "/places/maison-dandoy/",
-         
-         description: "Attente un peu longue mais les gaufres sont bonnes. Le chocolat est un peu trop liquide sur la gauffre.",
-         tags: ["restaurant", "gaufre", "pâtisserie"],
+        title: "Maison Dandoy",
+        lat: 50.8461197,
+        lon: 4.3520321,
+        url: "/places/maison-dandoy/",
+        
+        description: "Attente un peu longue mais les gaufres sont bonnes. Le chocolat est un peu trop liquide sur la gauffre.",
+        tags: ["restaurant", "gaufre", "pâtisserie"],
       },
       
-   
+    
       
       
       {
-         title: "Moxy Brussels City Center",
-         lat: 50.83464,
-         lon: 4.36351,
-         url: "/places/moxy-brussels-city-center/",
-         
-         description: "Cocktails de bienvenu, propre et proche du centre. Très bon choix pour  visiter Bruxelles !",
-         tags: ["hôtel"],
+        title: "Moxy Brussels City Center",
+        lat: 50.83464,
+        lon: 4.36351,
+        url: "/places/moxy-brussels-city-center/",
+        
+        description: "Cocktails de bienvenu, propre et proche du centre. Très bon choix pour  visiter Bruxelles !",
+        tags: ["hôtel"],
       },
       
-   
+    
       
       
       {
-         title: "Patatak",
-         lat: 50.84820556640625,
-         lon: 4.351023197174072,
-         url: "/places/patatak/",
-         
-         description: "Les frites sont incroyables et sont accompagnées de très bonnes sauces. Ça tient au corps par contre 😅.",
-         tags: ["restaurant", "sur-le-pouce", "friterie"],
+        title: "Patatak",
+        lat: 50.84820556640625,
+        lon: 4.351023197174072,
+        url: "/places/patatak/",
+        
+        description: "Les frites sont incroyables et sont accompagnées de très bonnes sauces. Ça tient au corps par contre 😅.",
+        tags: ["restaurant", "sur-le-pouce", "friterie"],
       },
       
-   
+    
       
       
       {
-         title: "Poechenellekelder",
-         lat: 50.8447359,
-         lon: 4.3500102,
-         url: "/places/poechenellekelder/",
-         
-         description: "Très sympa, typique pour déguster des bières belges authentiques. Petit concept de beer tasting : 3 galopins pour le prix d’une pinte 👌🏻. Service et musiques top !",
-         tags: ["bar", "bar-à-bière", "restaurant", "brasserie"],
+        title: "Poechenellekelder",
+        lat: 50.8447359,
+        lon: 4.3500102,
+        url: "/places/poechenellekelder/",
+        
+        description: "Très sympa, typique pour déguster des bières belges authentiques. Petit concept de beer tasting : 3 galopins pour le prix d’une pinte 👌🏻. Service et musiques top !",
+        tags: ["bar", "bar-à-bière", "restaurant", "brasserie"],
       },
       
-   
+    
       
       
       {
-         title: "That&#39;s Toast",
-         lat: 51.20653679999999,
-         lon: 3.2193294,
-         url: "/places/that-s-toast/",
-         
-         description: "Les tartines sont trop bonnes ! Petit patio extérieur possible.",
-         tags: ["restaurant", "tartine"],
+        title: "That&#39;s Toast",
+        lat: 51.20653679999999,
+        lon: 3.2193294,
+        url: "/places/that-s-toast/",
+        
+        description: "Les tartines sont trop bonnes ! Petit patio extérieur possible.",
+        tags: ["restaurant", "tartine"],
       },
       
-   
+    
       
       
       {
-         title: "Wolf",
-         lat: 50.8499341,
-         lon: 4.356280599999999,
-         url: "/places/wolf/",
-         
-         description: "Cuisine du monde, assez bruyant forcément mais le stand de pâtes est top ! Bon rapport qualité prix.",
-         tags: ["restaurant", "food-hall"],
+        title: "Wolf",
+        lat: 50.8499341,
+        lon: 4.356280599999999,
+        url: "/places/wolf/",
+        
+        description: "Cuisine du monde, assez bruyant forcément mais le stand de pâtes est top ! Bon rapport qualité prix.",
+        tags: ["restaurant", "food-hall"],
       }
       
-   
-   ];
+    
+  ];
 
-   let markers = [];
+  // === 6. Ajout des marqueurs ===
+  let markers = [];
 
-   voyagePlaces.forEach(place => {
-   const popupContent = `
+  voyagePlaces.forEach(place => {
+    const popupContent = `
       <div class="popup-content">
-         <h3><a href="${place.url}">${place.title}</a></h3>
-         ${place.image ? `<img src="${place.image}" alt="${place.title}" style="height: 150px; object-fit: cover;">` : ''}
-         ${place.description ? `<p>${place.description}</p>` : ''}
-         ${place.tags && place.tags.length > 0 ? `<div class="tags">${place.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</div>` : ''}
+        <h3><a href="${place.url}">${place.title}</a></h3>
+        ${place.image ? `<img src="${place.image}" alt="${place.title}" style="height: 150px; object-fit: cover;">` : ''}
+        ${place.description ? `<p>${place.description}</p>` : ''}
+        ${place.tags && place.tags.length > 0 ? `<div class="tags">${place.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</div>` : ''}
       </div>
-   `;
+    `;
 
-   const marker = L.marker([place.lat, place.lon], { icon: svgIcon })
+    const marker = L.marker([place.lat, place.lon], { icon: getPinIcon(isDark) })
       .addTo(map)
       .bindPopup(popupContent);
 
-   markers.push(marker);
-   });
-
-   if (markers.length > 0) {
-   const group = new L.featureGroup(markers);
-   map.fitBounds(group.getBounds().pad(0.1));
-   }
+    markers.push(marker);
   });
+
+  if (markers.length > 0) {
+    const group = new L.featureGroup(markers);
+    map.fitBounds(group.getBounds().pad(0.1));
+  }
+
+  // === 7. Écoute du changement de thème ===
+  prefersDark.addEventListener("change", (e) => {
+    isDark = e.matches;
+
+    // mise à jour du fond
+    map.removeLayer(currentTiles);
+    currentTiles = isDark ? darkTiles : lightTiles;
+    currentTiles.addTo(map);
+
+    // mise à jour des icônes
+    markers.forEach(marker => marker.setIcon(getPinIcon(isDark)));
+  });
+});
 </script>
 
     <footer id="footer" class="container">

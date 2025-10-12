@@ -104,269 +104,316 @@
 </main>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // Initialisation de la carte
-    const map = L.map('voyage-map').setView([46.603354, 1.888334], 5);
+document.addEventListener("DOMContentLoaded", function() {
+  // === 1. Initialisation de la carte ===
+  const map = L.map('voyage-map').setView([46.603354, 1.888334], 5);
 
-    // Fond de carte : OSM Bright via Stadia Maps
-    L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d', {
+  // === 2. Définition des fonds de carte clair / sombre ===
+  const lightTiles = L.tileLayer(
+    'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d',
+    {
       maxZoom: 20,
-      attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
-                   '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
-                   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
+      attribution:
+        '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
+        '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }
+  );
 
-    // Icône SVG personnalisée
-    const svgIcon = L.divIcon({
+  const darkTiles = L.tileLayer(
+    'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d',
+    {
+      maxZoom: 20,
+      attribution:
+        '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
+        '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }
+  );
+
+  // === 3. Définition des icônes SVG ===
+  const lightPinSVG = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
+      <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#202020"/>
+      <circle cx="15" cy="15" r="6" fill="#fff"/>
+    </svg>
+  `;
+
+  const darkPinSVG = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
+      <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#fff"/>
+      <circle cx="15" cy="15" r="6" fill="#202020"/>
+    </svg>
+  `;
+
+  function getPinIcon(isDark) {
+    return L.divIcon({
       className: "custom-svg-pin",
-      html: `
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
-          <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#202020"/>
-          <circle cx="15" cy="15" r="6" fill="#fff"/>
-        </svg>
-      `,
+      html: isDark ? darkPinSVG : lightPinSVG,
       iconSize: [30, 42],
       iconAnchor: [15, 42],
       popupAnchor: [0, -42]
     });
+  }
 
-    // Données des lieux pour ce voyage
-   const voyagePlaces = [
-   
+  // === 4. Détermination du thème courant ===
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+  let isDark = prefersDark.matches;
+
+  let currentTiles = isDark ? darkTiles : lightTiles;
+  currentTiles.addTo(map);
+
+  // === 5. Données Jekyll des lieux ===
+  const voyagePlaces = [
+    
       
       
       {
-         title: "A Tasca",
-         lat: 37.010427,
-         lon: -8.931091,
-         url: "/places/a-tasca/",
-         image: "/images/a-tasca.jpg",
-         description: "Restaurant à la cuisine portugaise traditionnelle, c’était excellent ! Service au top et une vue mer à couper le souffle !",
-         tags: ["restaurant", "poisson", "terrasse", "vue-mer", "vue"],
+        title: "A Tasca",
+        lat: 37.010427,
+        lon: -8.931091,
+        url: "/places/a-tasca/",
+        image: "/images/a-tasca.jpg",
+        description: "Restaurant à la cuisine portugaise traditionnelle, c’était excellent ! Service au top et une vue mer à couper le souffle !",
+        tags: ["restaurant", "poisson", "terrasse", "vue-mer", "vue"],
       },
       
-   
+    
       
       
       {
-         title: "Barbica",
-         lat: 38.7090213,
-         lon: -9.146759099999999,
-         url: "/places/barbica/",
-         
-         description: "Superbe terrasse au calme. La bouffe est bonne ! Petit moment posé 👌🏻.",
-         tags: ["restaurant", "brasserie", "terrasse"],
+        title: "Barbica",
+        lat: 38.7090213,
+        lon: -9.146759099999999,
+        url: "/places/barbica/",
+        
+        description: "Superbe terrasse au calme. La bouffe est bonne ! Petit moment posé 👌🏻.",
+        tags: ["restaurant", "brasserie", "terrasse"],
       },
       
-   
+    
       
       
       {
-         title: "Batz",
-         lat: 38.710866,
-         lon: -9.149505,
-         url: "/places/batz/",
-         
-         description: "Menu express à 6,50€ pour un petit déjeuner. Fait maison, c’est très sympa !",
-         tags: ["restaurant", "brunch", "terrasse"],
+        title: "Batz",
+        lat: 38.710866,
+        lon: -9.149505,
+        url: "/places/batz/",
+        
+        description: "Menu express à 6,50€ pour un petit déjeuner. Fait maison, c’est très sympa !",
+        tags: ["restaurant", "brunch", "terrasse"],
       },
       
-   
+    
       
       
       {
-         title: "Cap Saint-Vincent",
-         lat: 37.02265494420783,
-         lon: -8.99652734398842,
-         url: "/places/cap-saint-vincent/",
-         image: "/images/cap-saint-vincent.jpg",
-         description: "Le point le plus à l&#39;ouest de l&#39;Europe. Ce lieu offre une vue à 180° à couper le souffle sur l&#39;océan Atlantique. On se sent petit face à cette étendue. Le bout du monde en quelque sorte…",
-         tags: ["vue", "vue-mer"],
+        title: "Cap Saint-Vincent",
+        lat: 37.02265494420783,
+        lon: -8.99652734398842,
+        url: "/places/cap-saint-vincent/",
+        image: "/images/cap-saint-vincent.jpg",
+        description: "Le point le plus à l&#39;ouest de l&#39;Europe. Ce lieu offre une vue à 180° à couper le souffle sur l&#39;océan Atlantique. On se sent petit face à cette étendue. Le bout du monde en quelque sorte…",
+        tags: ["vue", "vue-mer"],
       },
       
-   
+    
       
       
       {
-         title: "Faaron Steakhouse",
-         lat: 37.016299,
-         lon: -7.934237,
-         url: "/places/faaron-steakhouse/",
-         
-         description: "Terrasse bien sympa pour prendre un verre ! Les plats ont l’air bon. Super service !",
-         tags: ["bar", "restaurant", "viande", "terrasse"],
+        title: "Faaron Steakhouse",
+        lat: 37.016299,
+        lon: -7.934237,
+        url: "/places/faaron-steakhouse/",
+        
+        description: "Terrasse bien sympa pour prendre un verre ! Les plats ont l’air bon. Super service !",
+        tags: ["bar", "restaurant", "viande", "terrasse"],
       },
       
-   
+    
       
       
       {
-         title: "Jardim da Cerca da Graca",
-         lat: 38.71722000506213,
-         lon: -9.131807237863542,
-         url: "/places/jardim-da-cerca-da-graca/",
-         image: "/images/jardim-da-cerca-da-graca.jpg",
-         description: "Un jardin dans le cœur de Lisbonne qui donne une vue en hauteur sur la ville.",
-         tags: ["parc", "touristique"],
+        title: "Jardim da Cerca da Graca",
+        lat: 38.71722000506213,
+        lon: -9.131807237863542,
+        url: "/places/jardim-da-cerca-da-graca/",
+        image: "/images/jardim-da-cerca-da-graca.jpg",
+        description: "Un jardin dans le cœur de Lisbonne qui donne une vue en hauteur sur la ville.",
+        tags: ["parc", "touristique"],
       },
       
-   
+    
       
       
       {
-         title: "Miradouro do Vale Suspenso",
-         lat: 37.08821,
-         lon: -8.44992,
-         url: "/places/miradouro-do-vale-suspenso/",
-         image: "/images/miradouro-do-vale-suspenso.jpg",
-         description: "Cette randonnée le long des falaises offre des vues somptuseuses sur l&#39;océan. Il faut simplement prévoir de bonnes baskets. Ce n&#39;est pas nécéssaire d&#39;avoir un bon niveau.",
-         tags: ["touristique", "vue", "vue-mer"],
+        title: "Miradouro do Vale Suspenso",
+        lat: 37.08821,
+        lon: -8.44992,
+        url: "/places/miradouro-do-vale-suspenso/",
+        image: "/images/miradouro-do-vale-suspenso.jpg",
+        description: "Cette randonnée le long des falaises offre des vues somptuseuses sur l&#39;océan. Il faut simplement prévoir de bonnes baskets. Ce n&#39;est pas nécéssaire d&#39;avoir un bon niveau.",
+        tags: ["touristique", "vue", "vue-mer"],
       },
       
-   
+    
       
       
       {
-         title: "Myomeu",
-         lat: 37.0157733,
-         lon: -7.933498,
-         url: "/places/myomeu/",
-         
-         description: "À défaut d’avoir pu manger portugais ce soir là, ce restaurant polonais est très bon !",
-         tags: ["restaurant", "terrasse"],
+        title: "Myomeu",
+        lat: 37.0157733,
+        lon: -7.933498,
+        url: "/places/myomeu/",
+        
+        description: "À défaut d’avoir pu manger portugais ce soir là, ce restaurant polonais est très bon !",
+        tags: ["restaurant", "terrasse"],
       },
       
-   
+    
       
       
       {
-         title: "Planto",
-         lat: 38.70878,
-         lon: -9.14896,
-         url: "/places/planto/",
-         image: "/images/planto.jpg",
-         description: "Coup de cœur pour ce restaurant qui venait à peine d&#39;ouvrir. Très belle décoration, les plats sont succulents et sont très bien présentés. Ce restaurant est la version plus accessible d&#39;un autre Planto qui lui, est étoilé.",
-         tags: ["restaurant", "bistronomique", "terrasse"],
+        title: "Planto",
+        lat: 38.70878,
+        lon: -9.14896,
+        url: "/places/planto/",
+        image: "/images/planto.jpg",
+        description: "Coup de cœur pour ce restaurant qui venait à peine d&#39;ouvrir. Très belle décoration, les plats sont succulents et sont très bien présentés. Ce restaurant est la version plus accessible d&#39;un autre Planto qui lui, est étoilé.",
+        tags: ["restaurant", "bistronomique", "terrasse"],
       },
       
-   
+    
       
       
       {
-         title: "Ponta de Piedade",
-         lat: 37.079538882335626,
-         lon: -8.668621927499773,
-         url: "/places/ponta-de-piedade/",
-         image: "/images/ponta-de-piedade.jpg",
-         description: "Une balade en bateau permet d&#39;accéder à cette côte. Entre eau turquoise, falaise et grotte, difficile de rester insensible à cette nature sauvage !",
-         tags: ["touristique", "vue", "vue-mer"],
+        title: "Ponta de Piedade",
+        lat: 37.079538882335626,
+        lon: -8.668621927499773,
+        url: "/places/ponta-de-piedade/",
+        image: "/images/ponta-de-piedade.jpg",
+        description: "Une balade en bateau permet d&#39;accéder à cette côte. Entre eau turquoise, falaise et grotte, difficile de rester insensible à cette nature sauvage !",
+        tags: ["touristique", "vue", "vue-mer"],
       },
       
-   
+    
       
       
       {
-         title: "Praia de São Roque",
-         lat: 37.10502658755344,
-         lon: -8.66564601659775,
-         url: "/places/praia-de-sao-roque/",
-         image: "/images/praia-de-sao-roque.jpg",
-         description: "Une grande plage face à l&#39;océan. Idéal pour prendre un apéro, les pieds dans le sable, avec le coucher de soleil.",
-         tags: ["plage", "vue", "vue-mer"],
+        title: "Praia de São Roque",
+        lat: 37.10502658755344,
+        lon: -8.66564601659775,
+        url: "/places/praia-de-sao-roque/",
+        image: "/images/praia-de-sao-roque.jpg",
+        description: "Une grande plage face à l&#39;océan. Idéal pour prendre un apéro, les pieds dans le sable, avec le coucher de soleil.",
+        tags: ["plage", "vue", "vue-mer"],
       },
       
-   
+    
       
       
       {
-         title: "R. 25 de Abril 78",
-         lat: 37.10079574584961,
-         lon: -8.671623229980469,
-         url: "/places/r-25-de-abril-78/",
-         
-         description: "Les poulets sont bons. Petite terrasse dans une rue animée, fort sympa !",
-         tags: ["restaurant", "terrasse"],
+        title: "R. 25 de Abril 78",
+        lat: 37.10079574584961,
+        lon: -8.671623229980469,
+        url: "/places/r-25-de-abril-78/",
+        
+        description: "Les poulets sont bons. Petite terrasse dans une rue animée, fort sympa !",
+        tags: ["restaurant", "terrasse"],
       },
       
-   
+    
       
       
       {
-         title: "Taberna da mó",
-         lat: 37.10042,
-         lon: -8.67152,
-         url: "/places/taberna-da-mo/",
-         
-         description: "Les tapas sont délicieux, le thon est dingue ! Très bonne adresse.",
-         tags: ["restaurant", "tapas", "sur-le-pouce", "terrasse"],
+        title: "Taberna da mó",
+        lat: 37.10042,
+        lon: -8.67152,
+        url: "/places/taberna-da-mo/",
+        
+        description: "Les tapas sont délicieux, le thon est dingue ! Très bonne adresse.",
+        tags: ["restaurant", "tapas", "sur-le-pouce", "terrasse"],
       },
       
-   
+    
       
       
       {
-         title: "Tour de Belém",
-         lat: 38.693031824873074,
-         lon: -9.208979755640032,
-         url: "/places/tour-de-belem/",
-         image: "/images/tour-de-belem.jpg",
-         description: "Que dire sur cette emblème portuguais ?! C&#39;est à faire !",
-         tags: ["touristique", "vue", "vue-mer"],
+        title: "Tour de Belém",
+        lat: 38.693031824873074,
+        lon: -9.208979755640032,
+        url: "/places/tour-de-belem/",
+        image: "/images/tour-de-belem.jpg",
+        description: "Que dire sur cette emblème portuguais ?! C&#39;est à faire !",
+        tags: ["touristique", "vue", "vue-mer"],
       },
       
-   
+    
       
       
       {
-         title: "the mill",
-         lat: 38.7107833,
-         lon: -9.1498186,
-         url: "/places/the-mill/",
-         
-         description: "Simple mais efficace. Le bagel breakfast est franchement bon ! À refaire.",
-         tags: ["restaurant", "brunch"],
+        title: "the mill",
+        lat: 38.7107833,
+        lon: -9.1498186,
+        url: "/places/the-mill/",
+        
+        description: "Simple mais efficace. Le bagel breakfast est franchement bon ! À refaire.",
+        tags: ["restaurant", "brunch"],
       },
       
-   
+    
       
       
       {
-         title: "Vila Adentro",
-         lat: 37.0129872,
-         lon: -7.9343757,
-         url: "/places/vila-adentro/",
-         
-         
-         tags: ["à-essayer", "restaurant", "terrasse"],
+        title: "Vila Adentro",
+        lat: 37.0129872,
+        lon: -7.9343757,
+        url: "/places/vila-adentro/",
+        
+        
+        tags: ["à-essayer", "restaurant", "terrasse"],
       }
       
-   
-   ];
+    
+  ];
 
-   let markers = [];
+  // === 6. Ajout des marqueurs ===
+  let markers = [];
 
-   voyagePlaces.forEach(place => {
-   const popupContent = `
+  voyagePlaces.forEach(place => {
+    const popupContent = `
       <div class="popup-content">
-         <h3><a href="${place.url}">${place.title}</a></h3>
-         ${place.image ? `<img src="${place.image}" alt="${place.title}" style="height: 150px; object-fit: cover;">` : ''}
-         ${place.description ? `<p>${place.description}</p>` : ''}
-         ${place.tags && place.tags.length > 0 ? `<div class="tags">${place.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</div>` : ''}
+        <h3><a href="${place.url}">${place.title}</a></h3>
+        ${place.image ? `<img src="${place.image}" alt="${place.title}" style="height: 150px; object-fit: cover;">` : ''}
+        ${place.description ? `<p>${place.description}</p>` : ''}
+        ${place.tags && place.tags.length > 0 ? `<div class="tags">${place.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</div>` : ''}
       </div>
-   `;
+    `;
 
-   const marker = L.marker([place.lat, place.lon], { icon: svgIcon })
+    const marker = L.marker([place.lat, place.lon], { icon: getPinIcon(isDark) })
       .addTo(map)
       .bindPopup(popupContent);
 
-   markers.push(marker);
-   });
-
-   if (markers.length > 0) {
-   const group = new L.featureGroup(markers);
-   map.fitBounds(group.getBounds().pad(0.1));
-   }
+    markers.push(marker);
   });
+
+  if (markers.length > 0) {
+    const group = new L.featureGroup(markers);
+    map.fitBounds(group.getBounds().pad(0.1));
+  }
+
+  // === 7. Écoute du changement de thème ===
+  prefersDark.addEventListener("change", (e) => {
+    isDark = e.matches;
+
+    // mise à jour du fond
+    map.removeLayer(currentTiles);
+    currentTiles = isDark ? darkTiles : lightTiles;
+    currentTiles.addTo(map);
+
+    // mise à jour des icônes
+    markers.forEach(marker => marker.setIcon(getPinIcon(isDark)));
+  });
+});
 </script>
 
     <footer id="footer" class="container">

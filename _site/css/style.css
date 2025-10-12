@@ -321,6 +321,7 @@ header {
 }
 
 .filter-btn.active {
+   font-weight: 600;
    outline: 2px solid var(--color-text-primary);
 }
 
@@ -338,7 +339,8 @@ header {
    box-shadow: 0 2px 2px rgba(0,0,0,0.15);
    display: none;
    z-index: 2;
-   }
+}
+
 .scroll-btn.left {
    width: 39px;
    height: 39px;
@@ -419,6 +421,7 @@ header {
    height: 50px;
    z-index: 10;
    margin-top: var(--space-medium);
+   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
 }
 
 .custom-svg-pin {
@@ -859,6 +862,7 @@ ul.footer-nav li {
       --color-text-third: #DEDEDE;
       --color-focus: #FBFBFB;
       --color-primary: #FBFBFB;
+      --color-brand: #FFBF00;
    }
 
    .leaflet-popup-content-wrapper {
@@ -874,27 +878,16 @@ ul.footer-nav li {
       box-shadow: none !important;
    }
 
-   .nav-panel {
-      background: rgba(32, 32, 32, 0.85);
-   }
-
    .nav-mobile {
       background: rgba(32, 32, 32, 0.85);
       backdrop-filter: blur(10px) saturate(120%);
       -webkit-backdrop-filter: blur(10px) saturate(120%);
    }
 
-   .checkbox-icon {
-      background-image: url('/assets/images/checkbox-light.svg'); /* icône par défaut */
+   #search-input {
+      background: rgba(32, 32, 32, 0.85);
    }
 
-   .tag-checkbox:checked + .checkbox-icon {
-      background-image: url('/assets/images/checkbox-active-light.svg'); /* icône cochée */
-   }
-   
-   #search-input {
-      background: rgba(255, 255, 255, 0.1);
-   }
    .nav-item::before {
       background: rgba(255, 255, 255, 0.1);
    }
@@ -904,5 +897,17 @@ ul.footer-nav li {
    }
    .nav-item-icon-dark-mode {
       display: inline;
+   }
+
+   .filter-btn {
+      background: rgba(32, 32, 32, 0.85);
+   }
+
+   #nav-links {
+      background: rgba(32, 32, 32, 0.85);
+   }
+
+   header {
+      background: rgba(32, 32, 32, 0.85);
    }
 }

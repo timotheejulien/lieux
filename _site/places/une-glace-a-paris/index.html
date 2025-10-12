@@ -100,35 +100,76 @@
          <div id="placeMap" style="height: 400px; overflow: hidden;"></div>
 
          <script>
-            // Créer une carte pour ce lieu spécifique
+            // Créer la carte
             const placeMap = L.map('placeMap').setView([48.8583190957689, 2.356285896776008], 13);
 
-            // Ajouter la couche CartoDB Light
-            L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d', {
+            // === 1. Définir les tuiles claire et sombre ===
+            const lightTiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d', {
                maxZoom: 20,
-               attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
-                           '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
-                           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            }).addTo(placeMap);
-
-            // Icône SVG personnalisée
-            const svgIcon = L.divIcon({
-               className: "custom-svg-pin",
-               html: `
-                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
-                     <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#202020"/>
-                     <circle cx="15" cy="15" r="6" fill="#fff"/>
-                     </svg>
-               `,
-               iconSize: [30, 42],
-               iconAnchor: [15, 42],
-               popupAnchor: [0, -42]
+               attribution:
+                  '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
+                  '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
+                  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             });
 
-            // Ajouter un marqueur avec icône SVG
-            L.marker([48.8583190957689, 2.356285896776008], { icon: svgIcon })
+            const darkTiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d', {
+               maxZoom: 20,
+               attribution:
+                  '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
+                  '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
+                  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            });
+
+            // === 2. Définir les deux versions du pin SVG ===
+            const darkPinSVG = `
+               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
+                  <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#fff"/>
+                  <circle cx="15" cy="15" r="6" fill="#202020"/>
+               </svg>
+            `;
+
+            const lightPinSVG = `
+               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
+                  <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#202020"/>
+                  <circle cx="15" cy="15" r="6" fill="#fff"/>
+               </svg>
+            `;
+
+            // === 3. Fonction pour récupérer la bonne icône ===
+            function getPinIcon(isDark) {
+               return L.divIcon({
+                  className: "custom-svg-pin",
+                  html: isDark ? darkPinSVG : lightPinSVG,
+                  iconSize: [30, 42],
+                  iconAnchor: [15, 42],
+                  popupAnchor: [0, -42]
+               });
+            }
+
+            // === 4. Appliquer le thème selon le mode système ===
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+            let isDark = prefersDark.matches;
+
+            let currentTiles = isDark ? darkTiles : lightTiles;
+            currentTiles.addTo(placeMap);
+
+            // === 5. Ajouter le marqueur principal ===
+            let marker = L.marker([48.8583190957689, 2.356285896776008], { icon: getPinIcon(isDark) })
                .addTo(placeMap)
                .bindPopup('Une Glace à Paris');
+
+            // === 6. Écouter le changement de thème système ===
+            prefersDark.addEventListener("change", (e) => {
+               isDark = e.matches;
+
+               // Mettre à jour la couche de tuiles
+               placeMap.removeLayer(currentTiles);
+               currentTiles = isDark ? darkTiles : lightTiles;
+               currentTiles.addTo(placeMap);
+
+               // Mettre à jour le pin
+               marker.setIcon(getPinIcon(isDark));
+            });
          </script>
       </div>
       
