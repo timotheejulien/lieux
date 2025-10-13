@@ -730,6 +730,10 @@ ul.post-list-meta li svg {
   padding-bottom: var(--space-regular);
 }
 
+#voyage-map {
+   border: 1px solid --var(color-divider);
+}
+
 /* FOOTER */
 #footer .divider {
     margin-bottom: var(--space-x-large);
