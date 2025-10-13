@@ -857,6 +857,7 @@ ul.footer-nav li {
 
    .nav-search-filters {
       flex-direction: row;
+      gap: var(--space-medium);
    }
 
    .nav-mobile {
