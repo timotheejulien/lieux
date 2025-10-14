@@ -217,7 +217,7 @@ main {
 a.grid-item {
    display: flex;
    flex-direction: row;
-   gap: var(--space-small);
+   gap: var(--space-regular);
    padding: var(--space-regular);
    text-align: left;
    text-decoration: none;
@@ -225,9 +225,32 @@ a.grid-item {
    font-size: 18px;
    background: var(--color-background-elevated);
    border-radius: 8px;
+   align-items: center;
 }
 
 a.grid-item img {
+   width: 24px;
+   height: 24px;
+}
+
+a.grid-item div {
+   width: 100%;
+}
+
+.grid-item-label {
+   display: block;
+   width: 100%;
+   line-height: 100%;
+}
+
+.grid-item-description {
+   width: 100%;
+   font-size: 14px;
+   font-weight: 400;
+   color: var(--color-text-secondary);
+}
+
+a.grid-item svg {
    width: 24px;
    height: 24px;
 }
@@ -835,7 +858,7 @@ ul.footer-nav li {
    a.grid-item {
       flex-direction: column;
       padding: var(--space-medium);
-      font-size: 20px;
+      font-size: 18px;
       border-radius: 16px;
       text-align: center;
    }
@@ -848,6 +871,10 @@ ul.footer-nav li {
 
    a.grid-item:hover {
       background: var(--color-background-elevated-hover);
+   }
+
+   a.grid-item svg {
+      display: none;
    }
 
    /* NAV */
