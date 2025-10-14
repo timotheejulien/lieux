@@ -11,20 +11,20 @@ icon-dark: icon-travels-light.svg
    <section class="container flex post-header">
       <div class="post-header-content">
          <h1>{{ page.title }}</h1>
-         <p class="post-review-comment">Retrouvez tous mes voyages et leurs lieux associés.</p>
+         <p class="post-review-comment">Explorez mes voyages à travers leurs lieux associés.</p>
       </div>
    </section>
 
    <section class="container">
-      <ul class="travel-list-places">
+      <ul class="grid-3">
          {% for voyage in site.voyages %}
          <li>
-            <a class="nav-item" href="{{ voyage.url | relative_url }}">
+            <a class="grid-item" href="{{ voyage.url | relative_url }}">
                {% if voyage.icon-light and voyage.icon-dark %}
                <img src="{{ '/assets/images/' | append: voyage.icon-light }}" alt="{{ voyage.title }} icon" class="nav-item-icon nav-item-icon-light-mode">
                <img src="{{ '/assets/images/' | append: voyage.icon-dark }}" alt="{{ voyage.title }} icon" class="nav-item-icon nav-item-icon-dark-mode">
                {% endif %}
-               <span class="nav-item-label">{{ voyage.title }}</span>
+               <span class="grid-item-label">{{ voyage.title }}</span>
             </a>
          </li>
          {% endfor %}
