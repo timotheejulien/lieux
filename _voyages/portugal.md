@@ -15,6 +15,7 @@ places:
    - myomeu
    - planto
    - ponta-de-piedade
+   - ponte-25-de-abril
    - praia-de-sao-roque
    - r-25-de-abril-78
    - taberna-da-mo

@@ -22,6 +22,7 @@ places:
    - la-tribu
    - le-cervane
    - le-tout-du-cru
+   - phare-des-baleines
    - plage-de-gros-jonc
    - re-ostrea
    - zadore

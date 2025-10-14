@@ -163,10 +163,6 @@ a:hover {
    color: var(--color-text-primary);
 }
 
-.btn-primary:hover {
-   border-radius: 0px;
-}
-
 /* VARIABLE LAYOUT */
 .flex {
     display: flex;
@@ -208,24 +204,24 @@ main {
    gap: var(--space-regular);
 }
 
-.grid-item li {
+.grid-item li, .grid-cell-item li {
   break-inside: avoid;
   padding-bottom: var(--space-regular);
   width: 100%;
 }
 
-a.grid-item {
+a.grid-item, a.grid-cell-item {
    display: flex;
    flex-direction: row;
    gap: var(--space-regular);
+   height: 100%;
    padding: var(--space-regular);
    text-align: left;
    text-decoration: none;
-   font-weight: 500;
+   font-weight: 400;
    font-size: 18px;
-   background: var(--color-background-elevated);
-   border-radius: 8px;
-   align-items: center;
+   align-items: start;
+   border: 1px solid var(--color-divider);
 }
 
 a.grid-item img {
@@ -233,7 +229,7 @@ a.grid-item img {
    height: 24px;
 }
 
-a.grid-item div {
+a.grid-item div, a.grid-cell-item div {
    width: 100%;
 }
 
@@ -247,6 +243,7 @@ a.grid-item div {
    width: 100%;
    font-size: 14px;
    font-weight: 400;
+   line-height: 80%;
    color: var(--color-text-secondary);
 }
 
@@ -470,7 +467,7 @@ header {
 }
 
 .nav-item {
-   padding: var(--space-x-none) var(--space-xx-small) var(--space-x-small) var(--space-xx-small); 
+   padding: var(--space-none) var(--space-xx-small) var(--space-x-small) var(--space-xx-small); 
    position: relative;
    display: flex;
    flex-direction: row;
@@ -859,18 +856,17 @@ ul.footer-nav li {
       flex-direction: column;
       padding: var(--space-medium);
       font-size: 18px;
-      border-radius: 16px;
       text-align: center;
    }
 
-   a.grid-item img {
+   a.grid-item img, a.grid-cell-item img {
       width: 48px;
       height: 48px;
       margin: auto;
    }
 
-   a.grid-item:hover {
-      background: var(--color-background-elevated-hover);
+   a.grid-item:hover, a.grid-cell-item:hover {
+      background: var(--color-background-elevated);
    }
 
    a.grid-item svg {
