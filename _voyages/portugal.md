@@ -4,6 +4,7 @@ icon-light: icon-portugal-dark.svg
 icon-dark: icon-portugal-light.svg
 title: "Portugal"
 description: "Un voyage marqué par une première escale de 3 jours à Lisbonne, avant de partir dans le sud. Si l'ensemble du Portugal m'a plu, j'ai été conquis par Lisbonne qui offre, pour une capitale, un air à la fois urbain et océanique ainsi que de très belles mosaïques. Il y fait bon vivre !"
+image: images/travel-portugal.jpg
 places:
    - a-tasca
    - barbica

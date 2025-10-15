@@ -4,6 +4,7 @@ icon-light: icon-rome-dark.svg
 icon-dark: icon-rome-light.svg
 title: "Rome"
 description: "Le temps d'un long week-end, j'ai pu visiter cette capitale chargée d'histoire."
+image: images/travel-rome.jpg
 places:
    - basilique-saint-pierre
    - fontaine-de-trevi

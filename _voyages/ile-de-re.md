@@ -4,6 +4,7 @@ icon-light: icon-ile-de-re-dark.svg
 icon-dark: icon-ile-de-re-light.svg
 title: "Île de Ré"
 description: "Une de mes destinations favorites, j'y vais depuis de nombreuses années. Restaurants, plages, lieux touristiques… Voici les lieux que j'affectionne sur l'Île de Ré."
+image: images/travel-ile-de-re.jpg
 places:
    - a-l-ouest
    - au-qg-de-la-mer
