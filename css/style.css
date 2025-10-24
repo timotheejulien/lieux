@@ -475,7 +475,7 @@ header {
 }
 
 .nav-item {
-   padding: var(--space-none) var(--space-xx-small) var(--space-x-small) var(--space-xx-small); 
+   padding: var(--space-xx-small); 
    position: relative;
    display: flex;
    flex-direction: row;
