@@ -1120,3 +1120,46 @@ ul.footer-nav li {
       background: rgba(32, 32, 32, 0.85);
    }
 }
+
+/* LAZY LOADING STYLES */
+.lazy-load {
+   opacity: 0;
+   transition: opacity 0.3s ease-in-out;
+}
+
+.lazy-load.loaded {
+   opacity: 1;
+}
+
+.lazy-bg {
+   background-color: var(--color-background-elevated);
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+   transition: opacity 0.3s ease-in-out;
+}
+
+.lazy-bg.loaded {
+   opacity: 1;
+}
+
+.lazy-bg:not(.loaded) {
+   opacity: 0.3;
+}
+
+/* Placeholder pour les images en cours de chargement */
+.lazy-load:not(.loaded) {
+   background-color: var(--color-background-elevated);
+   background-image: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+   background-size: 200% 100%;
+   animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+   0% {
+      background-position: -200% 0;
+   }
+   100% {
+      background-position: 200% 0;
+   }
+}

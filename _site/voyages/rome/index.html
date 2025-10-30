@@ -428,7 +428,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const popupContent = `
       <div class="popup-content">
         <h3><a href="${place.url}">${place.title}</a></h3>
-        ${place.image ? `<img src="${place.image}" alt="${place.title}" style="height: 150px; object-fit: cover;">` : ''}
+        ${place.image ? `<img data-src="${place.image}" alt="${place.title}" class="popup-image lazy-load" loading="lazy" style="height: 150px; object-fit: cover; width: 100%; border-radius: 4px;">` : ''}
         ${place.description ? `<p>${place.description}</p>` : ''}
         ${place.tags && place.tags.length > 0 ? `<div class="tags">${place.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</div>` : ''}
       </div>
@@ -458,7 +458,51 @@ document.addEventListener("DOMContentLoaded", function() {
     // mise à jour des icônes
     markers.forEach(marker => marker.setIcon(getPinIcon(isDark)));
   });
+
+  // === 8. Initialisation du lazy loading ===
+  initLazyLoading();
 });
+
+// Lazy loading functionality
+function initLazyLoading() {
+   // Configuration de l'Intersection Observer
+   const imageObserver = new IntersectionObserver((entries, observer) => {
+       entries.forEach(entry => {
+           if (entry.isIntersecting) {
+               const element = entry.target;
+               
+               // Pour les images normales
+               if (element.classList.contains('lazy-load')) {
+                   const src = element.getAttribute('data-src');
+                   if (src) {
+                       element.src = src;
+                       element.classList.add('loaded');
+                       observer.unobserve(element);
+                   }
+               }
+               
+               // Pour les images de fond
+               if (element.classList.contains('lazy-bg')) {
+                   const bgImage = element.getAttribute('data-bg');
+                   if (bgImage) {
+                       element.style.backgroundImage = `url('${bgImage}')`;
+                       element.classList.add('loaded');
+                       observer.unobserve(element);
+                   }
+               }
+           }
+       });
+   }, {
+       root: null,
+       rootMargin: '50px',
+       threshold: 0.1
+   });
+
+   // Observer toutes les images lazy
+   document.querySelectorAll('.lazy-load, .lazy-bg').forEach(img => {
+       imageObserver.observe(img);
+   });
+}
 </script>
 
     <footer id="footer" class="container">
