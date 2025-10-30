@@ -21,11 +21,11 @@ icon-dark: icon-travels-light.svg
       {% assign lieux_count = voyage.places | size %}
          <li>
             <a class="travel-card" href="{{ voyage.url | relative_url }}">
-               <div class="travel-card-img" style="background-image: url('{{ voyage.image }}');">
+               <div class="travel-card-img lazy-bg" data-bg="{{ voyage.image }}">
                   <div class="travel-card-icon">
                   {% if voyage.icon-light and voyage.icon-dark %}
-                  <img src="{{ '/assets/images/' | append: voyage.icon-light }}" alt="{{ voyage.title }} icon" class="nav-item-icon nav-item-icon-light-mode">
-                  <img src="{{ '/assets/images/' | append: voyage.icon-dark }}" alt="{{ voyage.title }} icon" class="nav-item-icon nav-item-icon-dark-mode">
+                  <img src="{{ '/assets/images/' | append: voyage.icon-light }}" alt="{{ voyage.title }} icon" class="nav-item-icon nav-item-icon-light-mode" loading="lazy">
+                  <img src="{{ '/assets/images/' | append: voyage.icon-dark }}" alt="{{ voyage.title }} icon" class="nav-item-icon nav-item-icon-dark-mode" loading="lazy">
                   {% endif %}
                   </div>
                </div>

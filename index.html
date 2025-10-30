@@ -131,6 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <h4><a href="${place.url}">${place.title}</a></h4>
       <p>${place.description}</p>
       ${place.tags && place.tags.length > 0 ? `<div class="tags">${place.tags.map(tag => `<span class="tag">${tag}</span>`).join("")}</div>` : ""}
+      ${place.image ? `<img data-src="${place.image}" alt="${place.title}" class="popup-image lazy-load" loading="lazy" style="width: 100%; height: 150px; object-fit: cover; margin-top: 10px; border-radius: 4px;">` : ""}
     `;
 
     marker.bindPopup(popupContent);
@@ -240,5 +241,49 @@ searchInput.addEventListener("input", function () {
 
   // Initialisation
   updateMap();
+  
+  // Initialiser le lazy loading pour les images dans les popups
+  initLazyLoading();
 });
+
+// Lazy loading functionality
+function initLazyLoading() {
+   // Configuration de l'Intersection Observer
+   const imageObserver = new IntersectionObserver((entries, observer) => {
+       entries.forEach(entry => {
+           if (entry.isIntersecting) {
+               const element = entry.target;
+               
+               // Pour les images normales
+               if (element.classList.contains('lazy-load')) {
+                   const src = element.getAttribute('data-src');
+                   if (src) {
+                       element.src = src;
+                       element.classList.add('loaded');
+                       observer.unobserve(element);
+                   }
+               }
+               
+               // Pour les images de fond
+               if (element.classList.contains('lazy-bg')) {
+                   const bgImage = element.getAttribute('data-bg');
+                   if (bgImage) {
+                       element.style.backgroundImage = `url('${bgImage}')`;
+                       element.classList.add('loaded');
+                       observer.unobserve(element);
+                   }
+               }
+           }
+       });
+   }, {
+       root: null,
+       rootMargin: '50px',
+       threshold: 0.1
+   });
+
+   // Observer toutes les images lazy
+   document.querySelectorAll('.lazy-load, .lazy-bg').forEach(img => {
+       imageObserver.observe(img);
+   });
+}
 </script>

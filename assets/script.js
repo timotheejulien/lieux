@@ -17,8 +17,52 @@ document.addEventListener("DOMContentLoaded", function() {
            return textA.localeCompare(textB, 'fr', { sensitivity: 'base' });
        });
 
-       // On vide et on réinsère dans l’ordre
+       // On vide et on réinsère dans l'ordre
        container.innerHTML = "";
        items.forEach(item => container.appendChild(item));
    });
+
+   // LAZY LOADING FUNCTIONALITY
+   initLazyLoading();
 });
+
+// Lazy loading functionality
+function initLazyLoading() {
+   // Configuration de l'Intersection Observer
+   const imageObserver = new IntersectionObserver((entries, observer) => {
+       entries.forEach(entry => {
+           if (entry.isIntersecting) {
+               const element = entry.target;
+               
+               // Pour les images normales
+               if (element.classList.contains('lazy-load')) {
+                   const src = element.getAttribute('data-src');
+                   if (src) {
+                       element.src = src;
+                       element.classList.add('loaded');
+                       observer.unobserve(element);
+                   }
+               }
+               
+               // Pour les images de fond
+               if (element.classList.contains('lazy-bg')) {
+                   const bgImage = element.getAttribute('data-bg');
+                   if (bgImage) {
+                       element.style.backgroundImage = `url('${bgImage}')`;
+                       element.classList.add('loaded');
+                       observer.unobserve(element);
+                   }
+               }
+           }
+       });
+   }, {
+       root: null,
+       rootMargin: '50px',
+       threshold: 0.1
+   });
+
+   // Observer toutes les images lazy
+   document.querySelectorAll('.lazy-load, .lazy-bg').forEach(img => {
+       imageObserver.observe(img);
+   });
+}
