@@ -1,5 +1,5 @@
 ---
-created-date:
+created-date: 28/11/2025
 title: "Gruppomimo (Neuilly)"
 description: La pâte à pizza est super bonne ! Un peu épaisse, pas trop cuite (tout comme j'aime) avec une qualité d'ingrédients plutôt bonne. Le service est super sympa également !
 lat: 48.884082002977
