@@ -5,6 +5,6 @@ description: L’ambiance du lieu est chouette et le service agréable. Les noui
 lat: 48.8769223
 lon: 2.3383351
 address: "8 rue Saint-Lazare 75009 Paris"
-website: restaurant asiatique
+website: https://www.baofamily.co/bleu-bao
 tags: "restaurant asiatique"
 ---
