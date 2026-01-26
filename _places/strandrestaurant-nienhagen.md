@@ -5,6 +5,6 @@ lat: 54.164409
 lon: 11.948319
 address: "Strandrestaurant, Strandstraße 42, 18211 Nienhagen, Allemagne"
 website: https://www.das-strandrestaurant.de
-tags: "restaurant sur-le-pouce vue-mer"
+tags: "restaurant à-emporter vue-mer"
 image: images/strandrestaurant-nienhagen.jpg
 ---

@@ -6,5 +6,5 @@ lat: 48.8751945
 lon: 2.3375835
 address: "34 rue de la Victoire 75009 Paris"
 website: https://www.uglywok.com
-tags: "restaurant asiatique thaï à-emporter sur-le-pouce"
+tags: "restaurant asiatique thaï à-emporter à-emporter"
 ---

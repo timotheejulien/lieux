@@ -5,5 +5,5 @@ lat: '37.10042'
 lon: '-8.67152'
 address: Rua Silva Lopes 14 8600-623 Lagos Portugal
 website: https://www.instagram.com/tabernadamo/
-tags: restaurant tapas sur-le-pouce terrasse
+tags: restaurant tapas à-emporter terrasse
 ---

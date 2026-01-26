@@ -5,5 +5,5 @@ lat: '48.8686812'
 lon: '2.3357642'
 address: 83 Passage Choiseul Paris 75002
 website: https://www.gallika.fr
-tags: restaurant grec sur-le-pouce
+tags: restaurant grec à-emporter
 ---
