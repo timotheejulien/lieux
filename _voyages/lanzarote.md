@@ -11,6 +11,7 @@ places:
    - el-rincon
    - el-patio
    - el-diablo
+   - esquina-teguise
    - la-antigua-escuela
    - la-galeria
    - la-tabla
