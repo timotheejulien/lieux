@@ -1,6 +1,6 @@
 ---
 created-date: 14/02/2026
-title: "La cabane de la terrasse dd l'étang"
+title: "La cabane de la terrasse de l'étang"
 description: 
 lat: 48.7978312
 lon: 2.2272169
