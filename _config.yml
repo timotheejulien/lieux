@@ -1,5 +1,6 @@
 # Configuration Jekyll pour le site de cartographie
 title: "Mes lieux"
+stadia_api_key: "cbccb69c-bd70-401f-a8ce-ade95addcf4d"
 description: "Cartographie de mes lieux visités"
 baseurl: ""
 url: "http://localhost:4000"

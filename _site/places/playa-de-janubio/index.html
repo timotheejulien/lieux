@@ -45,157 +45,197 @@
 </nav>
 
 <main>
-   <section class="container flex post-header">
-      <div class="post-header-content">
+   <!-- Nav bar -->
+   <div class="place-nav-bar">
+      <nav aria-label="Fil d'Ariane" class="place-breadcrumb">
+         <span>Lieux</span>
+         <span class="place-breadcrumb-sep" aria-hidden="true">›</span>
+         <span class="place-breadcrumb-current">Playa de Janubio</span>
+      </nav>
+   </div>
+
+   <!-- Media : photo + carte -->
+   <div class="container place-media-section">
+      <div class="place-media-grid">
+         
+         <button class="place-media-photo"
+                 onclick="document.getElementById('placeLightbox').showModal()"
+                 aria-label="Voir la photo en grand">
+            <img src="/images/playa-de-janubio.jpg"
+                 alt="Photographie de Playa de Janubio"
+                 class="place-media-img"
+                 loading="lazy">
+         </button>
+         
+         
+         <div class="place-media-map" id="placeMap"></div>
+         
+      </div>
+   </div>
+
+   <!-- Corps : contenu + panneau info -->
+   
+   <div class="container place-body">
+
+      <div class="place-main">
          <h1>Playa de Janubio</h1>
          
-            <p class="post-review-comment">Une plage de sable noir situé à côté des marais salants. Beaucoup de vent et la mer était très agitée. Cette plage est à voir mais pas nécessairement agréable pour s’y poser.</p>
+         <p class="post-review-comment">Une plage de sable noir situé à côté des marais salants. Beaucoup de vent et la mer était très agitée. Cette plage est à voir mais pas nécessairement agréable pour s’y poser.</p>
          
          
-         
-         <div class="place-tags tags">
+            <div class="place-tags tags">
                
                <span class="tag">plage</span>
                
-         </div>
+            </div>
          
+         <div class="post-content">
+            
+
+         </div>
       </div>
 
-      
-
-      
-      <div class="related-travels">
-         <strong>Ce lieu fait partie du voyage</strong>
-         <ul>
+      <aside class="place-info-panel">
+         <p class="place-info-section-title">Informations</p>
+         <ul class="place-info-list">
             
             <li>
-               <a class="cell" href="/voyages/lanzarote/">
+               <button type="button"
+                       class="place-info-row"
+                       onclick="openMap('LZ-703 35570 Yaiza, Las Palmas de Grande Canarie, Espagne')">
+                  <svg class="place-info-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M14 11C14 10.4696 13.7891 9.96101 13.4141 9.58594C13.039 9.21087 12.5304 9 12 9C11.4696 9 10.961 9.21087 10.5859 9.58594C10.2109 9.96101 10 10.4696 10 11C10 11.5304 10.2109 12.039 10.5859 12.4141C10.961 12.7891 11.4696 13 12 13C12.5304 13 13.039 12.7891 13.4141 12.4141C13.7891 12.039 14 11.5304 14 11ZM16 11C16 12.0609 15.5783 13.078 14.8281 13.8281C14.078 14.5783 13.0609 15 12 15C10.9391 15 9.92202 14.5783 9.17188 13.8281C8.42173 13.078 8 12.0609 8 11C8 9.93913 8.42173 8.92202 9.17188 8.17188C9.92202 7.42173 10.9391 7 12 7C13.0609 7 14.078 7.42173 14.8281 8.17188C15.5783 8.92202 16 9.93913 16 11Z"/>
+                     <path d="M11.9999 2C13.7799 2 15.5199 2.52774 16.9999 3.5166C18.4799 4.50547 19.6332 5.91125 20.3144 7.55566C20.9956 9.20017 21.1743 11.01 20.8271 12.7559C20.4798 14.5016 19.6228 16.1056 18.3642 17.3643L14.121 21.6064V21.6074C13.5586 22.1693 12.7959 22.4842 12.0009 22.4844C11.2058 22.4844 10.4423 22.1694 9.87981 21.6074V21.6064L5.63567 17.3643C4.37709 16.1056 3.52004 14.5016 3.17278 12.7559C2.82555 11.01 3.00428 9.20017 3.68548 7.55566C4.36669 5.91125 5.51996 4.50547 6.99993 3.5166C8.47994 2.52774 10.22 2 11.9999 2ZM11.9999 4C10.6156 4 9.26235 4.41062 8.11126 5.17969C6.96012 5.94884 6.06296 7.04223 5.53313 8.32129C5.00334 9.60028 4.86468 11.0074 5.1347 12.3652C5.40473 13.7229 6.071 14.9703 7.04974 15.9492L11.2939 20.1924L11.3671 20.2588C11.545 20.4043 11.7691 20.4844 12.0009 20.4844C12.2657 20.4842 12.5196 20.3795 12.707 20.1924L16.9501 15.9492C17.9289 14.9703 18.5951 13.7229 18.8652 12.3652C19.1352 11.0074 18.9965 9.60028 18.4667 8.32129C17.9369 7.04223 17.0397 5.94884 15.8886 5.17969C14.7375 4.41062 13.3843 4 11.9999 4Z"/>
+                  </svg>
+                  <span class="place-info-label">LZ-703 35570 Yaiza, Las Palmas de Grande Canarie, Espagne</span>
+                  <svg class="place-info-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 7l-10 10" /><path d="M8 7l9 0l0 9" /></svg>
+               </button>
+            </li>
+            
+            
+            
+         </ul>
+         
+         <p class="place-info-section-title place-info-voyages-title">
+            Voyage associé
+         </p>
+         <ul class="place-info-voyages-list">
+            
+            <li>
+               <a class="place-info-row" href="/voyages/lanzarote/">
                   
-                  <img src="/assets/images/icon-lanzarote-dark.svg" alt="Lanzarote icon" class="nav-item-icon nav-item-icon-light-mode">
-                  <img src="/assets/images/icon-lanzarote-light.svg" alt="Lanzarote icon" class="nav-item-icon nav-item-icon-dark-mode">
+                  <img src="/assets/images/icon-lanzarote-dark.svg"
+                       alt="Lanzarote"
+                       class="place-info-icon nav-item-icon nav-item-icon-light-mode"
+                       width="20" height="20">
+                  <img src="/assets/images/icon-lanzarote-light.svg"
+                       alt="Lanzarote"
+                       class="place-info-icon nav-item-icon nav-item-icon-dark-mode"
+                       width="20" height="20">
                   
-                  <span class="cell-label">Lanzarote</span>
-                  <svg width="20" height="20" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.293 5.79302C14.6835 5.40249 15.3165 5.40249 15.707 5.79302L19.707 9.79302C20.0975 10.1835 20.0975 10.8166 19.707 11.2071L15.707 15.2071C15.3165 15.5976 14.6835 15.5976 14.293 15.2071C13.9024 14.8166 13.9024 14.1835 14.293 13.793L17.5859 10.5L14.293 7.20708C13.9024 6.81655 13.9024 6.18354 14.293 5.79302Z" fill=""/></svg>
+                  <span class="place-info-label">Lanzarote</span>
+                  <svg class="place-info-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" /></svg>
                </a>
             </li>
             
          </ul>
-      </div>
-      
-   </section>
-
-   <section class="container">
-      <div class="post-map-container">
-         <script>
-            function openMap(address) {
-               const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-               const googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address);
-               const appleMapsUrl = 'https://maps.apple.com/?q=' + encodeURIComponent(address);
-
-               window.location.href = isIOS ? appleMapsUrl : googleMapsUrl;
-            }
-         </script>
-
-         <ul class="post-list-meta">
-            <li>
-               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M14 11C14 10.4696 13.7891 9.96101 13.4141 9.58594C13.039 9.21087 12.5304 9 12 9C11.4696 9 10.961 9.21087 10.5859 9.58594C10.2109 9.96101 10 10.4696 10 11C10 11.5304 10.2109 12.039 10.5859 12.4141C10.961 12.7891 11.4696 13 12 13C12.5304 13 13.039 12.7891 13.4141 12.4141C13.7891 12.039 14 11.5304 14 11ZM16 11C16 12.0609 15.5783 13.078 14.8281 13.8281C14.078 14.5783 13.0609 15 12 15C10.9391 15 9.92202 14.5783 9.17188 13.8281C8.42173 13.078 8 12.0609 8 11C8 9.93913 8.42173 8.92202 9.17188 8.17188C9.92202 7.42173 10.9391 7 12 7C13.0609 7 14.078 7.42173 14.8281 8.17188C15.5783 8.92202 16 9.93913 16 11Z"/>
-                  <path d="M11.9999 2C13.7799 2 15.5199 2.52774 16.9999 3.5166C18.4799 4.50547 19.6332 5.91125 20.3144 7.55566C20.9956 9.20017 21.1743 11.01 20.8271 12.7559C20.4798 14.5016 19.6228 16.1056 18.3642 17.3643L14.121 21.6064V21.6074C13.5586 22.1693 12.7959 22.4842 12.0009 22.4844C11.2058 22.4844 10.4423 22.1694 9.87981 21.6074V21.6064L5.63567 17.3643C4.37709 16.1056 3.52004 14.5016 3.17278 12.7559C2.82555 11.01 3.00428 9.20017 3.68548 7.55566C4.36669 5.91125 5.51996 4.50547 6.99993 3.5166C8.47994 2.52774 10.22 2 11.9999 2ZM11.9999 4C10.6156 4 9.26235 4.41062 8.11126 5.17969C6.96012 5.94884 6.06296 7.04223 5.53313 8.32129C5.00334 9.60028 4.86468 11.0074 5.1347 12.3652C5.40473 13.7229 6.071 14.9703 7.04974 15.9492L11.2939 20.1924L11.3671 20.2588C11.545 20.4043 11.7691 20.4844 12.0009 20.4844C12.2657 20.4842 12.5196 20.3795 12.707 20.1924L16.9501 15.9492C17.9289 14.9703 18.5951 13.7229 18.8652 12.3652C19.1352 11.0074 18.9965 9.60028 18.4667 8.32129C17.9369 7.04223 17.0397 5.94884 15.8886 5.17969C14.7375 4.41062 13.3843 4 11.9999 4Z"/>
-               </svg>
-               <a href="#" onclick="openMap('LZ-703 35570 Yaiza, Las Palmas de Grande Canarie, Espagne'); return false;">LZ-703 35570 Yaiza, Las Palmas de Grande Canarie, Espagne</a>
-            </li>
-            
-
-            
-         </ul>
          
-         <div id="placeMap" style="height: 400px; overflow: hidden;"></div>
+      </aside>
+   </div>
 
-         <script>
-            // Créer la carte
-            const placeMap = L.map('placeMap').setView([28.93457387254879, -13.829705715179445], 13);
-
-            // === 1. Définir les tuiles claire et sombre ===
-            const lightTiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d', {
-               maxZoom: 20,
-               attribution:
-                  '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
-                  '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
-                  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            });
-
-            const darkTiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d', {
-               maxZoom: 20,
-               attribution:
-                  '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
-                  '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
-                  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            });
-
-            // === 2. Définir les deux versions du pin SVG ===
-            const darkPinSVG = `
-               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
-                  <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#fff"/>
-                  <circle cx="15" cy="15" r="6" fill="#202020"/>
-               </svg>
-            `;
-
-            const lightPinSVG = `
-               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
-                  <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#202020"/>
-                  <circle cx="15" cy="15" r="6" fill="#fff"/>
-               </svg>
-            `;
-
-            // === 3. Fonction pour récupérer la bonne icône ===
-            function getPinIcon(isDark) {
-               return L.divIcon({
-                  className: "custom-svg-pin",
-                  html: isDark ? darkPinSVG : lightPinSVG,
-                  iconSize: [30, 42],
-                  iconAnchor: [15, 42],
-                  popupAnchor: [0, -42]
-               });
-            }
-
-            // === 4. Appliquer le thème selon le mode système ===
-            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
-            let isDark = prefersDark.matches;
-
-            let currentTiles = isDark ? darkTiles : lightTiles;
-            currentTiles.addTo(placeMap);
-
-            // === 5. Ajouter le marqueur principal ===
-            let marker = L.marker([28.93457387254879, -13.829705715179445], { icon: getPinIcon(isDark) })
-               .addTo(placeMap)
-               .bindPopup('Playa de Janubio');
-
-            // === 6. Écouter le changement de thème système ===
-            prefersDark.addEventListener("change", (e) => {
-               isDark = e.matches;
-
-               // Mettre à jour la couche de tuiles
-               placeMap.removeLayer(currentTiles);
-               currentTiles = isDark ? darkTiles : lightTiles;
-               currentTiles.addTo(placeMap);
-
-               // Mettre à jour le pin
-               marker.setIcon(getPinIcon(isDark));
-            });
-         </script>
-      </div>
-      
-   </section>
+   <!-- Lightbox -->
    
-   <section class="container post-content">
-      
+   <dialog class="place-lightbox" id="placeLightbox">
+      <button class="place-lightbox-close"
+              onclick="document.getElementById('placeLightbox').close()"
+              aria-label="Fermer">
+         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+         </svg>
+      </button>
+      <img src="/images/playa-de-janubio.jpg"
+           alt="Photographie de Playa de Janubio"
+           class="place-lightbox-img">
+   </dialog>
+   <script>
+      document.getElementById('placeLightbox').addEventListener('click', function(e) {
+         if (e.target === this) this.close();
+      });
+   </script>
+   
 
+   <script>
+      function openMap(address) {
+         const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+         const googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address);
+         const appleMapsUrl = 'https://maps.apple.com/?q=' + encodeURIComponent(address);
+         window.location.href = isIOS ? appleMapsUrl : googleMapsUrl;
+      }
+   </script>
 
-      
-         <h2>Photo du lieu</h2>
-         <img data-src="/images/playa-de-janubio.jpg" alt="Photographie du lieu : Playa de Janubio" class="place-image lazy-load" loading="lazy">
-      
-   </section>
+   
+   <script>
+      const placeMap = L.map('placeMap').setView([28.93457387254879, -13.829705715179445], 13);
+
+      const lightTiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=', {
+         maxZoom: 20,
+         attribution:
+            '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
+            '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      });
+
+      const darkTiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=', {
+         maxZoom: 20,
+         attribution:
+            '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
+            '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      });
+
+      const darkPinSVG = `
+         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
+            <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#fff"/>
+            <circle cx="15" cy="15" r="6" fill="#202020"/>
+         </svg>
+      `;
+
+      const lightPinSVG = `
+         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42">
+            <path d="M15 0C6.7 0 0 6.7 0 15c0 11.3 15 27 15 27s15-15.7 15-27C30 6.7 23.3 0 15 0z" fill="#202020"/>
+            <circle cx="15" cy="15" r="6" fill="#fff"/>
+         </svg>
+      `;
+
+      function getPinIcon(isDark) {
+         return L.divIcon({
+            className: "custom-svg-pin",
+            html: isDark ? darkPinSVG : lightPinSVG,
+            iconSize: [30, 42],
+            iconAnchor: [15, 42],
+            popupAnchor: [0, -42]
+         });
+      }
+
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+      let isDark = prefersDark.matches;
+
+      let currentTiles = isDark ? darkTiles : lightTiles;
+      currentTiles.addTo(placeMap);
+
+      let marker = L.marker([28.93457387254879, -13.829705715179445], { icon: getPinIcon(isDark) })
+         .addTo(placeMap)
+         .bindPopup('Playa de Janubio');
+
+      prefersDark.addEventListener("change", (e) => {
+         isDark = e.matches;
+         placeMap.removeLayer(currentTiles);
+         currentTiles = isDark ? darkTiles : lightTiles;
+         currentTiles.addTo(placeMap);
+         marker.setIcon(getPinIcon(isDark));
+      });
+   </script>
+   
 </main>
 
     <footer id="footer" class="container">
@@ -241,5 +281,6 @@
     </footer>
 </body>
 </html>
+
 </body>
 </html>
