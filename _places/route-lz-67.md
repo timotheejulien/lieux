@@ -1,4 +1,5 @@
 ---
+created-date: 04/09/2026
 title: "Route LZ-67"
 description: "Une route à absolument prendre car elle offre des paysages magnifiques : un désert de roches et volcans noirs ! J’ai parcouru le tronçon du kilomètre 5 à 19."
 lat: 29.026287667151674

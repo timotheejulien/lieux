@@ -1,4 +1,5 @@
 ---
+created-date: 04/09/2026
 title: "Playa de Famara"
 description: La couleur de l’eau est magnifique, presque translucide. La côte rocheuse offre un beau contraste avec la mer. En revanche la partie de sable n’est pas très grande et énormément de vent… Ça ressemble à un spot pour kitesurf. 
 lat: 29.1193202

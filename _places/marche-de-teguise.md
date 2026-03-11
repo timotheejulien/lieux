@@ -1,4 +1,5 @@
 ---
+created-date: 04/09/2026
 title: "Marché de Teguise"
 description: "C’est nul, tout simplement ! C’est un énorme marché où on y vend pas mal de babioles. Peut de stands de gastronomie et rien d’artisanal. (Uniquement le dimanche)."
 lat: 29.060183572387

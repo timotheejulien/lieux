@@ -1,4 +1,5 @@
 ---
+created-date: 04/09/2026
 title: "El Diablo"
 description: "Ce restaurant est situé dans le parc de Timanfaya (à faire absolument). La viande est cuite grâce à la chaleur du volcan. Même si la promesse semble alléchante, vous pouvez vous en passer."
 lat: 29.005486

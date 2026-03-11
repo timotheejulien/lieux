@@ -1,4 +1,5 @@
 ---
+created-date: 04/09/2026
 title: "El Patio Crêperie"
 description: "Le cadre est super mignon. Dans une rue au calme, vous pourrez profiter de cette terrasse fait de bric et de broc. Les crêpes sont réchauffés ce qui n'est pas terrible… En revanche vous pourrez déguster une bière locale. Bon à savoir : paiement en espèce uniquement."
 lat: 29.058751522466

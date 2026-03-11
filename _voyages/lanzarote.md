@@ -7,7 +7,6 @@ description: "Restaurants, plages, lieux touristiques… Voici les lieux que j'a
 image: images/travel-lanzarote.jpg
 places:
    - bonbon-cafe
-   - piscinas-naturales
    - el-rincon
    - el-patio
    - el-diablo

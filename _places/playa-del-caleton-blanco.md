@@ -1,4 +1,5 @@
 ---
+created-date: 04/09/2026
 title: "Playa del Caleton Blanco"
 description: Une plage de sable blanc, entouré de roches noires. La couleur de l’eau est magnifique ! La route pour y parvenir est superbe, roche volcanique à perte de vue.
 lat: 29.216709769351425

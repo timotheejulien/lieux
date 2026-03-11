@@ -1,4 +1,5 @@
 ---
+created-date: 04/09/2026
 title: "Marais salants de Janubio"
 description: 
 lat: 28.93791651085635

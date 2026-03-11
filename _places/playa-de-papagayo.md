@@ -1,4 +1,5 @@
 ---
+created-date: 04/09/2026
 title: "Playa de Papagayo"
 description: Une belle plage à côté de la plage de Cera qui est plus intimiste. L’accès est un peu long sur une route de terre mais c’est à faire !
 lat: 28.842428336175185

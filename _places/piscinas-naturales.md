@@ -1,4 +1,5 @@
 ---
+created-date: 04/09/2026
 title: "Piscinas naturales"
 description: Des piscines d’eau de mer « naturelles ». Un lieu idéal pour se rafraîchir avant de repartir. Les places pour se poser sont rares… La vue est cool !
 lat: 29.143112282801

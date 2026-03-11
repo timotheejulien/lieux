@@ -1,4 +1,5 @@
 ---
+created-date: 04/09/2026
 title: "Mirador del Rio"
 description: "Un super point de vue pour admirer un coucher de soleil. Entre mer, île et montagne, c’est compliqué de ne pas apprécier cette beauté de la nature !"
 lat: 29.195798

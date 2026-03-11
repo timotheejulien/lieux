@@ -1,4 +1,5 @@
 ---
+created-date: 04/09/2026
 title: "Playa de Janubio"
 description: Une plage de sable noir situé à côté des marais salants. Beaucoup de vent et la mer était très agitée. Cette plage est à voir mais pas nécessairement agréable pour s’y poser.
 lat: 28.93457387254879

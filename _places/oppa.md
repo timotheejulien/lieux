@@ -1,4 +1,5 @@
 ---
+created-date: 04/09/2026
 title: "Oppa"
 description: "Excellent coffee shop / brunch. Les « burgers » sont vraiment trop bon avec la mayonnaise au sriracha. Petite terrasse au calme même si elle donne sur un parking. Potentiellement possible d’avoir une place dans la ruelle qui est plus intime. Super service !"
 lat: 28.99778242815145

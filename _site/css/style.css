@@ -900,7 +900,7 @@ ul.post-list-meta li svg {
 
 .place-info-row {
    display: flex;
-   align-items: flex-start;
+   align-items: center;
    gap: var(--space-small);
    padding: var(--space-regular);
    width: 100%;

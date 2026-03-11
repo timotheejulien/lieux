@@ -1,4 +1,5 @@
 ---
+created-date: 04/09/2026
 title: "Peskara"
 description: Restaurant très touristique qui propose une multitude de plats différents (pizzas, pâtes, tapas, poisson, etc). La terrasse offre une vue mer. Un lieux disons « pratique ».
 lat: 28.999408
