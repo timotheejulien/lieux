@@ -239,6 +239,7 @@ a.grid-item div, a.grid-cell-item div {
 }
 
 .grid-item-label {
+   margin-bottom: var(--space-x-small);
    display: block;
    width: 100%;
    line-height: 100%;
@@ -251,7 +252,7 @@ a.grid-item div, a.grid-cell-item div {
    -webkit-line-clamp: 1;
    -webkit-box-orient: vertical;
    overflow: hidden;
-   font-size: 14px;
+   font-size: 16px;
    font-weight: 400;
    color: var(--color-text-secondary);
 }
@@ -323,7 +324,7 @@ a.cell:hover::before {
 .tag {
    padding: var(--space-xx-small) var(--space-small) var(--space-x-small) var(--space-small);
    font-family: UncutSans-Variable, sans-serif;
-   font-size: 14px;
+   font-size: 16px;
    line-height: 18px;
    list-style: none;
    color: var(--color-primary);
@@ -430,7 +431,7 @@ header {
    transition: all 0.2s ease;
    white-space: nowrap;
    font-family: UncutSans-Variable, sans-serif;
-   font-size: 14px;
+   font-size: 16px;
    color: var(--color-text-primary);
    background: rgba(251, 251, 251, 0.85);
    backdrop-filter: blur(10px) saturate(120%);
@@ -620,7 +621,7 @@ header {
 
 .nav-mobile-item-value {
    padding: var(--space-x-small)  var(--space-small) var(--space-x-small)  var(--space-small);
-   font-size: 14px;
+   font-size: 16px;
    color: var(--color-text-secondary);
    border: 1px solid var(--color-divider);
    border-radius: 100px;
@@ -691,7 +692,7 @@ header {
    margin-bottom: var(--space-regular);
    -webkit-line-clamp: 4 !important;
    font-family: UncutSans-Variable, sans-serif;
-   font-size: 14px;
+   font-size: 16px;
    color: var(--color-text-secondary);
 }
 
@@ -793,7 +794,7 @@ ul.post-list-meta li svg {
 }
 
 .place-back-link {
-   font-size: 14px;
+   font-size: 16px;
    font-weight: 500;
    color: var(--color-text-secondary);
    text-decoration: none;
@@ -812,7 +813,7 @@ ul.post-list-meta li svg {
    display: flex;
    align-items: center;
    gap: var(--space-x-small);
-   font-size: 14px;
+   font-size: 16px;
    color: var(--color-text-secondary);
 }
 
@@ -886,7 +887,7 @@ ul.post-list-meta li svg {
 .place-info-section-title {
    margin: 0;
    padding: var(--space-regular) var(--space-regular) var(--space-none) var(--space-regular);
-   font-size: 15px;
+   font-size: 18px;
    font-weight: 500;
    color: var(--color-text-primary);
 }
@@ -903,7 +904,7 @@ ul.post-list-meta li svg {
    gap: var(--space-small);
    padding: var(--space-regular);
    width: 100%;
-   font-size: 15px;
+   font-size: 18px;
    line-height: 1.4;
    font-family: inherit;
    color: var(--color-text-primary);
@@ -1021,10 +1022,19 @@ ul.post-list-meta li svg {
    color: var(--color-text-primary);
 }
 
+.post-content {
+   margin-top: var(--space-xxx-large);
+}
+
 
 .post-content p {
-   max-width: 700px;
    margin-top: var(--space-medium);
+}
+
+.post-content p img {
+   width: 100%;
+   height: auto;
+   border-radius: var(--radius-default);
 }
 
 .place-image {
@@ -1041,7 +1051,7 @@ ul.post-list-meta li svg {
 }
 
 #voyage-map {
-   height: 440px;
+   height: 240px;
    margin-bottom: 0 !important;
    border: 1px solid var(--color-divider);
    border-radius: var(--radius-default);
@@ -1244,6 +1254,10 @@ ul.footer-nav li {
 
    #voyage {
       padding-top: var(--space-regular);
+   }
+
+   #voyage-map {
+      height: 440px;
    }
 
    #voyage-title {

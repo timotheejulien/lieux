@@ -56,7 +56,16 @@
 
    <!-- Media : photo + carte -->
    <div class="container place-media-section">
-      <div class="place-media-grid place-media-grid--no-image">
+      <div class="place-media-grid">
+         
+         <button class="place-media-photo"
+                 onclick="document.getElementById('placeLightbox').showModal()"
+                 aria-label="Voir la photo en grand">
+            <img src="/images/hangar-y.jpg"
+                 alt="Photographie de Hangar Y"
+                 class="place-media-img"
+                 loading="lazy">
+         </button>
          
          
          <div class="place-media-map" id="placeMap"></div>
@@ -70,15 +79,27 @@
       <div class="place-main">
          <h1>Hangar Y</h1>
          
+         <p class="post-review-comment">Le lieu possède une architecture très industrielle et est situé dans un parc avec un étang. La vue depuis le restaurant est exceptionnelle et l'est encore plus une fois sur la tarresse. La nourriture est bonne, on est clairement sur un bistronomique, simple et efficace !</p>
+         
          
             <div class="place-tags tags">
                
-               <span class="tag">à-essayer</span>
+               <span class="tag">restaurant</span>
+               
+               <span class="tag">bistronomique</span>
+               
+               <span class="tag">bar</span>
+               
+               <span class="tag">guinguette</span>
+               
+               <span class="tag">terrasse</span>
+               
+               <span class="tag">vue</span>
                
             </div>
          
          <div class="post-content">
-            
+            <p><img src="/images/hangar-y-2.jpg" alt="Vue sur l'étang" /></p>
 
          </div>
       </div>
@@ -132,6 +153,24 @@
    </div>
 
    <!-- Lightbox -->
+   
+   <dialog class="place-lightbox" id="placeLightbox">
+      <button class="place-lightbox-close"
+              onclick="document.getElementById('placeLightbox').close()"
+              aria-label="Fermer">
+         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+         </svg>
+      </button>
+      <img src="/images/hangar-y.jpg"
+           alt="Photographie de Hangar Y"
+           class="place-lightbox-img">
+   </dialog>
+   <script>
+      document.getElementById('placeLightbox').addEventListener('click', function(e) {
+         if (e.target === this) this.close();
+      });
+   </script>
    
 
    <script>
