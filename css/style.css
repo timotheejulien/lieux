@@ -872,7 +872,7 @@ ul.post-list-meta li svg {
 .place-body {
    display: grid;
    grid-template-columns: 1fr;
-   gap: var(--space-x-large);
+   gap: var(--space-regular);
    align-items: start;
    padding-bottom: var(--space-x-large);
 }
@@ -1023,7 +1023,7 @@ ul.post-list-meta li svg {
 }
 
 .post-content {
-   margin-top: var(--space-xxx-large);
+   margin-top: var(--space-x-large);
 }
 
 
@@ -1298,6 +1298,11 @@ ul.footer-nav li {
 
    .place-body {
       grid-template-columns: 1fr 320px;
+      gap: var(--space-x-large);
+   }
+
+   .post-content {
+      margin-top: var(--space-xxx-large);
    }
 
    /* FOOTER */
