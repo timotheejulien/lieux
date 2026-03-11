@@ -6,5 +6,5 @@ lat: 48.8148768
 lon: 2.2341444
 address: "2 Place Stalingrad 92190 Meudon"
 website: https://olivia-meudon.com
-tags: "restaurant italien pizza pâte bar terrasse"
+tags: "restaurant italien pizzeria pâte bar terrasse"
 ---
