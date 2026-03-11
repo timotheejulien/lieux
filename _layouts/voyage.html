@@ -14,6 +14,10 @@ layout: default
       </div>
    </section>
 
+   <section class="container voyage">
+      <div id="voyage-map" style="height: 500px; margin-bottom: 2rem;"></div>
+   </section>
+   
    <section class="container">
       <ul class="grid-3 sort-by-alphabetical">
          {% assign selected_places = "" | split: "" %}
@@ -45,10 +49,6 @@ layout: default
             </li>
          {% endfor %}
       </ul>
-   </section>
-
-   <section class="container voyage">
-      <div id="voyage-map" style="height: 500px; margin-bottom: 2rem;"></div>
    </section>
 </main>
 

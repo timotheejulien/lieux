@@ -6,5 +6,5 @@ lat: '48.89064510000001'
 lon: '2.3452711'
 address: 61 Rue Ramey, 75018 Paris, France
 website: https://gemuseparis.fr
-tags: restaurant kebab sur-le-pouce
+tags: restaurant kebab à-emporter
 ---
