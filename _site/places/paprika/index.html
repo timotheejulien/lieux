@@ -67,7 +67,6 @@
    <!-- Corps : contenu + panneau info -->
    
    <div class="container place-body">
-
       <div class="place-main">
          <h1>Paprika (fermé défintivement)</h1>
          
@@ -124,7 +123,17 @@
 
    
    <script>
-      const placeMap = L.map('placeMap').setView([48.864327330033746, 2.360152858604935], 13);
+      const placeMap = L.map('placeMap', { scrollWheelZoom: false }).setView([48.864327330033746, 2.360152858604935], 13);
+
+      placeMap.getContainer().addEventListener('wheel', function(e) {
+         if (!e.ctrlKey) return;
+         e.preventDefault();
+         if (e.deltaY < 0) {
+            placeMap.zoomIn();
+         } else if (e.deltaY > 0) {
+            placeMap.zoomOut();
+         }
+      }, { passive: false });
 
       const lightTiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=', {
          maxZoom: 20,

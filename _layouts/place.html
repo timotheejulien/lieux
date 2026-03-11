@@ -37,7 +37,6 @@ layout: default
    <!-- Corps : contenu + panneau info -->
    {% assign related_voyages = site.voyages | where_exp: "voyage", "voyage.places contains page.slug" %}
    <div class="container place-body">
-
       <div class="place-main">
          <h1>{{ page.title }}</h1>
          {% if page.description %}
@@ -159,7 +158,17 @@ layout: default
 
    {% if page.lat and page.lon %}
    <script>
-      const placeMap = L.map('placeMap').setView([{{ page.lat }}, {{ page.lon }}], 13);
+      const placeMap = L.map('placeMap', { scrollWheelZoom: false }).setView([{{ page.lat }}, {{ page.lon }}], 13);
+
+      placeMap.getContainer().addEventListener('wheel', function(e) {
+         if (!e.ctrlKey) return;
+         e.preventDefault();
+         if (e.deltaY < 0) {
+            placeMap.zoomIn();
+         } else if (e.deltaY > 0) {
+            placeMap.zoomOut();
+         }
+      }, { passive: false });
 
       const lightTiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key={{ site.stadia_api_key }}', {
          maxZoom: 20,

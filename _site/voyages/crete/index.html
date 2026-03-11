@@ -45,17 +45,25 @@
 </nav>
 
 <main>
-   <section class="container flex post-header">
+   <div class="place-nav-bar">
+      <nav aria-label="Fil d'Ariane" class="place-breadcrumb">
+         <span>Voyages</span>
+         <span class="place-breadcrumb-sep" aria-hidden="true">›</span>
+         <span class="place-breadcrumb-current">Crête</span>
+      </nav>
+   </div>
+
+   <section id="voyage" class="container">
+      <div id="voyage-map"></div>
+   </section>
+
+   <section id="voyage-title" class="container flex post-header">
       <div class="post-header-content">
          <h1>Crête</h1>
          
             <p class="post-review-comment">Restaurants, plages, lieux touristiques… Malgré beaucoup de repos, voici les lieux que j'ai visité durant mon voyage en Crête, pendant l'été 2024.</p>
          
       </div>
-   </section>
-
-   <section class="container voyage">
-      <div id="voyage-map" style="height: 500px; margin-bottom: 2rem;"></div>
    </section>
    
    <section class="container">
@@ -79,7 +87,7 @@
                         
                      </span>
                   </div>
-                  <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.293 5.79302C14.6835 5.40249 15.3165 5.40249 15.707 5.79302L19.707 9.79302C20.0975 10.1835 20.0975 10.8166 19.707 11.2071L15.707 15.2071C15.3165 15.5976 14.6835 15.5976 14.293 15.2071C13.9024 14.8166 13.9024 14.1835 14.293 13.793L17.5859 10.5L14.293 7.20708C13.9024 6.81655 13.9024 6.18354 14.293 5.79302Z" fill=""/></svg>
+                  <svg class="place-info-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" /></svg>
                </a>
             </li>
          
@@ -95,7 +103,7 @@
                         
                      </span>
                   </div>
-                  <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.293 5.79302C14.6835 5.40249 15.3165 5.40249 15.707 5.79302L19.707 9.79302C20.0975 10.1835 20.0975 10.8166 19.707 11.2071L15.707 15.2071C15.3165 15.5976 14.6835 15.5976 14.293 15.2071C13.9024 14.8166 13.9024 14.1835 14.293 13.793L17.5859 10.5L14.293 7.20708C13.9024 6.81655 13.9024 6.18354 14.293 5.79302Z" fill=""/></svg>
+                  <svg class="place-info-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" /></svg>
                </a>
             </li>
          
@@ -111,7 +119,7 @@
                         
                      </span>
                   </div>
-                  <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.293 5.79302C14.6835 5.40249 15.3165 5.40249 15.707 5.79302L19.707 9.79302C20.0975 10.1835 20.0975 10.8166 19.707 11.2071L15.707 15.2071C15.3165 15.5976 14.6835 15.5976 14.293 15.2071C13.9024 14.8166 13.9024 14.1835 14.293 13.793L17.5859 10.5L14.293 7.20708C13.9024 6.81655 13.9024 6.18354 14.293 5.79302Z" fill=""/></svg>
+                  <svg class="place-info-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" /></svg>
                </a>
             </li>
          
@@ -135,7 +143,7 @@
                         
                      </span>
                   </div>
-                  <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.293 5.79302C14.6835 5.40249 15.3165 5.40249 15.707 5.79302L19.707 9.79302C20.0975 10.1835 20.0975 10.8166 19.707 11.2071L15.707 15.2071C15.3165 15.5976 14.6835 15.5976 14.293 15.2071C13.9024 14.8166 13.9024 14.1835 14.293 13.793L17.5859 10.5L14.293 7.20708C13.9024 6.81655 13.9024 6.18354 14.293 5.79302Z" fill=""/></svg>
+                  <svg class="place-info-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" /></svg>
                </a>
             </li>
          
@@ -146,7 +154,17 @@
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   // === 1. Initialisation de la carte ===
-  const map = L.map('voyage-map').setView([46.603354, 1.888334], 5);
+  const map = L.map('voyage-map', { scrollWheelZoom: false }).setView([46.603354, 1.888334], 5);
+
+  map.getContainer().addEventListener('wheel', function(e) {
+    if (!e.ctrlKey) return;
+    e.preventDefault();
+    if (e.deltaY < 0) {
+      map.zoomIn();
+    } else if (e.deltaY > 0) {
+      map.zoomOut();
+    }
+  }, { passive: false });
 
   // === 2. Définition des fonds de carte clair / sombre ===
   const lightTiles = L.tileLayer(

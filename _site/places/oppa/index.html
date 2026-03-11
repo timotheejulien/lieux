@@ -76,7 +76,6 @@
    <!-- Corps : contenu + panneau info -->
    
    <div class="container place-body">
-
       <div class="place-main">
          <h1>Oppa</h1>
          
@@ -192,7 +191,17 @@
 
    
    <script>
-      const placeMap = L.map('placeMap').setView([28.99778242815145, -13.492267517463343], 13);
+      const placeMap = L.map('placeMap', { scrollWheelZoom: false }).setView([28.99778242815145, -13.492267517463343], 13);
+
+      placeMap.getContainer().addEventListener('wheel', function(e) {
+         if (!e.ctrlKey) return;
+         e.preventDefault();
+         if (e.deltaY < 0) {
+            placeMap.zoomIn();
+         } else if (e.deltaY > 0) {
+            placeMap.zoomOut();
+         }
+      }, { passive: false });
 
       const lightTiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=', {
          maxZoom: 20,
