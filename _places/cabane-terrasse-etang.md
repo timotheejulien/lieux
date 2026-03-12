@@ -6,5 +6,6 @@ lat: 48.7978312
 lon: 2.2272169
 address: "La terrasse de l'étang 92360 Meudon"
 website: https://lacabanemeudon.fr
-tags: "à-essayer restaurant terrasse"
+statut: "à-essayer"
+tags: restaurant terrasse
 ---

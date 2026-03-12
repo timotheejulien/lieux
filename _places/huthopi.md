@@ -5,5 +5,6 @@ lat: '48.85087203979492'
 lon: '2.3729517459869385'
 address: 53 Rue de Charenton, 75012 Paris, France
 website: https://www.huthopi.fr
-tags: à-essayer restaurant bistronomique
+statut: "à-essayer"
+tags: restaurant bistronomique
 ---

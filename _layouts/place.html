@@ -43,15 +43,18 @@ layout: default
          <p class="post-review-comment">{{ page.description }}</p>
          {% endif %}
          {% if page.tags %}
-            <div class="place-tags tags">
-               {% for tag in page.tags %}
-               <span class="tag">{{ tag }}</span>
-               {% endfor %}
-            </div>
+         <div class="place-tags tags">
+            {% for tag in page.tags %}
+            <span class="tag">{{ tag }}</span>
+            {% endfor %}
+         </div>
          {% endif %}
+         {% assign content_stripped = page.content | strip %}
+         {% if content_stripped != "" %}
          <div class="post-content">
             {{ page.content }}
          </div>
+         {% endif %}
       </div>
 
       <aside class="place-info-panel">
