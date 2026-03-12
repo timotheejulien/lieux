@@ -6,6 +6,7 @@ lat: 48.870543008144
 lon: 2.334883987128
 address: "20 rue de la Michodière 75002 Paris"
 website: https://www.takesanramen.fr
-tags: "à-essayer restaurant japonais"
+statut: "à-essayer"
+tags: restaurant japonais
 image: 
 ---

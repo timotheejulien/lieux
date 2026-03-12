@@ -6,5 +6,5 @@ lat: 48.8689102
 lon: 2.3295556
 address: "10 rue des Capucines 75002 Paris"
 website: https://frogpubs.com
-tags: "bar bar-à-bières tapas happy-hour"
+tags: "bar bar-à-bière tapas happy-hour"
 ---

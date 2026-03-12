@@ -5,5 +5,6 @@ lat: '37.0129872'
 lon: '-7.9343757'
 address: Praça do Afonso III 17, 8000-149 Faro, Portugal
 website: https://vilaadentro.pt
-tags: à-essayer restaurant terrasse
+statut: "à-essayer"
+tags: restaurant terrasse
 ---

@@ -5,5 +5,6 @@ lat: '48.87785619999999'
 lon: '2.3854427'
 address: 1 Rue du Plateau, 75019 Paris, France
 website: https://www.instagram.com/fleuribar/
-tags: à-essayer bar restaurant brasserie
+statut: "à-essayer"
+tags: bar restaurant brasserie
 ---

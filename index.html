@@ -7,63 +7,165 @@ title: Carte de mes lieux
 
 <div id="map"></div>
 
-<nav id="nav" class="nav">
-   <div class="nav-search-filters">
-      <input type="text" id="search-input" placeholder="Rechercher un lieu" title="Rechercher un lieu">
-      <div class="filter-wrapper">
-         <button class="scroll-btn left" id="scroll-left" aria-label="Scroll left"><svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.707 15.2071C12.3164 15.5976 11.6834 15.5976 11.2929 15.2071L7.29289 11.2071C6.90237 10.8166 6.90237 10.1836 7.29289 9.79304L11.2929 5.79304C11.6834 5.40252 12.3164 5.40252 12.707 5.79304C13.0975 6.18357 13.0975 6.81658 12.707 7.20711L9.41399 10.5001L12.707 13.793C13.0975 14.1836 13.0975 14.8166 12.707 15.2071Z" fill=""/></svg></button>
+<aside class="side-panel" id="side-panel">
 
-         <div id="tags-scroll" class="tags-scroll sort-by-alphabetical">
-         {% assign all_tags = site.places | map: "tags" | join: "," | split: "," | uniq | sort %}
-         {% for tag in all_tags %}
-         {% assign clean_tag = tag | strip %}
-         {% if clean_tag and clean_tag != "" %}
-            <button class="filter-btn" data-tag="{{ clean_tag }}">{{ clean_tag }}</button>
-         {% endif %}
-         {% endfor %}
-         </div>
+  <div class="panel-header">
+    <div class="search-wrap">
+      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
+      <input type="text"
+             id="search-input"
+             placeholder="Rechercher un lieu…"
+             autocomplete="off"
+             aria-label="Rechercher un lieu">
+    </div>
 
-         <button class="scroll-btn right" id="scroll-right" aria-label="Scroll right"><svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.29289 5.79302C7.68342 5.40249 8.31643 5.40249 8.70696 5.79302L12.707 9.79302C13.0975 10.1835 13.0975 10.8166 12.707 11.2071L8.70696 15.2071C8.31643 15.5976 7.68342 15.5976 7.29289 15.2071C6.90237 14.8166 6.90237 14.1835 7.29289 13.793L10.5859 10.5L7.29289 7.20708C6.90237 6.81655 6.90237 6.18354 7.29289 5.79302Z" fill=""/></svg></button>
+    <a class="btn-voyages" href="{{ '/voyages.html' | relative_url }}">
+      <svg width="24" height="24" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 2.5C13.7956 2.5 14.5585 2.8163 15.1211 3.37891C15.6837 3.94152 16 4.70435 16 5.5C16.7956 5.5 17.5585 5.8163 18.1211 6.37891C18.6837 6.94152 19 7.70435 19 8.5V18.5C19 19.2957 18.6837 20.0585 18.1211 20.6211C17.5585 21.1837 16.7957 21.5 16 21.5C16 22.0523 15.5523 22.5 15 22.5C14.4477 22.5 14 22.0523 14 21.5H10C10 22.0523 9.55228 22.5 9 22.5C8.44772 22.5 8 22.0523 8 21.5C7.20435 21.5 6.44152 21.1837 5.87891 20.6211C5.3163 20.0585 5 19.2956 5 18.5V8.5C5 7.70435 5.3163 6.94152 5.87891 6.37891C6.44152 5.8163 7.20435 5.5 8 5.5C8 4.70435 8.3163 3.94152 8.87891 3.37891C9.44152 2.8163 10.2044 2.5 11 2.5H13ZM7 18.5L7.00488 18.5986C7.02757 18.8276 7.12883 19.0429 7.29297 19.207C7.48051 19.3946 7.73478 19.5 8 19.5H16C16.2652 19.5 16.5195 19.3946 16.707 19.207C16.8946 19.0195 17 18.7652 17 18.5V17.5H7V18.5ZM7 15.5H17V11.5H7V15.5ZM8 7.5C7.73478 7.5 7.48051 7.60543 7.29297 7.79297C7.10543 7.98051 7 8.23478 7 8.5V9.5H17V8.5C17 8.23478 16.8946 7.98051 16.707 7.79297C16.5429 7.62883 16.3276 7.52757 16.0986 7.50488L16 7.5H8ZM11 4.5C10.7348 4.5 10.4805 4.60543 10.293 4.79297C10.1054 4.98051 10 5.23478 10 5.5H14C14 5.23478 13.8946 4.98051 13.707 4.79297C13.5429 4.62883 13.3276 4.52757 13.0986 4.50488L13 4.5H11Z" fill=""></path></svg>
+      <span>Voyages</span>
+      
+      <svg class="btn-voyages-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg>
+    </a>
+  </div>
+
+  <div class="panel-body" id="panel-body">
+
+    <div class="filter-section">
+      <div class="filter-section-title">Catégories</div>
+      <button class="toggle-essayer" id="toggle-essayer-desktop" type="button">
+        À essayer
+        <span class="toggle-count" id="essayer-count-desktop">
+          {{ site.places | where: "statut", "à-essayer" | size }} lieux
+        </span>
+        <span class="toggle-check" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    {% assign all_tags = site.places | map: "tags" | join: " " | split: " " | uniq | sort %}
+    {% if all_tags.size > 0 %}
+    <div class="filter-section">
+      <div class="filter-section-title">Tags</div>
+      <div class="tags-grid sort-by-alphabetical">
+        {% for tag in all_tags %}
+        {% assign clean_tag = tag | strip %}
+        {% if clean_tag != "" %}
+        <button class="filter-tag" data-tag="{{ clean_tag }}" type="button">
+          <span class="tag-label">{{ clean_tag }}</span>
+          <span class="tag-check" aria-hidden="true"></span>
+        </button>
+        {% endif %}
+        {% endfor %}
       </div>
+    </div>
+    {% endif %}
 
-      <button id="clear-filters" class="btn btn-primary" style="display:none;">Supprimer les filtres</button>
-   </div>
+  </div>
 
-   <div class="nav-section">
-      <ul id="nav-links" class="sort-by-alphabetical">
-         <li>
-            <a class="nav-item" href="{{ '/voyages.html' | relative_url }}">
-               <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 2.5C13.7956 2.5 14.5585 2.8163 15.1211 3.37891C15.6837 3.94152 16 4.70435 16 5.5C16.7956 5.5 17.5585 5.8163 18.1211 6.37891C18.6837 6.94152 19 7.70435 19 8.5V18.5C19 19.2957 18.6837 20.0585 18.1211 20.6211C17.5585 21.1837 16.7957 21.5 16 21.5C16 22.0523 15.5523 22.5 15 22.5C14.4477 22.5 14 22.0523 14 21.5H10C10 22.0523 9.55228 22.5 9 22.5C8.44772 22.5 8 22.0523 8 21.5C7.20435 21.5 6.44152 21.1837 5.87891 20.6211C5.3163 20.0585 5 19.2956 5 18.5V8.5C5 7.70435 5.3163 6.94152 5.87891 6.37891C6.44152 5.8163 7.20435 5.5 8 5.5C8 4.70435 8.3163 3.94152 8.87891 3.37891C9.44152 2.8163 10.2044 2.5 11 2.5H13ZM7 18.5L7.00488 18.5986C7.02757 18.8276 7.12883 19.0429 7.29297 19.207C7.48051 19.3946 7.73478 19.5 8 19.5H16C16.2652 19.5 16.5195 19.3946 16.707 19.207C16.8946 19.0195 17 18.7652 17 18.5V17.5H7V18.5ZM7 15.5H17V11.5H7V15.5ZM8 7.5C7.73478 7.5 7.48051 7.60543 7.29297 7.79297C7.10543 7.98051 7 8.23478 7 8.5V9.5H17V8.5C17 8.23478 16.8946 7.98051 16.707 7.79297C16.5429 7.62883 16.3276 7.52757 16.0986 7.50488L16 7.5H8ZM11 4.5C10.7348 4.5 10.4805 4.60543 10.293 4.79297C10.1054 4.98051 10 5.23478 10 5.5H14C14 5.23478 13.8946 4.98051 13.707 4.79297C13.5429 4.62883 13.3276 4.52757 13.0986 4.50488L13 4.5H11Z" fill=""/></svg>
-               <span class="nav-item-label">Voyages</span>
-               <svg class="place-info-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" /></svg>
-            </a>
-         </li>
-      </ul>
-   </div>
-</nav>
+  <div class="panel-footer" id="panel-footer">
+    <span class="result-count-text">
+      <span id="result-count-desktop">0</span> lieu(x)
+    </span>
+    <button class="btn-clear" id="btn-clear-desktop" type="button">
+      Effacer
+    </button>
+  </div>
 
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</aside>
+
+<!-- Top bar mobile -->
+<div class="mobile-top-bar" id="mobile-top-bar">
+  <div class="mobile-search-row">
+    <div class="search-wrap">
+      <svg class="search-icon" stroke-width="2" viewBox="0 0 24 24" fill="none">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="text"
+             id="search-input-mobile"
+             placeholder="Rechercher un lieu…"
+             autocomplete="off"
+             aria-label="Rechercher un lieu">
+    </div>
+    <button class="btn-filter-mobile" id="btn-open-sheet" type="button" aria-haspopup="dialog">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256"><path d="M40,88H73a32,32,0,0,0,62,0h81a8,8,0,0,0,0-16H135a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16Zm64-24A16,16,0,1,1,88,80,16,16,0,0,1,104,64ZM216,168H199a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16h97a32,32,0,0,0,62,0h17a8,8,0,0,0,0-16Zm-48,24a16,16,0,1,1,16-16A16,16,0,0,1,168,192Z"></path></svg>
+      Filtres
+      <span class="filter-badge" id="filter-badge" aria-live="polite"></span>
+    </button>
+  </div>
+</div>
+
+<!-- Backdrop -->
+<div class="sheet-backdrop" id="sheet-backdrop" aria-hidden="true"></div>
+
+<!-- Bottom sheet -->
+<div class="bottom-sheet"
+     id="bottom-sheet"
+     role="dialog"
+     aria-modal="true"
+     aria-label="Filtres">
+
+  <div class="sheet-handle" aria-hidden="true"></div>
+
+  <div class="sheet-header">
+    <span class="sheet-title">Filtres</span>
+    <button class="sheet-close" id="btn-close-sheet" type="button" aria-label="Fermer les filtres">✕</button>
+  </div>
+
+  <div class="sheet-body">
+
+    <div class="sheet-section">
+      <div class="sheet-section-title">Statut</div>
+      <button class="toggle-essayer" id="toggle-essayer-mobile" type="button">
+        <span class="toggle-dot"></span>
+        À essayer
+        <span class="toggle-count" id="essayer-count-mobile">
+          {{ site.places | where: "statut", "à-essayer" | size }} lieux
+        </span>
+        <span class="toggle-check" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    {% if all_tags.size > 0 %}
+    <div class="sheet-section">
+      <div class="sheet-section-title">Catégories</div>
+      <div class="tags-grid sort-by-alphabetical">
+        {% for tag in all_tags %}
+        {% assign clean_tag = tag | strip %}
+        {% if clean_tag != "" %}
+        <button class="filter-tag" data-tag="{{ clean_tag }}" type="button">
+          <span class="tag-label">{{ clean_tag }}</span>
+          <span class="tag-check" aria-hidden="true"></span>
+        </button>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+
+  <div class="sheet-footer">
+    <button class="btn-reset" id="btn-reset-sheet" type="button">Réinitialiser</button>
+    <button class="btn-apply" id="btn-apply-sheet" type="button">Afficher</button>
+  </div>
+
+</div>
+
+<!-- Pill résultat mobile -->
+<div class="map-result-pill" id="result-pill-mobile" aria-live="polite"></div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const searchInput = document.getElementById("search-input");
-  const clearFiltersBtn = document.getElementById("clear-filters");
-
-  let activeSearch = "";
-  let activeVoyage = null;
-  let activeTags = [];
 
   // Initialisation carte
   const map = L.map('map').setView([46.8, 2.2], 6);
 
   // --- Thèmes clair et sombre ---
-  const lightTiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d', {
+  const lightTiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key={{ site.stadia_api_key }}', {
     maxZoom: 20,
     attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>'
   });
 
-  const darkTiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=cbccb69c-bd70-401f-a8ce-ade95addcf4d', {
+  const darkTiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key={{ site.stadia_api_key }}', {
     maxZoom: 20,
     attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>'
   });
@@ -72,7 +174,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
   let isDark = prefersDark.matches;
 
-  // Ajoute le bon thème au démarrage
   let currentTiles = isDark ? darkTiles : lightTiles;
   currentTiles.addTo(map);
 
@@ -105,20 +206,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const placesData = [
     {% for place in site.places %}
     {% if place.lat and place.lon %}
-      {
-        title: {{ place.title | jsonify }},
-        description: {{ place.description | default: place.description | default: "" | jsonify }},
-        lat: {{ place.lat }},
-        lon: {{ place.lon }},
-        voyage: {{ place.voyage | default: "" | jsonify }},
-        tags: [
-          {% for tag in place.tags %}
-            {{ tag | jsonify }}{% unless forloop.last %},{% endunless %}
-          {% endfor %}
-        ],
-        url: {{ place.url | jsonify }},
-        date: {{ place.date | default: "" | jsonify }}
-      }{% unless forloop.last %},{% endunless %}
+    {
+      title:       {{ place.title | jsonify }},
+      description: {{ place.description | default: "" | jsonify }},
+      lat:         {{ place.lat }},
+      lon:         {{ place.lon }},
+      tags:        {{ place.tags | jsonify }},
+      statut:      {{ place.statut | default: "" | jsonify }},
+      url:         {{ place.url | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
     {% endif %}
     {% endfor %}
   ];
@@ -131,159 +227,253 @@ document.addEventListener("DOMContentLoaded", function () {
       <h4><a href="${place.url}">${place.title}</a></h4>
       <p>${place.description}</p>
       ${place.tags && place.tags.length > 0 ? `<div class="tags">${place.tags.map(tag => `<span class="tag">${tag}</span>`).join("")}</div>` : ""}
-      ${place.image ? `<img data-src="${place.image}" alt="${place.title}" class="popup-image lazy-load" loading="lazy" style="width: 100%; height: 150px; object-fit: cover; margin-top: 10px; border-radius: 4px;">` : ""}
     `;
 
     marker.bindPopup(popupContent);
 
     markers.push({
       element: marker,
-      title: (place.title || "").toLowerCase(),
-      voyage: place.voyage || "",
-      tags: place.tags || []
+      title:   (place.title || "").toLowerCase(),
+      tags:    place.tags || [],
+      statut:  place.statut || ""
     });
   });
 
   // --- Bascule automatique du thème et des pins ---
   prefersDark.addEventListener("change", (e) => {
     isDark = e.matches;
-
-    // change les tuiles
     map.removeLayer(currentTiles);
     currentTiles = isDark ? darkTiles : lightTiles;
     currentTiles.addTo(map);
-
-    // change les icônes
     markers.forEach(m => m.element.setIcon(getPinIcon(isDark)));
   });
 
-  function updateMap({ fitBounds = false } = {}) {
-  const visibleMarkers = markers.filter(m => {
-    let visible = true;
-    if (activeSearch && !m.title.includes(activeSearch)) visible = false;
-    if (activeVoyage && m.voyage !== activeVoyage) visible = false;
-    if (activeTags.length > 0 && !activeTags.every(tag => m.tags.includes(tag))) visible = false;
+  /* ─── ÉTAT ─────────────────────────────────────────────────── */
+  let activeSearch  = '';
+  let activeTags    = new Set();
+  let activeEssayer = false;
 
-    if (visible) {
-      if (!map.hasLayer(m.element)) m.element.addTo(map);
+  let draftTags    = new Set();
+  let draftEssayer = false;
+
+  /* ─── ÉLÉMENTS DOM ──────────────────────────────────────────── */
+  const searchDesktop   = document.getElementById('search-input');
+  const searchMobile    = document.getElementById('search-input-mobile');
+  const panelFooter     = document.getElementById('panel-footer');
+  const resultCountEl   = document.getElementById('result-count-desktop');
+  const resultPillMob   = document.getElementById('result-pill-mobile');
+  const filterBadge     = document.getElementById('filter-badge');
+  const emptyState      = document.getElementById('empty-state');
+  const btnClearDesktop = document.getElementById('btn-clear-desktop');
+
+  /* ─── UPDATE MAP ────────────────────────────────────────────── */
+  function updateMap(fitBounds = false) {
+    const hasFilter = activeSearch || activeTags.size > 0 || activeEssayer;
+
+    const visible = markers.filter(m => {
+      const matchSearch  = !activeSearch  || m.title.includes(activeSearch);
+      const matchTags    = activeTags.size === 0
+                        || [...activeTags].every(t => m.tags.includes(t));
+      const matchEssayer = !activeEssayer || m.statut === 'à-essayer';
+      const show = matchSearch && matchTags && matchEssayer;
+
+      show
+        ? (!map.hasLayer(m.element) && m.element.addTo(map))
+        : (map.hasLayer(m.element) && map.removeLayer(m.element));
+
+      return show;
+    });
+
+    panelFooter.classList.toggle('visible', hasFilter);
+    if (resultCountEl) resultCountEl.textContent = visible.length;
+
+    if (hasFilter) {
+      resultPillMob.classList.add('visible');
+      resultPillMob.textContent =
+        `${visible.length} lieu${visible.length > 1 ? 'x' : ''}`;
     } else {
-      if (map.hasLayer(m.element)) map.removeLayer(m.element);
+      resultPillMob.classList.remove('visible');
     }
-    return visible;
-  });
 
-  clearFiltersBtn.style.display = (activeTags.length > 0 || activeVoyage || activeSearch) ? "block" : "none";
+    const n = activeTags.size + (activeEssayer ? 1 : 0);
+    filterBadge.textContent = n || '';
+    filterBadge.classList.toggle('visible', n > 0);
 
-  // 🧭 Ajuste la vue seulement si fitBounds est demandé et qu’il y a des résultats
-  if (fitBounds && visibleMarkers.length > 0) {
-    const group = L.featureGroup(visibleMarkers.map(m => m.element));
-    map.fitBounds(group.getBounds(), { padding: [50, 50] });
+    if (emptyState) {
+      emptyState.classList.toggle('visible', hasFilter && visible.length === 0);
+    }
+
+    if (fitBounds && visible.length > 0) {
+      const group = L.featureGroup(visible.map(m => m.element));
+      map.fitBounds(group.getBounds(), { padding: [80, 100] });
+    }
   }
-}
 
-// --- Recherche ---
-searchInput.addEventListener("input", function () {
-  activeSearch = this.value.toLowerCase();
-  updateMap({ fitBounds: true }); // 🧭 recadre la carte sur les résultats de la recherche
-});
+  /* ─── SYNC UI ───────────────────────────────────────────────── */
+  function syncDesktopUI() {
+    document.querySelectorAll('#side-panel .filter-tag').forEach(btn => {
+      btn.classList.toggle('active', activeTags.has(btn.dataset.tag));
+    });
+    document.getElementById('toggle-essayer-desktop')
+      .classList.toggle('active', activeEssayer);
+  }
 
-  document.addEventListener('click', function(e) {
-    if (e.target.classList.contains('voyage-link')) {
-      e.preventDefault();
-      const voyage = e.target.dataset.voyage;
-      activeVoyage = activeVoyage === voyage ? null : voyage;
-      updateMap();
-    }
+  function syncMobileUI() {
+    document.querySelectorAll('#bottom-sheet .filter-tag').forEach(btn => {
+      btn.classList.toggle('active', draftTags.has(btn.dataset.tag));
+    });
+    document.getElementById('toggle-essayer-mobile')
+      .classList.toggle('active', draftEssayer);
+
+    const hasFilter = activeSearch || draftTags.size > 0 || draftEssayer;
+    const matchCount = markers.filter(m => {
+      const matchSearch  = !activeSearch  || m.title.includes(activeSearch);
+      const matchTags    = draftTags.size === 0
+                        || [...draftTags].every(t => m.tags.includes(t));
+      const matchEssayer = !draftEssayer || m.statut === 'à-essayer';
+      return matchSearch && matchTags && matchEssayer;
+    }).length;
+    const applyBtn = document.getElementById('btn-apply-sheet');
+    applyBtn.textContent = hasFilter
+      ? `Afficher (${matchCount} lieu${matchCount > 1 ? 'x' : ''})`
+      : 'Afficher';
+  }
+
+  /* ─── ÉVÉNEMENTS DESKTOP ────────────────────────────────────── */
+  searchDesktop.addEventListener('input', function () {
+    activeSearch = this.value.toLowerCase().trim();
+    updateMap(true);
   });
 
-  clearFiltersBtn.addEventListener("click", function() {
-    activeSearch = "";
-    activeVoyage = null;
-    activeTags = [];
-    searchInput.value = "";
-    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelectorAll('.voyage-link').forEach(link => link.classList.remove('active'));
+  document.querySelectorAll('#side-panel .filter-tag').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tag = btn.dataset.tag;
+      activeTags.has(tag) ? activeTags.delete(tag) : activeTags.add(tag);
+      syncDesktopUI();
+      updateMap(true);
+    });
+  });
+
+  document.getElementById('toggle-essayer-desktop').addEventListener('click', function () {
+    activeEssayer = !activeEssayer;
+    syncDesktopUI();
+    updateMap(true);
+  });
+
+  btnClearDesktop.addEventListener('click', () => {
+    activeSearch = '';
+    activeTags.clear();
+    activeEssayer = false;
+    searchDesktop.value = '';
+    syncDesktopUI();
     markers.forEach(m => { if (!map.hasLayer(m.element)) m.element.addTo(map); });
     updateMap();
   });
 
-  // ✅ --- scroll horizontal filtres ---
-  const tagsScroll = document.getElementById("tags-scroll");
-  const leftBtn = document.getElementById("scroll-left");
-  const rightBtn = document.getElementById("scroll-right");
+  /* ─── BOTTOM SHEET MOBILE ───────────────────────────────────── */
+  const sheet    = document.getElementById('bottom-sheet');
+  const backdrop = document.getElementById('sheet-backdrop');
 
-  function updateScrollButtons() {
-    const scrollLeft = tagsScroll.scrollLeft;
-    const maxScroll = tagsScroll.scrollWidth - tagsScroll.clientWidth;
-    leftBtn.style.display = scrollLeft > 5 ? "block" : "none";
-    rightBtn.style.display = scrollLeft < maxScroll - 5 ? "block" : "none";
+  function openSheet() {
+    draftTags    = new Set(activeTags);
+    draftEssayer = activeEssayer;
+    syncMobileUI();
+    sheet.style.display = 'flex';
+    backdrop.style.display = 'block';
+    requestAnimationFrame(() => {
+      sheet.classList.add('open');
+      backdrop.classList.add('open');
+    });
+    document.getElementById('btn-close-sheet').focus();
   }
 
-  leftBtn.addEventListener("click", () => {
-    tagsScroll.scrollBy({ left: -150, behavior: "smooth" });
-  });
-  rightBtn.addEventListener("click", () => {
-    tagsScroll.scrollBy({ left: 150, behavior: "smooth" });
-  });
-  tagsScroll.addEventListener("scroll", updateScrollButtons);
-  window.addEventListener("resize", updateScrollButtons);
-  updateScrollButtons();
+  function closeSheet() {
+    sheet.classList.remove('open');
+    backdrop.classList.remove('open');
+    setTimeout(() => {
+      sheet.style.display = 'none';
+      backdrop.style.display = 'none';
+    }, 300);
+  }
 
-  // ✅ --- gestion clic sur filtres ---
-  document.querySelectorAll(".filter-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      btn.classList.toggle("active");
-      activeTags = Array.from(document.querySelectorAll(".filter-btn.active"))
-                        .map(b => b.dataset.tag);
-      updateMap();
+  document.getElementById('btn-open-sheet').addEventListener('click', openSheet);
+  document.getElementById('btn-close-sheet').addEventListener('click', closeSheet);
+  backdrop.addEventListener('click', closeSheet);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && sheet.classList.contains('open')) closeSheet();
+  });
+
+  document.querySelectorAll('#bottom-sheet .filter-tag').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tag = btn.dataset.tag;
+      draftTags.has(tag) ? draftTags.delete(tag) : draftTags.add(tag);
+      syncMobileUI();
     });
   });
 
-  // Initialisation
+  document.getElementById('toggle-essayer-mobile').addEventListener('click', function () {
+    draftEssayer = !draftEssayer;
+    syncMobileUI();
+  });
+
+  document.getElementById('btn-reset-sheet').addEventListener('click', () => {
+    draftTags.clear();
+    draftEssayer = false;
+    syncMobileUI();
+  });
+
+  document.getElementById('btn-apply-sheet').addEventListener('click', () => {
+    activeTags    = new Set(draftTags);
+    activeEssayer = draftEssayer;
+    updateMap(true);
+    closeSheet();
+  });
+
+  searchMobile.addEventListener('input', function () {
+    activeSearch = this.value.toLowerCase().trim();
+    updateMap(true);
+  });
+
+  /* ─── INIT ──────────────────────────────────────────────────── */
   updateMap();
-  
-  // Initialiser le lazy loading pour les images dans les popups
+
   initLazyLoading();
 });
 
-// Lazy loading functionality
 function initLazyLoading() {
-   // Configuration de l'Intersection Observer
-   const imageObserver = new IntersectionObserver((entries, observer) => {
-       entries.forEach(entry => {
-           if (entry.isIntersecting) {
-               const element = entry.target;
-               
-               // Pour les images normales
-               if (element.classList.contains('lazy-load')) {
-                   const src = element.getAttribute('data-src');
-                   if (src) {
-                       element.src = src;
-                       element.classList.add('loaded');
-                       observer.unobserve(element);
-                   }
-               }
-               
-               // Pour les images de fond
-               if (element.classList.contains('lazy-bg')) {
-                   const bgImage = element.getAttribute('data-bg');
-                   if (bgImage) {
-                       element.style.backgroundImage = `url('${bgImage}')`;
-                       element.classList.add('loaded');
-                       observer.unobserve(element);
-                   }
-               }
-           }
-       });
-   }, {
-       root: null,
-       rootMargin: '50px',
-       threshold: 0.1
-   });
+  const imageObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const element = entry.target;
 
-   // Observer toutes les images lazy
-   document.querySelectorAll('.lazy-load, .lazy-bg').forEach(img => {
-       imageObserver.observe(img);
-   });
+        if (element.classList.contains('lazy-load')) {
+          const src = element.getAttribute('data-src');
+          if (src) {
+            element.src = src;
+            element.classList.add('loaded');
+            observer.unobserve(element);
+          }
+        }
+
+        if (element.classList.contains('lazy-bg')) {
+          const bgImage = element.getAttribute('data-bg');
+          if (bgImage) {
+            element.style.backgroundImage = `url('${bgImage}')`;
+            element.classList.add('loaded');
+            observer.unobserve(element);
+          }
+        }
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: '50px',
+    threshold: 0.1
+  });
+
+  document.querySelectorAll('.lazy-load, .lazy-bg').forEach(img => {
+    imageObserver.observe(img);
+  });
 }
 </script>
