@@ -325,10 +325,17 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('toggle-essayer-mobile')
       .classList.toggle('active', draftEssayer);
 
-    const n = draftTags.size + (draftEssayer ? 1 : 0);
+    const hasFilter = activeSearch || draftTags.size > 0 || draftEssayer;
+    const matchCount = markers.filter(m => {
+      const matchSearch  = !activeSearch  || m.title.includes(activeSearch);
+      const matchTags    = draftTags.size === 0
+                        || [...draftTags].every(t => m.tags.includes(t));
+      const matchEssayer = !draftEssayer || m.statut === 'à-essayer';
+      return matchSearch && matchTags && matchEssayer;
+    }).length;
     const applyBtn = document.getElementById('btn-apply-sheet');
-    applyBtn.textContent = n > 0
-      ? `Afficher (${n} filtre${n > 1 ? 's' : ''})`
+    applyBtn.textContent = hasFilter
+      ? `Afficher (${matchCount} lieu${matchCount > 1 ? 'x' : ''})`
       : 'Afficher';
   }
 

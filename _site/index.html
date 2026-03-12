@@ -101,14 +101,6 @@
         
         
         
-        <button class="filter-tag" data-tag="bar-à-bières" type="button">
-          <span class="tag-label">bar-à-bières</span>
-          <span class="tag-check" aria-hidden="true"></span>
-        </button>
-        
-        
-        
-        
         <button class="filter-tag" data-tag="bar-à-fromage" type="button">
           <span class="tag-label">bar-à-fromage</span>
           <span class="tag-check" aria-hidden="true"></span>
@@ -826,14 +818,6 @@
         
         <button class="filter-tag" data-tag="bar-à-bière" type="button">
           <span class="tag-label">bar-à-bière</span>
-          <span class="tag-check" aria-hidden="true"></span>
-        </button>
-        
-        
-        
-        
-        <button class="filter-tag" data-tag="bar-à-bières" type="button">
-          <span class="tag-label">bar-à-bières</span>
           <span class="tag-check" aria-hidden="true"></span>
         </button>
         
@@ -2796,7 +2780,7 @@ document.addEventListener("DOMContentLoaded", function () {
       description: "Grand bar à bières avec une sélection d’une dizaine de pressions. Plutôt sympa même si ce lieu est très bruyant. On peut y voir des matchs de foot. Les tapas sont corrects.",
       lat:         48.8689102,
       lon:         2.3295556,
-      tags:        ["bar","bar-à-bières","tapas","happy-hour"],
+      tags:        ["bar","bar-à-bière","tapas","happy-hour"],
       statut:      "",
       url:         "/places/frog-hop-house/"
     },
@@ -6762,10 +6746,17 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('toggle-essayer-mobile')
       .classList.toggle('active', draftEssayer);
 
-    const n = draftTags.size + (draftEssayer ? 1 : 0);
+    const hasFilter = activeSearch || draftTags.size > 0 || draftEssayer;
+    const matchCount = markers.filter(m => {
+      const matchSearch  = !activeSearch  || m.title.includes(activeSearch);
+      const matchTags    = draftTags.size === 0
+                        || [...draftTags].every(t => m.tags.includes(t));
+      const matchEssayer = !draftEssayer || m.statut === 'à-essayer';
+      return matchSearch && matchTags && matchEssayer;
+    }).length;
     const applyBtn = document.getElementById('btn-apply-sheet');
-    applyBtn.textContent = n > 0
-      ? `Afficher (${n} filtre${n > 1 ? 's' : ''})`
+    applyBtn.textContent = hasFilter
+      ? `Afficher (${matchCount} lieu${matchCount > 1 ? 'x' : ''})`
       : 'Afficher';
   }
 
