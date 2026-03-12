@@ -1232,6 +1232,19 @@ ul.post-list-meta li svg {
    margin-top: 1px;
 }
 
+.nav-item-icon-dark-mode {
+   display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+   .nav-item-icon-light-mode {
+      display: none;
+   }
+   .nav-item-icon-dark-mode {
+      display: inline;
+   }
+}
+
 .place-info-label {
    flex: 1;
 }
