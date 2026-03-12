@@ -1,6 +1,6 @@
 ---
 title: La fine mousse restaurant
-description:
+description: Sur ma liste, mais pas encore essayé.
 lat: '48.8647375'
 lon: '2.3818415'
 address: 4 bis Avenue Jean Aicard, 75011 Paris, France

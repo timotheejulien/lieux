@@ -1,6 +1,6 @@
 ---
 title: Caprice
-description:
+description: Sur ma liste, mais pas encore essayé.
 lat: '48.8753118'
 lon: '2.3452432'
 address: 41 Rue de Trévise, 75009 Paris, France

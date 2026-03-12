@@ -1,6 +1,6 @@
 ---
 title: La Trama
-description: "Anciennement Ademi, je n'ai pas testé cette nouvelle adresse."
+description: Sur ma liste, mais pas encore essayé.
 lat: '48.869546'
 lon: '2.3357216'
 address: 19 Rue Monsigny 75002 Paris France

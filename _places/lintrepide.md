@@ -1,6 +1,6 @@
 ---
 title: 'L’intrépide'
-description: "Ils ont 12 bières artisanales à la pression. À tester."
+description: Sur ma liste, mais pas encore essayé (ils ont 12 bières artisanales à la pression).
 lat: '48.88438267737241'
 lon: '2.3346957111931586'
 address: 6B Passage Lepic, 75018 Paris, France

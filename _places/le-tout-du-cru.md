@@ -1,6 +1,6 @@
 ---
 title: "Le tout du cru"
-description: 
+description: Sur ma liste, mais pas encore essayé.
 lat: 46.205045
 lon: -1.366792
 address: "16 Quai Job Foran, 17410 Saint-Martin-de-Ré"

@@ -1,6 +1,6 @@
 ---
 title: Le Potager de Charlotte
-description: 
+description: Sur ma liste, mais pas encore essayé.
 lat: '48.87928009033203'
 lon: '2.34306001663208'
 address: 12 rue Louise-Émilie de la Tour d’Auvergne 75009 Paris
