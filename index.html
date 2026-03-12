@@ -44,7 +44,7 @@ title: Carte de mes lieux
     {% if all_tags.size > 0 %}
     <div class="filter-section">
       <div class="filter-section-title">Tags</div>
-      <div class="tags-grid">
+      <div class="tags-grid sort-by-alphabetical">
         {% for tag in all_tags %}
         {% assign clean_tag = tag | strip %}
         {% if clean_tag != "" %}
@@ -127,7 +127,7 @@ title: Carte de mes lieux
     {% if all_tags.size > 0 %}
     <div class="sheet-section">
       <div class="sheet-section-title">Catégories</div>
-      <div class="tags-grid">
+      <div class="tags-grid sort-by-alphabetical">
         {% for tag in all_tags %}
         {% assign clean_tag = tag | strip %}
         {% if clean_tag != "" %}
