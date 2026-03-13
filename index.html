@@ -36,7 +36,13 @@ title: Carte de mes lieux
         <span class="toggle-count" id="essayer-count-desktop">
           {{ site.places | where: "statut", "à-essayer" | size }} lieux
         </span>
-        <span class="toggle-check" aria-hidden="true"></span>
+        <span class="toggle-check" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+               fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path stroke="currentColor" d="M5 12l5 5l10 -10"/>
+          </svg>
+        </span>
       </button>
     </div>
 
@@ -118,7 +124,13 @@ title: Carte de mes lieux
         <span class="toggle-count" id="essayer-count-mobile">
           {{ site.places | where: "statut", "à-essayer" | size }} lieux
         </span>
-        <span class="toggle-check" aria-hidden="true"></span>
+        <span class="toggle-check" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+               fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path stroke="currentColor" d="M5 12l5 5l10 -10"/>
+          </svg>
+        </span>
       </button>
     </div>
 
