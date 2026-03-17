@@ -1166,7 +1166,7 @@ header {
    display: flex;
    align-items: center;
    justify-content: center;
-   background: var(--color-background-elevated);
+   background: var(--color-background);
    border: none;
    border-radius: 100px;
    cursor: pointer;
@@ -1174,7 +1174,7 @@ header {
 }
 
 .place-lightbox-close:hover {
-   background: var(--color-background-elevated-hover);
+   background: var(--color-background-elevated);
 }
 
 /* POST CONTENT */
