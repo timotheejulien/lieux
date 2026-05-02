@@ -902,16 +902,26 @@ header {
    max-width: 260px;
 }
 
-.popup-content h4,
-.leaflet-popup-content a {
+.popup-content h4 {
    margin-bottom: var(--space-regular) !important;
    font-size: 24px !important;
    font-weight: 400 !important;
    color: var(--color-text-primary) !important;
 }
 
-.popup-content h4 a,
+.leaflet-popup-content h4 a {
+   font-size: 24px !important;
+   color: var(--color-text-primary) !important;
+}
+
 .leaflet-popup-content a {
+   margin-bottom: var(--space-regular) !important;
+   font-size: 1.08333em !important;
+   font-weight: 400 !important;
+   color: var(--color-text-secondary) !important;
+}
+
+.popup-content h4 a {
    color: var(--color-text-primary) !important;
 }
 

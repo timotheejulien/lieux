@@ -3,15 +3,15 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Hangar Y - Mes lieux</title>
+   <title>Hangar Y (guinguette) - Mes lieux</title>
    <meta name="description" content="Cartographie de mes lieux visités">
    <link rel="stylesheet" href="/css/style.css">
    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
    <meta property="og:locale" content="fr_FR" />
-   <meta property="og:site_name" content="Hangar Y | Mes lieux">
+   <meta property="og:site_name" content="Hangar Y (guinguette) | Mes lieux">
    <meta property="og:image" content="/cover.jpg"/>
    <meta property="og:description" content="" />
-   <meta property="og:url" content="/places/hangar-y/">
+   <meta property="og:url" content="/places/hangar-y-guinguette/">
    <meta name="fediverse:creator" content="@timothee@mastodon.design" />
    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
    <script src="/assets/script.js"></script>
@@ -50,7 +50,7 @@
       <nav aria-label="Fil d'Ariane" class="place-breadcrumb">
          <span>Lieux</span>
          <span class="place-breadcrumb-sep" aria-hidden="true">›</span>
-         <span class="place-breadcrumb-current">Hangar Y</span>
+         <span class="place-breadcrumb-current">Hangar Y (guinguette)</span>
       </nav>
    </div>
 
@@ -61,8 +61,8 @@
          <button class="place-media-photo"
                  onclick="document.getElementById('placeLightbox').showModal()"
                  aria-label="Voir la photo en grand">
-            <img src="/images/hangar-y.jpg"
-                 alt="Photographie de Hangar Y"
+            <img src="/images/hangar-y-guinguette-2.jpg"
+                 alt="Photographie de Hangar Y (guinguette)"
                  class="place-media-img"
                  loading="lazy">
          </button>
@@ -77,16 +77,12 @@
    
    <div class="container place-body">
       <div class="place-main">
-         <h1>Hangar Y</h1>
+         <h1>Hangar Y (guinguette)</h1>
          
-         <p class="post-review-comment">Le lieu possède une architecture très industrielle et est situé dans un parc avec un étang. La vue depuis le restaurant est exceptionnelle et l'est encore plus une fois sur la tarresse. La nourriture est bonne, on est clairement sur un bistronomique, simple et efficace !</p>
+         <p class="post-review-comment">Situé en face du <a href="/hangar-y-restaurant.html">restaurant</a>, le lieu est toujours aussi cool ! Ceci dit, la bouffe de la guinguette est vraiment pas terrible, chère et il y a peu de quantité… Il faut y aller pour boire une bière ou alors se poser dans le parc pour profiter du calme de l'étang.</p>
          
          
          <div class="place-tags tags">
-            
-            <span class="tag">restaurant</span>
-            
-            <span class="tag">bistronomique</span>
             
             <span class="tag">bar</span>
             
@@ -101,7 +97,7 @@
          
          
          <div class="post-content">
-            <p><img src="/images/hangar-y-2.jpg" alt="Vue sur l'étang" /></p>
+            <p><img src="/images/hangar-y-guinguette-1.jpg" alt="Vue sur l'étang et le restaurant" /></p>
 
          </div>
          
@@ -165,8 +161,8 @@
             <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
          </svg>
       </button>
-      <img src="/images/hangar-y.jpg"
-           alt="Photographie de Hangar Y"
+      <img src="/images/hangar-y-guinguette-2.jpg"
+           alt="Photographie de Hangar Y (guinguette)"
            class="place-lightbox-img">
    </dialog>
    <script>
@@ -187,7 +183,7 @@
 
    
    <script>
-      const placeMap = L.map('placeMap', { scrollWheelZoom: false }).setView([48.7989177, 2.2332332], 13);
+      const placeMap = L.map('placeMap', { scrollWheelZoom: false }).setView([48.79638848822281, 2.236380279064179], 13);
 
       placeMap.getContainer().addEventListener('wheel', function(e) {
          if (!e.ctrlKey) return;
@@ -245,9 +241,9 @@
       let currentTiles = isDark ? darkTiles : lightTiles;
       currentTiles.addTo(placeMap);
 
-      let marker = L.marker([48.7989177, 2.2332332], { icon: getPinIcon(isDark) })
+      let marker = L.marker([48.79638848822281, 2.236380279064179], { icon: getPinIcon(isDark) })
          .addTo(placeMap)
-         .bindPopup('Hangar Y');
+         .bindPopup('Hangar Y (guinguette)');
 
       prefersDark.addEventListener("change", (e) => {
          isDark = e.matches;
