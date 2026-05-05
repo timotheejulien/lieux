@@ -79,24 +79,11 @@ title: Carte de mes lieux
 
 <!-- Top bar mobile -->
 <div class="mobile-top-bar" id="mobile-top-bar">
-  <div class="mobile-search-row">
-    <div class="search-wrap">
-      <svg class="search-icon" stroke-width="2" viewBox="0 0 24 24" fill="none">
-        <circle cx="11" cy="11" r="8"/>
-        <path d="m21 21-4.35-4.35"/>
-      </svg>
-      <input type="text"
-             id="search-input-mobile"
-             placeholder="Rechercher un lieu…"
-             autocomplete="off"
-             aria-label="Rechercher un lieu">
-    </div>
-    <button class="btn-filter-mobile" id="btn-open-sheet" type="button" aria-haspopup="dialog">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256"><path d="M40,88H73a32,32,0,0,0,62,0h81a8,8,0,0,0,0-16H135a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16Zm64-24A16,16,0,1,1,88,80,16,16,0,0,1,104,64ZM216,168H199a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16h97a32,32,0,0,0,62,0h17a8,8,0,0,0,0-16Zm-48,24a16,16,0,1,1,16-16A16,16,0,0,1,168,192Z"></path></svg>
-      Filtres
-      <span class="filter-badge" id="filter-badge" aria-live="polite"></span>
-    </button>
-  </div>
+  <button class="btn-filter-mobile" id="btn-open-sheet" type="button" aria-haspopup="dialog">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256"><path d="M40,88H73a32,32,0,0,0,62,0h81a8,8,0,0,0,0-16H135a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16Zm64-24A16,16,0,1,1,88,80,16,16,0,0,1,104,64ZM216,168H199a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16h97a32,32,0,0,0,62,0h17a8,8,0,0,0,0-16Zm-48,24a16,16,0,1,1,16-16A16,16,0,0,1,168,192Z"></path></svg>
+    Filtres
+    <span class="filter-badge" id="filter-badge" aria-live="polite"></span>
+  </button>
 </div>
 
 <!-- Backdrop -->
@@ -268,8 +255,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* ─── ÉLÉMENTS DOM ──────────────────────────────────────────── */
   const searchDesktop   = document.getElementById('search-input');
-  const searchMobile    = document.getElementById('search-input-mobile');
-  const panelFooter     = document.getElementById('panel-footer');
+const panelFooter     = document.getElementById('panel-footer');
   const resultCountEl   = document.getElementById('result-count-desktop');
   const resultPillMob   = document.getElementById('result-pill-mobile');
   const filterBadge     = document.getElementById('filter-badge');
@@ -438,11 +424,6 @@ document.addEventListener("DOMContentLoaded", function () {
     activeEssayer = draftEssayer;
     updateMap(true);
     closeSheet();
-  });
-
-  searchMobile.addEventListener('input', function () {
-    activeSearch = this.value.toLowerCase().trim();
-    updateMap(true);
   });
 
   /* ─── INIT ──────────────────────────────────────────────────── */
