@@ -28,15 +28,15 @@ document.addEventListener('DOMContentLoaded', () => {
       let html = '';
 
       if (places.length > 0) {
-         if (both) html += `<li class="search-suggestion-label" role="presentation">Lieux</li>`;
+         if (both) html += `<li class="filter-section-title" role="presentation">Lieux</li>`;
          places.forEach(p => {
             html += `<li role="option"><a class="search-suggestion-item" href="${p.url}">${esc(p.title)}</a></li>`;
          });
       }
       if (voyages.length > 0) {
-         if (both) html += `<li class="search-suggestion-label" role="presentation">Voyages</li>`;
+         if (both) html += `<li class="filter-section-title" id="filter-section-title-trip" role="presentation">Voyages</li>`;
          voyages.forEach(v => {
-            html += `<li role="option"><a class="search-suggestion-item search-suggestion-item--voyage" href="${v.url}">${esc(v.title)}</a></li>`;
+            html += `<li role="option"><a class="search-suggestion-item" href="${v.url}">${esc(v.title)}</a></li>`;
          });
       }
       list.innerHTML = html;
@@ -47,10 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
       backdrop.classList.add('open');
       backdrop.removeAttribute('aria-hidden');
       document.body.classList.add('modal-open');
-      setTimeout(() => {
-         input.focus();
-         renderSuggestions(input.value.trim());
-      }, 100);
+      input.focus();
+      renderSuggestions(input.value.trim());
    }
 
    function closeModal() {
