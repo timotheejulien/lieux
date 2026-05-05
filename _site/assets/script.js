@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
          });
       }
       if (voyages.length > 0) {
-         if (both) html += `<li class="filter-section-title" id="search-section-trip" role="presentation">Voyages</li>`;
+         if (both) html += `<li class="filter-section-title" id="filter-section-title-trip" role="presentation">Voyages</li>`;
          voyages.forEach(v => {
             html += `<li role="option"><a class="search-suggestion-item" href="${v.url}">${esc(v.title)}</a></li>`;
          });
@@ -47,10 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
       backdrop.classList.add('open');
       backdrop.removeAttribute('aria-hidden');
       document.body.classList.add('modal-open');
-      setTimeout(() => {
-         input.focus();
-         renderSuggestions(input.value.trim());
-      }, 100);
+      input.focus();
+      renderSuggestions(input.value.trim());
    }
 
    function closeModal() {
