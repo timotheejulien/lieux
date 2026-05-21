@@ -1,6 +1,6 @@
 ---
 title: La Cantine Diderot
-description: Super petite brasserie. On est un peu dans la salle mais les plats offrent un très bon rapport qualité/prix ! Je vous recommande la saucisse purée !
+description: Super petite brasserie. On est un peu serré dans la salle mais les plats offrent un très bon rapport qualité/prix ! Je vous recommande la saucisse purée accompagnée de son jus de viande !
 lat: '48.8466672'
 lon: '2.3822285'
 address: 74 Boulevard Diderot, 75012 Paris, France
