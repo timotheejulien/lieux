@@ -35,14 +35,16 @@ Create a file in `_places/` with this format:
 
 ```yaml
 ---
-title: "Name of the place"
-description: "Short description"
-lat: ""
-lon: ""
+created-date: ""
+title: ""
+description: ""
+statut: "à-essayer"
+website: 
 address: ""
-website: "" # optional
-tags: "tag1 tag2"
-image: "/images/photo.jpg"  # optional
+lat: 
+lon: 
+tags: ""
+image: images/
 ---
 ```
 
