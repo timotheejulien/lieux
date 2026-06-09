@@ -532,11 +532,14 @@ button.nav-mobile-item svg {
    border-color: transparent;
 }
 
+.toggle-essayer.active .toggle-check {
+   background-color: var(--color-button-background-primary);
+   border-color: transparent;
+}
+
 .toggle-essayer.active .toggle-check svg {
    display: block;
-   border-color: transparent;
-   background-color: var(--color-button-background-primary);
-   fill: var(--color-button-text-primary);
+   color: var(--color-button-text-primary);
 }
 
 /* TAGS GRID */
