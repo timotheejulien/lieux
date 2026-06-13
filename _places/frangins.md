@@ -6,5 +6,5 @@ lon: '2.3710943'
 address: 26b Rue de la Fontaine au Roi, 75011 Paris, France
 website: https://franginsparis.fr
 statut: "à-essayer"
-tags: restaurant brasserie bistronomique bar-à-vins
+tags: restaurant brasserie bistronomique bar-à-vin
 ---
