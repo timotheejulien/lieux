@@ -7,6 +7,6 @@ website: https://lanouvellegarde.com/fr/brasserie-bellanger
 address: "140 Rue du Faubourg Poissonnière 75010 Paris"
 lat: 48.880925001055
 lon: 2.349941992364
-tags: "restauranr brasserie terrasse"
+tags: "restaurant brasserie terrasse"
 image:
 ---
