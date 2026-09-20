@@ -1,5 +1,5 @@
 ---
-title: Kodawari Ramen - Tsukiji
+title: Kodawari Ramen (Tsukiji)
 description: 'Ramen excellent ! Le bouillon fait à base de poisson est top ! La décoration reproduit un marché japonais.'
 lat: '48.86437'
 lon: '2.33626'
